@@ -15,13 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::view('/nav', 'partials.navbar');
+
+Route::view('/nav', '_test');
 
 Route::Resource('articles', ArticleController::class);
 Route::middleware(['admin'])->group(function () {
