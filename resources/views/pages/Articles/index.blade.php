@@ -4,20 +4,37 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <a href="{{ url('articles/create') }}" class="btn btn-primary">Create Article</a>
-                <div class="card">
-                    <div class="card-header">{{ __('Article') }}</div>
-                    {{-- buatkan tampilan artikel --}}
-                    <div class="card-body">
-                        <h2 class="card-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa ratione sed
-                            voluptate saepe accusamus sunt, veritatis necessitatibus consequatur vero alias similique!
-                            Eligendi earum nobis sed delectus sit accusantium sapiente cumque?</p>
-                        <p class="card-text"><small class="text-muted">Published on
-                                2 Desember 2020</small></p>
+                <a href="{{ url('articles/create') }}"
+                    class="mb-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Create
+                    Article</a>
+                <aside aria-label="Related articles" class="py-8 lg:py-24 bg-gray-50 dark:bg-gray-800">
+                    <div class="px-4 mx-auto max-w-screen-xl">
+                        <h2 class="mb-8 text-2xl font-bold text-gray-900 dark:text-white">Related articles</h2>
+                        <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+                            @foreach ($articles as $item)
+                                <article class="max-w-xs">
+                                    <a href="#">
+                                        <img src="{{ url('images/' . $item->image) }}" class="mb-5 rounded-lg"
+                                            alt="Image 1">
+                                    </a>
+                                    <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
+                                        <a href="#">
+                                            {{ $item->title }}
+                                        </a>
+                                    </h2>
+                                    <p class="mb-4 font-light text-gray-500 dark:text-gray-400">
+                                        {!! Str::limit($item->body, 100) !!}
+                                    </p>
+                                    <a href="{{ route('articles.show', $item) }}"
+                                        class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+                                        Detail
+                                    </a>
+                                </article>
+                            @endforeach
+                        </div>
                     </div>
-
-                </div>
+                </aside>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

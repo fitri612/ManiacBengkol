@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -13,7 +16,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('pages.articles.index');
+        $articles = Article::all();
+        return view('pages.articles.index', compact('articles'));
     }
 
     /**
@@ -34,8 +38,30 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return view('pages.articles.create.index');
+        try {
+            $request->validate([
+                'title' => 'required',
+                'body' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'author' => 'required',
+            ]);
+
+            $file = $request->file('image');
+            $path = time() . '_' . $request->title . '.' . $file->getClientOriginalExtension();
+
+            $file->move(public_path('images'), $path);
+
+            Article::create([
+                'title' => $request->title,
+                'body' => $request->body,
+                'slug' => Str::slug($request->title),
+                'image' => $path,
+                'author' => $request->author,
+            ]);
+            return view('pages.Articles.index')->with('success', 'Article created successfully.');
+        } catch (\Exception $e) {
+            return view('pages.Articles.create.index')->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -81,5 +107,11 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showArticle(Article $article)
+    {
+        // dd($article);
+        return view('pages.Articles.detail.index', compact('article'));
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,5 +26,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::view('/nav', '_test');
 
 Route::Resource('articles', ArticleController::class);
+Route::get('articles/{article:slug}', [ArticleController::class, 'showArticle'])->name('articles.show');
+
 Route::middleware(['admin'])->group(function () {
+});
+
+Route::middleware(['auth'])->group(function () {
 });
