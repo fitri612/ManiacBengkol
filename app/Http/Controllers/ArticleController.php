@@ -58,7 +58,9 @@ class ArticleController extends Controller
                 'image' => $path,
                 'author' => $request->author,
             ]);
-            return view('pages.Articles.index')->with('success', 'Article created successfully.');
+
+            $articles = Article::all();
+            return view('pages.Articles.index', compact('articles'))->with('success', 'Article created successfully.');
         } catch (\Exception $e) {
             return view('pages.Articles.create.index')->with('error', $e->getMessage());
         }
