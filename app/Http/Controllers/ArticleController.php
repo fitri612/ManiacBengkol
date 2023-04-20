@@ -17,7 +17,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::with('likes')->get();
         $comments = Comment::all();
         // dd($comments);
         return view('pages.articles.index', compact('articles', 'comments'));

@@ -25,6 +25,7 @@
 
                             </div>
                         </div>
+
                     </address>
                     <figure><img src="{{ url('images/' . $article->image) }}" alt="">
                     </figure>
@@ -33,6 +34,41 @@
                         {{ $article->title }}</h1>
                 </header>
                 <p class="lead">{!! $article->body !!}</p>
+
+                <p>Total Like : {{ $article->likes->count() }}</p>
+               
+                @if ($article->isLikeBy(Auth::user()))
+                Unlike
+                @else
+                Like
+                @endif
+
+                <form action="{{ route('like.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="article_id" value="{{ $article->id }}">
+                    <button type="submit"
+                        class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                        <svg fill="none" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" class="w-5 h-5"
+                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z">
+                            </path>
+                        </svg>
+                        <span class="ml-2">Like</span>
+                    </button>
+                </form>
+
+
+                {{-- <button type="button" name="like" id="like"
+                    class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                    <svg fill="none" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" class="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z">
+                        </path>
+                    </svg>
+                </button> --}}
+
                 <section class="not-format">
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion (20)</h2>
@@ -79,13 +115,11 @@
                                     class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                         aria-labelledby="dropdownMenuIconHorizontalButton">
-                                        <li>
-                                            <!-- <a href="#"
-                                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a> -->
-                                            <button onclick="editComment({{ $comment->id }})"
-                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</button>
-                                        </li>
-                                        @if (Auth::user()->id == $comment->user_id || Auth::user()->role == 'admin')
+                                        {{-- <li>
+                                            <a href="#"
+                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                        </li> --}}
+                                        @if (Auth::user()->id == $comment->user_id || Auth::user()->is_admin == 1)
                                             <form action="{{ route('comment.destroy', $comment->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -101,26 +135,7 @@
                                     </ul>
                                 </div>
                             </footer>
-                            <!-- <p>{{ $comment->comment }}.</p> -->
-                            <div id="commentText{{ $comment->id }}">
-                                <p id="commentValue{{ $comment->id }}">{{ $comment->comment }}.</p>
-                            </div>
-
-                            <div id="commentEdit{{ $comment->id }}" class="hidden">
-                                <form action="{{ route('comment.update', $comment->id) }}" method="POST"
-                                    onsubmit="updateComment({{ $comment->id }})">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="flex flex-col mb-4">
-                                        <textarea id="commentTextarea{{ $comment->id }}" rows="6" name="comment"
-                                            class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
-                                            placeholder="Write a comment..." required></textarea>
-                                    </div>
-                                    <button type="submit"
-                                        class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Update
-                                        comment</button>
-                                </form>
-                            </div>
+                            <p>{{ $comment->comment }}.</p>
                         </article>
                     @endforeach
                 </section>
@@ -128,5 +143,5 @@
             </article>
 
         </div>
-    </main>
-@endsection
+        </div>
+    @endsection

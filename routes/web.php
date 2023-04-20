@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,9 @@ Route::delete('articles/{article:slug}', [ArticleController::class, 'destroy'])-
 Route::post('comment', [CommentController::class, 'store'])->name('comment.store');
 Route::delete('comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
 Route::put('comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
+
+// like
+Route::post('like', [LikeController::class, 'store'])->name('like.store');
 
 
 Route::middleware(['admin'])->group(function () {
