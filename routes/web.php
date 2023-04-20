@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,10 +27,21 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::view('/nav', '_test');
 
 // Articles
-Route::Resource('articles', ArticleController::class);
+// Route::Resource('articles', ArticleController::class);
+Route::get('articles', [ArticleController::class, 'index'])->name('articles.index');
+Route::post('articles', [ArticleController::class, 'store'])->name('articles.store');
+Route::get('articles/create', [ArticleController::class, 'create'])->name('articles.create');
+Route::get('articles/{article:slug}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
 Route::get('articles/{article:slug}', [ArticleController::class, 'showArticle'])->name('articles.show');
+Route::put('articles/{article:slug}', [ArticleController::class, 'update'])->name('articles.update');
+Route::delete('articles/{article:slug}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+
 // comment
-Route::get('comment', [ArticleController::class, 'comment'])->name('comment');
+Route::post('comment', [CommentController::class, 'store'])->name('comment.store');
+Route::delete('comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+Route::put('comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
+
+
 Route::middleware(['admin'])->group(function () {
 });
 

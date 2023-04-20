@@ -33,16 +33,17 @@
                         {{ $article->title }}</h1>
                 </header>
                 <p class="lead">{!! $article->body !!}</p>
-
                 <section class="not-format">
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion (20)</h2>
                     </div>
-                    <form class="mb-6">
+                    <form class="mb-6" action="{{ route('comment.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="article_id" value="{{ $article->id }}">
                         <div
                             class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                             <label for="comment" class="sr-only">Your comment</label>
-                            <textarea id="comment" rows="6"
+                            <textarea id="comment" rows="6" name="comment"
                                 class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
                                 placeholder="Write a comment..." required></textarea>
                         </div>
@@ -79,21 +80,47 @@
                                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                         aria-labelledby="dropdownMenuIconHorizontalButton">
                                         <li>
-                                            <a href="#"
-                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                            <!-- <a href="#"
+                                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a> -->
+                                            <button onclick="editComment({{ $comment->id }})"
+                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</button>
                                         </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                                        </li>
+                                        @if (Auth::user()->id == $comment->user_id || Auth::user()->role == 'admin')
+                                            <form action="{{ route('comment.destroy', $comment->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</button>
+                                            </form>
+                                        @else
+                                            <li>
+                                                <a href="#"
+                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </footer>
-                            <p>{{ $comment->comment }}.</p>
+                            <!-- <p>{{ $comment->comment }}.</p> -->
+                            <div id="commentText{{ $comment->id }}">
+                                <p id="commentValue{{ $comment->id }}">{{ $comment->comment }}.</p>
+                            </div>
+
+                            <div id="commentEdit{{ $comment->id }}" class="hidden">
+                                <form action="{{ route('comment.update', $comment->id) }}" method="POST"
+                                    onsubmit="updateComment({{ $comment->id }})">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="flex flex-col mb-4">
+                                        <textarea id="commentTextarea{{ $comment->id }}" rows="6" name="comment"
+                                            class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                                            placeholder="Write a comment..." required></textarea>
+                                    </div>
+                                    <button type="submit"
+                                        class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Update
+                                        comment</button>
+                                </form>
+                            </div>
                         </article>
                     @endforeach
                 </section>
@@ -101,5 +128,5 @@
             </article>
 
         </div>
-        </div>
-    @endsection
+    </main>
+@endsection

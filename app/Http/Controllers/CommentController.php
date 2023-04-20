@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -14,8 +15,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        // $comments = Comment::all();
-        // return view('pages.Articles.detail.index', compact('comments'));
+        $comments = Comment::all();
+        return view('pages.Articles.detail.index', compact('comments'));
     }
 
     /**
@@ -36,7 +37,23 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        try {
+            $request->validate([
+                'comment' => 'required',
+                'article_id' => 'required',
+            ]);
+
+            Comment::create([
+                'comment' => $request->comment,
+                'article_id' => $request->article_id,
+                'user_id' => Auth::user()->id,
+            ]);
+
+            return redirect()->back()->with('success', 'Comment successfully added');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -70,7 +87,19 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $request->validate([
+                'comment' => 'required',
+            ]);
+
+            $comment = Comment::findOrFail($id);
+            $comment->comment = $request->comment;
+            $comment->save();
+
+            return redirect()->back()->with('success', 'Comment successfully updated');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -81,6 +110,12 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $comment = Comment::findOrFail($id);
+            $comment->delete();
+            return redirect()->back()->with('success', 'Comment successfully deleted');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }
