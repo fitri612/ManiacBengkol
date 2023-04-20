@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -17,7 +18,9 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::all();
-        return view('pages.articles.index', compact('articles'));
+        $comments = Comment::all();
+        // dd($comments);
+        return view('pages.articles.index', compact('articles', 'comments'));
     }
 
     /**
@@ -85,7 +88,8 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::findOrfail($id);
+        return view('pages.Articles.update.index', compact('article'));
     }
 
     /**
@@ -95,9 +99,34 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $article)
     {
-        //
+        // dd($request->all());
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'author' => 'required',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = time() . '_' . $request->title . '.' . $file->getClientOriginalExtension();
+            $destinationPath = public_path('/images');
+            $file->move($destinationPath, $name);
+            $article->update([
+                'image' => $name,
+            ]);
+        }
+
+        $article->update([
+            'title' => $request->title,
+            'body' => $request->body,
+            'slug' => Str::slug($request->title),
+            'author' => $request->author,
+        ]);
+
+        return redirect()->back()->with('success', 'Article updated successfully.');
     }
 
     /**
@@ -108,12 +137,18 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $article = Article::findOrfail($id);
+            $article->delete();
+            return redirect()->back()->with('success', 'Article deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function showArticle(Article $article)
     {
-        // dd($article);
-        return view('pages.Articles.detail.index', compact('article'));
+        $comments = Comment::all();
+        return view('pages.Articles.detail.index', compact('article', 'comments'));
     }
 }

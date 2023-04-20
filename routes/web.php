@@ -25,9 +25,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::view('/nav', '_test');
 
+// Articles
 Route::Resource('articles', ArticleController::class);
 Route::get('articles/{article:slug}', [ArticleController::class, 'showArticle'])->name('articles.show');
-
+// comment
+Route::get('comment', [ArticleController::class, 'comment'])->name('comment');
 Route::middleware(['admin'])->group(function () {
 });
 

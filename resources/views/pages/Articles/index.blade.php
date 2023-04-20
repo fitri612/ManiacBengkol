@@ -29,6 +29,18 @@
                                         class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
                                         Detail
                                     </a>
+                                    <a href="{{ route('articles.edit', $item->id) }}"
+                                        class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+                                        Edit
+                                    </a>
+                                    <form action="{{ route('articles.destroy', $item->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+                                            Delete
+                                        </button>
+                                    </form>
                                 </article>
                             @endforeach
                         </div>
