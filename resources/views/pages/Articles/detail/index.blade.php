@@ -36,11 +36,11 @@
                 <p class="lead">{!! $article->body !!}</p>
 
                 <p>Total Like : {{ $article->likes->count() }}</p>
-               
+
                 @if ($article->isLikeBy(Auth::user()))
-                Unlike
+                    Unlike
                 @else
-                Like
+                    Like
                 @endif
 
                 <form action="{{ route('like.store') }}" method="POST">
@@ -57,17 +57,6 @@
                         <span class="ml-2">Like</span>
                     </button>
                 </form>
-
-
-                {{-- <button type="button" name="like" id="like"
-                    class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
-                    <svg fill="none" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" class="w-5 h-5"
-                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z">
-                        </path>
-                    </svg>
-                </button> --}}
 
                 <section class="not-format">
                     <div class="flex justify-between items-center mb-6">
@@ -99,7 +88,8 @@
                                     <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
                                             title="February 8th, 2022">{{ $comment->created_at }}</time></p>
                                 </div>
-                                <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
+                                <button id="dropdownCommentButton"
+                                    data-dropdown-toggle="dropdownComment{{ $comment->id }}"
                                     class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                                     type="button">
                                     <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
@@ -111,14 +101,14 @@
                                     <span class="sr-only">Comment settings</span>
                                 </button>
                                 <!-- Dropdown menu -->
-                                <div id="dropdownComment1"
+                                <div id="dropdownComment{{ $comment->id }}"
                                     class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                         aria-labelledby="dropdownMenuIconHorizontalButton">
-                                        {{-- <li>
-                                            <a href="#"
-                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                        </li> --}}
+                                        <li>
+                                            <button onclick="editComment({{ $comment->id }})"
+                                                class="edit-comment-btn block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</button>
+                                        </li>
                                         @if (Auth::user()->id == $comment->user_id || Auth::user()->is_admin == 1)
                                             <form action="{{ route('comment.destroy', $comment->id) }}" method="POST">
                                                 @csrf
@@ -135,7 +125,29 @@
                                     </ul>
                                 </div>
                             </footer>
-                            <p>{{ $comment->comment }}.</p>
+                            {{-- <p>{{ $comment->comment }}.</p> --}}
+                            <div class="comment-text" id="commentText{{ $comment->id }}">
+                                <p id="commentValue{{ $comment->id }}">{{ $comment->comment }}.</p>
+                            </div>
+
+                            <div class="comment-edit hidden" id="commentEdit{{ $comment->id }}">
+                                <form action="{{ route('comment.update', $comment->id) }}" method="POST"
+                                    onsubmit="updateComment({{ $comment->id }})">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="flex flex-col mb-4">
+                                        <textarea id="commentTextarea{{ $comment->id }}" rows="6" name="comment"
+                                            class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                                            placeholder="Write a comment..." required></textarea>
+                                    </div>
+                                    <button type="submit"
+                                        class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Update
+                                        comment</button>
+
+                                    <button type="cancel" onclick="cancelEdit({{ $comment->id }})"
+                                        class="inline-flex items-center py-2.5 px-4 ml-2 text-xs font-medium text-center text-gray-700 bg-gray-200 rounded-lg dark:bg-gray-800 dark:text-gray-300 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-700 hover:bg-gray-300 dark:hover:bg-gray-700">Cancel</button>
+                                </form>
+                            </div>
                         </article>
                     @endforeach
                 </section>

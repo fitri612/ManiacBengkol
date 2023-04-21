@@ -85,14 +85,13 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comment $comment)
     {
         try {
             $request->validate([
                 'comment' => 'required',
             ]);
 
-            $comment = Comment::findOrFail($id);
             $comment->comment = $request->comment;
             $comment->save();
 

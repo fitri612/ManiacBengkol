@@ -1,12 +1,22 @@
 function editComment(commentId) {
     var commentElement = document.getElementById('commentText' + commentId);
     var editForm = document.getElementById('commentEdit' + commentId);
+    var dropdown = document.getElementById('dropdownComment' + commentId);
     commentElement.style.display = 'none';
     editForm.style.display = 'block';
+    dropdown.style.display = 'none';
 
     var commentValue = document.getElementById('commentValue' + commentId).textContent;
     var commentTextarea = document.getElementById('commentTextarea' + commentId);
     commentTextarea.value = commentValue;
+}
+
+function cancelEdit(commentId) {
+    var commentElement = document.getElementById('commentText' + commentId);
+    var editForm = document.getElementById('commentEdit' + commentId);
+    commentElement.style.display = 'block';
+    editForm.style.display = 'none';
+
 }
 
 // function editComment(event, commentId) {

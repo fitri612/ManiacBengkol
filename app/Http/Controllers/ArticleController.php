@@ -148,7 +148,7 @@ class ArticleController extends Controller
 
     public function showArticle(Article $article)
     {
-        $comments = Comment::all();
+        $comments = Comment::where('article_id', $article->id)->get();
         $users = Auth::user();
         return view('pages.Articles.detail.index', compact('article', 'comments', 'users'));
     }
