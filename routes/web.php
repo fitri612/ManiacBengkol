@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +29,6 @@ Route::view('/nav', '_test');
 Route::Resource('articles', ArticleController::class);
 Route::middleware(['admin'])->group(function () {
 });
+
+Route::Resource('category', CategoryController::class);
+Route::Resource('product', ProductController::class);
