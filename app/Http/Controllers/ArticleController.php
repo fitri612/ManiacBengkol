@@ -17,7 +17,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::with('likes')->get();
         $comments = Comment::all();
         // dd($comments);
         return view('pages.articles.index', compact('articles', 'comments'));
@@ -148,7 +148,8 @@ class ArticleController extends Controller
 
     public function showArticle(Article $article)
     {
-        $comments = Comment::all();
-        return view('pages.Articles.detail.index', compact('article', 'comments'));
+        $comments = Comment::where('article_id', $article->id)->get();
+        $users = Auth::user();
+        return view('pages.Articles.detail.index', compact('article', 'comments', 'users'));
     }
 }

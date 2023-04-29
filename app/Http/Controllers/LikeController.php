@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
+use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CommentController extends Controller
+class LikeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::all();
-        return view('pages.Articles.detail.index', compact('comments'));
+        //
     }
 
     /**
@@ -37,24 +36,45 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         try {
             $request->validate([
-                'comment' => 'required',
                 'article_id' => 'required',
             ]);
 
-            Comment::create([
-                'comment' => $request->comment,
-                'article_id' => $request->article_id,
-                'user_id' => Auth::user()->id,
-            ]);
+            // cek apakah user sudah pernah melakukan like
+            $like_user = Like::where('article_id', $request->article_id)
+                ->where('user_id', Auth::user()->id)
+                ->first();
 
-            return redirect()->back()->with('success', 'Comment successfully added');
+            
+            if($like_user){
+                $like_user->delete();
+            }else{
+                Like::create([
+                    'count' => 1,
+                    'article_id' => $request->article_id,
+                    'user_id' => Auth::user()->id,
+                ]);
+            }    
+
+
+            // if ($like) {
+            //     $like->count++;
+            //     $like->save();
+            // } else {
+            //     Like::create([
+            //         'count' => 1,
+            //         'article_id' => $request->article_id,
+            //         'user_id' => Auth::user()->id,
+            //     ]);
+            // }
+
+            return redirect()->back()->with('success', 'Like successfully added');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
 
     /**
      * Display the specified resource.
@@ -85,20 +105,9 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, $id)
     {
-        try {
-            $request->validate([
-                'comment' => 'required',
-            ]);
-
-            $comment->comment = $request->comment;
-            $comment->save();
-
-            return redirect()->back()->with('success', 'Comment successfully updated');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+        //
     }
 
     /**
@@ -109,12 +118,6 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $comment = Comment::findOrFail($id);
-            $comment->delete();
-            return redirect()->back()->with('success', 'Comment successfully deleted');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+        //
     }
 }
