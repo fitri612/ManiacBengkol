@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -51,3 +53,7 @@ Route::middleware(['admin'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 });
+
+// product and category
+Route::Resource('category', CategoryController::class);
+Route::Resource('product', ProductController::class);
