@@ -45,6 +45,14 @@
                         <span class="block text-sm text-gray-900 dark:text-white"> {{ Auth::user()->name }}</span>
                         <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">
                             {{ Auth::user()->email }}</span>
+                            @auth
+                            @if(!auth()->user()->hasVerifiedEmail())
+                                <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-xs text-sky-500">verify your email</button>.
+                                </form>
+                            @endif
+                            @endauth
                     </div>
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>

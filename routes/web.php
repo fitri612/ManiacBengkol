@@ -1,12 +1,18 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\LikeController;
-use App\Http\Controllers\ProductController;
+use App\Http\Livewire\Auth\Login;
+use App\Http\Livewire\Auth\Register;
+use App\Http\Livewire\Auth\PwdResetConfirm;
+use App\Http\Livewire\Auth\PasswordReset;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +29,20 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-Auth::routes();
+Auth::routes([
+    'login'=>false,
+    'register'=>false,
+    'password.request'=>false,
+    'verify'=>true, 
+]);
+
+Route::middleware('guest')->group(function() {
+    Route::get('/login',Login::class)->name('login');
+    Route::get('/register',Register::class)->name('register');
+    Route::get('/forgot-password',PasswordReset::class)->name('forgot-password');
+    Route::get('/confirm-reset',PwdResetConfirm::class)->name('confirm-reset');
+    
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
