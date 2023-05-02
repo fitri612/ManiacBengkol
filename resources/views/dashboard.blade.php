@@ -41,6 +41,8 @@
         </span>
     </button>
 </div>
-
+@if(auth()->check())
+    @livewire('category.index')
+@endif
 
 @endsection

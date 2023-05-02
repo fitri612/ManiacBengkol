@@ -1,18 +1,22 @@
 <?php
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\PwdResetConfirm;
 use App\Http\Livewire\Auth\PasswordReset;
+// use App\Http\Livewire\Category\index;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +75,7 @@ Route::middleware(['admin'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    // Route::get('/categoryASL',index::class)->name('categoryASL');
 });
 
 // product and category
