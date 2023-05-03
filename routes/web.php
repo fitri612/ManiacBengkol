@@ -16,7 +16,9 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,3 +83,7 @@ Route::middleware(['auth'])->group(function () {
 // product and category
 Route::Resource('category', CategoryController::class);
 Route::Resource('product', ProductController::class);
+
+//profile
+Route::get('/profile', [ProfileController::class, 'index']);
+Route::post('/profile',[ProfileController::class,'update'])->name('profile_update');

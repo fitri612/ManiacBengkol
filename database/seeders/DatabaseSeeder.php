@@ -7,7 +7,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -27,5 +26,12 @@ class DatabaseSeeder extends Seeder
                 'is_admin' => true
                 ]
         ]);
+
+        User::create([
+            'name'=>'haikal',
+            'email'=>'haikal@gmail.com',
+            'password'=>Hash::make('12345'),
+        ]);
+
     }
 }
