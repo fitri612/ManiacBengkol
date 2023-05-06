@@ -1,30 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+</head>
+<body>
+    
 @extends('layouts.app')
 
 @section('content')
 
+<section class="bg-white dark:bg-gray-900">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-16">
+        <div class="flex flex-col justify-center">
+            <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Servis kendaraanmu dengan cepat dan berkualitas ada disini</h1>
+         
+            <section class="home">  
+            {{-- <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p> --}}
+            <div class="home-text ">
+                <p class="animate-text">
+                   <span>Berkualitas</span>
+                   <span>Terbaik</span>
+                   <span>Terjangkau</span>
+                </p>
+           </div>
 
-<div id="gallery" class="relative w-full py-5" data-carousel="slide">
+        </section>
+            <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+                <a href="#" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                    Get started
+                    <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </a>
+                <a href="#" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                    Hubungi Kami 
+                </a>  
+            </div>
+        </div>
+        
+
+<div id="gallery" class="relative w-full" data-carousel="slide">
     <!-- Carousel wrapper -->
     <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
          <!-- Item 1 -->
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
+            <img src="https://media.istockphoto.com/id/1210309025/id/video/mekanik-di-blue-overalls-adalah-unscrewing-lug-nuts-dengan-kunci-pas-dampak-pneumatik-tukang.jpg?s=640x640&k=20&c=JYI4BtgKu0g1Ciy-G_mi0q9VwPDpj6z5GDhFgdzYpl4=" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
         </div>
         <!-- Item 2 -->
         <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-            <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
+            <img src="https://media.istockphoto.com/id/1210309432/id/video/cuplikan-potret-mekanik-tampan-yang-sedang-mengerjakan-kendaraan-di-mobil-dinas-tukang.jpg?s=640x640&k=20&c=_l0zGeixbCb6Auchj2NAyvw815pAzzbRHB6XF_wGJ4k=" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
         </div>
         <!-- Item 3 -->
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
+            <img src="https://media.istockphoto.com/id/1210306897/id/video/manajer-memeriksa-data-di-komputer-tablet-dan-menjelaskan-perincian-ke-mekanik-karyawan.jpg?s=640x640&k=20&c=FYNQKdeF8DJfS4aFz5qLrrLLOYwhIkjgmwOwogxSe-E=" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
         </div>
         <!-- Item 4 -->
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
-        </div>
-        <!-- Item 5 -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
+            <img src="https://media.istockphoto.com/id/1210305638/id/video/cuplikan-potret-mekanik-tampan-yang-sedang-mengerjakan-kendaraan-di-mobil-dinas-tukang.jpg?s=640x640&k=20&c=37zc5Lg_CibY8lXwS-qdyegMUBrPRt-hxeb7HdNjHWk=" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
         </div>
     </div>
     <!-- Slider controls -->
@@ -42,6 +76,45 @@
     </button>
 </div>
 
+    </div>
+</section>
+
+<script>
+    const txts=document.querySelector(".animate-text").children,
+          txtsLen=txts.length;
+      let index=0;
+     const textInTimer=3000,
+           textOutTimer=2800;
+
+    function animateText() {
+       for(let i=0; i<txtsLen; i++){
+         txts[i].classList.remove("text-in","text-out");  
+       }
+       txts[index].classList.add("text-in");
+
+       setTimeout(function(){
+           txts[index].classList.add("text-out");              
+       },textOutTimer)
+
+       setTimeout(function(){
+
+         if(index == txtsLen-1){
+             index=0;
+           }
+          else{
+              index++;
+            }
+           animateText();
+       },textInTimer); 
+    }
+    
+    window.onload=animateText;
+
+</script>
+
+
+<div id="gallery" class="relative w-full py-5" data-carousel="slide">
+    <!-- Carousel wrapper -->
 
 @if (session('success'))
 
@@ -59,3 +132,6 @@
 @endif
 
 @endsection
+
+</body>
+</html>
