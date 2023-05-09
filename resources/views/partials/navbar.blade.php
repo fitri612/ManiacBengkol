@@ -5,7 +5,7 @@
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
         </a>
         <div class="flex items-center md:order-2">
-
+            @include('partials.darkmode')
             @guest
                 @if (Route::has('login'))
                     <form action="{{ route('login') }}">

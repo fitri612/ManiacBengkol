@@ -1,9 +1,6 @@
 <div>
     <div>
-        {{-- <form wire:submit.prevent="create">
-            <input type="text" wire:model="name">
-            <button type="submit">Create</button>
-        </form> --}}
+        <a href="/testprod">produk</a>
 
     @if (session()->has('message'))
         <div id="alert-3" class="flex p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
@@ -113,6 +110,7 @@
             @endforeach
         </tbody>
     </table>
+    
 </div>
 
 
