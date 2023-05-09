@@ -11,6 +11,7 @@ body{
 	margin: 0;
 	overflow: hidden;
 }
+
 .home .home-text p span{
     font-size: 40px;
     color:#0400ff;
@@ -25,9 +26,11 @@ body{
 	display: block;
 	animation: textIn .7s ease;
 }
+
 .home .home-text p span.text-out{
 	animation: textOut .7s ease;
 }
+
 @keyframes textIn{
 	0%{
 		transform: translateY(100%);
@@ -36,6 +39,7 @@ body{
 		transform: translateY(0%);
 	}
 }
+
 @keyframes textOut{
 	0%{
 		transform: translateY(0%);
@@ -45,8 +49,6 @@ body{
 
 	}
 }
-
-
 
 
 

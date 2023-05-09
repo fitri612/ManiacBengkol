@@ -89,7 +89,6 @@
                     <div class="px-4 py-6">
                         <h4 class="font-bold mb-2">Cara oli</h4>
                         <p class="mb-2">lorem adasdasdjah ajfhabjfgajf</p>
-                        {{-- <a href="" class="bg-blue-600 inline-block px-4 py-2 text-sm text-white "> ca</a> --}}
                     </div>
             </div>
 
@@ -107,7 +106,6 @@
                     <div class="px-4 py-6">
                         <h4 class="font-bold mb-2">Cara oli</h4>
                         <p class="mb-2">lorem adasdasdjah ajfhabjfgajf</p>
-                        {{-- <a href="" class="bg-blue-600 inline-block px-4 py-2 text-sm text-white "> ca</a> --}}
                     </div>
             </div>
 
