@@ -4,30 +4,31 @@
     <div class="container">
         <div class="row justify-content-center">
             @if (Session::has('success'))
-                <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                    role="alert">
                     <p>Create Product Successfully</p>
                 </div>
-                
             @endif
             @if (Session::has('update'))
-                <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-blue-800 dark:text-blue-400" role="alert">
+                <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-blue-800 dark:text-blue-400"
+                    role="alert">
                     <p>Update Product Successfully</p>
                 </div>
-                
             @endif
             @if (Session::has('delete'))
-                <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                    role="alert">
                     <p>Delete Product Successfully</p>
                 </div>
-                
             @endif
             <div class="col-md-8">
-                    {{-- modal create --}}
-                    <a href="{{url('product/create')}}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-full hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-3">
-                        Create product
-                    </a>
-                
-                    <div class="card">
+                {{-- modal create --}}
+                <a href="{{ url('product/create') }}"
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-full hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-3">
+                    Create product
+                </a>
+
+                <div class="card">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -37,9 +38,9 @@
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Image Product
-                                   </th>
+                                    </th>
                                     <th scope="col" class="px-6 py-3">
-                                         Name
+                                        Name
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Price
@@ -62,59 +63,66 @@
                                 </tr>
                             </thead>
                             @foreach ($products as $item)
-                                
-                            <tbody>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{$loop->iteration}}
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        
-                                            <img src="{{asset('storage/'.$item->image)}}" style="max-width: 70px;height:70px;margin:0;object-fit: cover;" alt="">
-                                    </td>
-                                    
-                                    <td class="px-6 py-4">
-                                        {{$item->name}}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{$item->price}}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{$item->description}}                                        
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{$item->stock}}                                        
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{$item->category->category_name}}                                        
-                                    </td>
-                                    <td class="px-6 py-4 ">
-                                        <a href="/product/{{$item->id}}/edit ">    
-                                            <button  class=" text-white bg-blue-700 hover:bg-red-800   rounded-full text-sm px-4 py-2" type="button">
-                                            Update
-                                        </button>
-                                        </a>
-                    
+                                <tbody>
+                                    <tr
+                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $loop->iteration }}
+                                        </th>
+                                        <td class="px-6 py-4">
 
-                                    </td>
-                                    <td>
+                                            <img src="{{ asset('storage/' . $item->image) }}"
+                                                style="max-width: 70px;height:70px;margin:0;object-fit: cover;"
+                                                alt="">
+                                        </td>
 
-                                        <form action="/product/{{$item->id}}" method="post">
-                                            @method('delete')
-                                            @csrf
-                                            <button  class=" text-white bg-blue-700 hover:bg-red-800   rounded-full text-sm px-4 py-2 " type="submit">
-                                                Delete
-                                            </button>
+                                        <td class="px-6 py-4">
+                                            {{ $item->name }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $item->price }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $item->description }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $item->stock }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $item->category->category_name }}
+                                        </td>
+                                        <td class="px-6 py-4 ">
+                                            <a href="/product/{{ $item->id }}/edit ">
+                                                <button
+                                                    class=" text-white bg-blue-700 hover:bg-red-800   rounded-full text-sm px-4 py-2"
+                                                    type="button">
+                                                    Update
+                                                </button>
+                                            </a>
+
+
+                                        </td>
+                                        <td>
+
+                                            <form action="/product/{{ $item->id }}" method="post">
+                                                @method('delete')
+                                                @csrf
+                                                <button
+                                                    class=" text-white bg-blue-700 hover:bg-red-800   rounded-full text-sm px-4 py-2 "
+                                                    type="submit">
+                                                    Delete
+                                                </button>
                                             </form>
-                        
-                                    </td>
-                                </tr>
-                            </tbody>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
                             @endforeach
                         </table>
                     </div>
-    <!-- Main modal create -->
-    {{-- <div id="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <!-- Main modal create -->
+                    {{-- <div id="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative w-full max-w-2xl max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -170,7 +178,7 @@
         </div>
        </div>
     </div> --}}
-                    
+
                 </div>
             </div>
         </div>
