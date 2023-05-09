@@ -16,6 +16,7 @@ class Index extends Component
         $this->categories = Category::all();
     }
     
+    
     public function render()
     {
         return view('livewire.category.index');
@@ -24,16 +25,26 @@ class Index extends Component
     public function create()
     {
         # code...
+        $validatedData = $this->validate([
+            'name' => 'required|unique:categories,category_name',
+        ], [
+            'name.required' => 'Please enter a category name.',
+            'name.unique' => 'This category name already exists.',
+        ]);
+
         Category::create(['category_name' => $this->name]);
         $this->reset('name');
         $this->categories = Category::all();
+        session()->flash('message', 'Category created successfully!');
+    
     }
 
     public function edit($id)
     {
         $category = Category::find($id);
         $this->selectedCategory = $category;
-        $this->name = $category->name;
+        $this->name = $category->category_name;
+        
     }
 
     public function update()
@@ -41,6 +52,8 @@ class Index extends Component
         $this->selectedCategory->update(['category_name' => $this->name]);
         $this->reset('name', 'selectedCategory');
         $this->categories = Category::all();
+        $this->reset(['selectedCategory', 'name']);
+        session()->flash('message', 'Category Update successfully!');
     }
 
     
@@ -48,5 +61,7 @@ class Index extends Component
     {
         Category::destroy($id);
         $this->categories = Category::all();
+        session()->flash('message', 'Category Delete successfully!');
+        
     }
 }

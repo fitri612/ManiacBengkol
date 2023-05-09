@@ -50,7 +50,9 @@ Route::middleware('guest')->group(function() {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::view('/nav', '_test');
+// 'views testing aldi'  
+Route::view('/testing', 'test._test');
+Route::view('/testprod', 'test.prod');
 
 // Articles
 // Route::Resource('articles', ArticleController::class);
