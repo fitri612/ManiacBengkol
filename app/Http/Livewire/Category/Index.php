@@ -4,9 +4,12 @@ namespace App\Http\Livewire\Category;
 
 use Livewire\Component;
 use App\Models\Category;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination;
+    
     public $categories;
     public $name;
     public $selectedCategory;
@@ -19,7 +22,11 @@ class Index extends Component
     
     public function render()
     {
-        return view('livewire.category.index');
+        $categories = Category::latest()->paginate(10);
+
+        return view('livewire.category.index', [
+            'categories' => $categories,
+        ]);
     }
 
     public function create()
