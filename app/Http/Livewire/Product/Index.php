@@ -35,6 +35,7 @@ class Index extends Component
         'category_id' => 'exists:categories,id',
         'stock' => 'required|numeric',
     ];
+    // .
 
     public function store()
     {
