@@ -182,8 +182,7 @@
 
     </div>
 </div>
-</div>
-</div>
+
 <script>
     const txts=document.querySelector(".animate-text").children,
           txtsLen=txts.length;
