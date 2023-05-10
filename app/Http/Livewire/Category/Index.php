@@ -22,7 +22,7 @@ class Index extends Component
     
     public function render()
     {
-        $categories = Category::latest()->paginate(10);
+        $categories = Category::paginate(10);
 
         return view('livewire.category.index', [
             'categories' => $categories,

@@ -7,7 +7,7 @@ use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\PwdResetConfirm;
 use App\Http\Livewire\Auth\PasswordReset;
-// use App\Http\Livewire\Category\index;
+
 
 
 use App\Http\Controllers\HomeController;
@@ -53,6 +53,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // 'views testing aldi'  
 Route::view('/testing', 'test._test');
 Route::view('/testprod', 'test.prod');
+Route::get('/testlist', [ProductController::class, 'index_test']); 
 
 // Articles
 // Route::Resource('articles', ArticleController::class);

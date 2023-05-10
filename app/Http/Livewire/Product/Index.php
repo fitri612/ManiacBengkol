@@ -48,10 +48,11 @@ class Index extends Component
         $validatedData = $this->validate();
 
         $validatedData['image'] = $this->image->store('products', 'public');
+        
         Product::create($validatedData);
-
-        session()->flash('message', 'Product created successfully!');
         $this->reset();
+        $this->products = Product::all();
+        session()->flash('message', 'Product created successfully!');
 
        
     }
