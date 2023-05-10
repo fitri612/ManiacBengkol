@@ -53,7 +53,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // 'views testing aldi'  
 Route::view('/testing', 'test._test');
 Route::view('/testprod', 'test.prod');
-Route::get('/testlist', [ProductController::class, 'index_test']); 
+
 
 // Articles
 // Route::Resource('articles', ArticleController::class);
@@ -84,6 +84,9 @@ Route::middleware(['auth'])->group(function () {
 // product and category
 Route::Resource('category', CategoryController::class);
 Route::Resource('product', ProductController::class);
+
+// cart
+Route::get('/cart', [ProductController::class, 'index_test']); 
 
 //profile
 Route::get('/profile', [ProfileController::class, 'index']);
