@@ -7,7 +7,7 @@ use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\PwdResetConfirm;
 use App\Http\Livewire\Auth\PasswordReset;
-// use App\Http\Livewire\Category\index;
+
 
 
 use App\Http\Controllers\HomeController;
@@ -54,6 +54,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::view('/testing', 'test._test');
 Route::view('/testprod', 'test.prod');
 
+
 // Articles
 // Route::Resource('articles', ArticleController::class);
 Route::get('articles', [ArticleController::class, 'index'])->name('articles.index');
@@ -83,6 +84,9 @@ Route::middleware(['auth'])->group(function () {
 // product and category
 Route::Resource('category', CategoryController::class);
 Route::Resource('product', ProductController::class);
+
+// cart
+Route::get('/cart', [ProductController::class, 'index_test']); 
 
 //profile
 Route::get('/profile', [ProfileController::class, 'index']);

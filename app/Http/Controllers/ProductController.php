@@ -21,6 +21,15 @@ class ProductController extends Controller
         ]);
     }
 
+    public function index_test()
+    {
+        # code...
+        return view('test.product_list',[
+            'products'=>Product::latest()->paginate(),
+            'categories'=>Category::all()
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
