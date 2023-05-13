@@ -2,6 +2,6 @@
 
 @section('content')
 
-{{-- @livewire('cart.index') --}}
+@livewire('cart.cart-list')
 
 @endsection

@@ -1,22 +1,23 @@
 <?php
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-
-
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
-use App\Http\Livewire\Auth\PwdResetConfirm;
-use App\Http\Livewire\Auth\PasswordReset;
 
 
-
+use App\Http\Livewire\Cart\CartList;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+
+
+
 use App\Http\Controllers\LikeController;
+use App\Http\Livewire\Auth\PasswordReset;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Auth\PwdResetConfirm;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,7 +87,16 @@ Route::Resource('category', CategoryController::class);
 Route::Resource('product', ProductController::class);
 
 // cart
-Route::get('/cart', [ProductController::class, 'index_test']); 
+// Route::get('/cart', [ProductController::class, 'index_test']); 
+// Route::view('/cart', 'dashboard.cart.index');
+Route::get('/cart', function () {
+    return view('dashboard.cart.index');
+})->middleware(['auth']);
+
+Route::view('/cart-list', 'dashboard.cart.cart_list');
+// Route::get('/cart-list', CartList::class)->name('cart-list'); 
+
+
 
 //profile
 Route::get('/profile', [ProfileController::class, 'index']);

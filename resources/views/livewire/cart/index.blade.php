@@ -1,5 +1,12 @@
-<div>
-    
+<div >
+    <a href="/cart-list" class="mb-5 text-xl">view cart list raw mode</a>
+
+@if(session()->has('success'))
+    <div class="flex bg-green-100 rounded-lg p-4 text-sm text-green-700">
+        {{ session('success')}}
+    </div>
+@endif
+@include('partials.success_toast')
 @foreach ( $products as $item)
 
 <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -20,7 +27,7 @@
         </div>
         <div class="flex items-center justify-between">
             <span class="text-3xl font-bold text-gray-900 dark:text-white">{{ $item->price }}</span>
-            <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</a>
+            <button wire:click="addToCart({{ $item->id }})"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</button>
         </div>
     </div>
 </div>

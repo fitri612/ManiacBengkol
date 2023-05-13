@@ -38,7 +38,11 @@
 </head>
 
 <body>
+    @auth
     @include('partials.navbar')
+    @else
+    @include('partials.guestnavbar')
+    @endauth
     <div class="container mx-auto px-5 py-4">
         @yield('content')
     </div>
