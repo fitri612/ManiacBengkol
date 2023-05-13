@@ -52,6 +52,7 @@ class Index extends Component
         Product::create($validatedData);
         $this->reset();
         $this->products = Product::all();
+        $this->categories = Category::all();
         session()->flash('message', 'Product created successfully!');
 
        

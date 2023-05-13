@@ -1,4 +1,4 @@
-<div>
+<div >
     <a href="/cart-list" class="mb-5 text-xl">view cart list raw mode</a>
 
 @if(session()->has('success'))
@@ -6,6 +6,7 @@
         {{ session('success')}}
     </div>
 @endif
+@include('partials.success_toast')
 @foreach ( $products as $item)
 
 <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">

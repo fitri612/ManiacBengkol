@@ -1,4 +1,6 @@
 <div>
+    @include('partials.success_toast')
+    @include('partials.error_toast')
     <div class="flex justify-center my-6">
         <div class="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg pin-r pin-y md:w-4/5 lg:w-4/5">
             <div class="flex-1">
@@ -20,7 +22,7 @@
                         <tr>
                             <td class="hidden pb-4 md:table-cell">
                                 <a href="#">
-                                    <img src="{{ $item->product->image }}" class="w-20 rounded" alt="Thumbnail" />
+                                    <img src="{{ asset('storage/' . $item->product->image) }}" class="w-20 rounded" alt="Thumbnail" />
                                 </a>
                             </td>
                             <td>

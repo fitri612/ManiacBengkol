@@ -38,7 +38,7 @@ class CartList extends Component
             $cart->save();
             session()->flash('success', 'Product quantity updated !!!');
         }else{
-            session()->flash('info','You cannot have less than 1 quantity');
+            session()->flash('error','You cannot have less than 1 quantity');
         }
     }
 
