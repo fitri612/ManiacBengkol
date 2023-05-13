@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('transaction_details', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('price');
-            $table->string('description');
-            $table->string('image')->nullable();
-            // $table->string('image');
-            $table->integer('stock');
+            $table->foreignId('transaction_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->json('product');
+            $table->bigInteger('qty');
+            $table->decimal('price', 48, 4); // harga satuan ketika dibeli
             $table->timestamps();
-            });
+        });
     }
 
     /**
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('transaction_details');
     }
 };
