@@ -15,9 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('dashboard.product.index',[
-            'products'=>Product::latest()->paginate(),
-            'categories'=>Category::all()
+        return view('dashboard.product.index', [
+            'products' => Product::latest()->paginate(),
+            'categories' => Category::all()
         ]);
     }
 
@@ -37,8 +37,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('dashboard.product.create',[
-            'categories'=>Category::all()
+        return view('dashboard.product.create', [
+            'categories' => Category::all()
         ]);
     }
 
@@ -51,21 +51,21 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name'=>'required|string',
-            'price'=>'required|numeric|',
-            'description'=>'required|max:75',
-            'category_id'=>'required',
-            'image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'stock'=>'required|numeric'
+            'name' => 'required|string',
+            'price' => 'required|numeric|',
+            'description' => 'required|max:75',
+            'category_id' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'stock' => 'required|numeric'
         ]);
-    
 
-        if($request->file('image')){
-            $validatedData['image']=$request->file('image')->store('image_product');
+
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('image_product');
         }
 
         Product::create($validatedData);
-        return redirect('/product')->with('success','Create Product Successfully!');
+        return redirect('/product')->with('success', 'Create Product Successfully!');
     }
 
     /**
@@ -87,10 +87,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        return view('dashboard.product.edit',[
-            'products'=>Product::find($id),
-            'categories'=>Category::all()
-        ]);    
+        return view('dashboard.product.edit', [
+            'products' => Product::find($id),
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -103,21 +103,21 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'name'=>'required|string',
-            'price'=>'required|numeric|',
-            'description'=>'required|max:75',
-            'category_id'=>'required',
-            'image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'stock'=>'required|numeric'
+            'name' => 'required|string',
+            'price' => 'required|numeric|',
+            'description' => 'required|max:75',
+            'category_id' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'stock' => 'required|numeric'
         ]);
-    
 
-        if($request->file('image')){
-            $validatedData['image']=$request->file('image')->store('image_product');
+
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('image_product');
         }
 
-        Product::where('id',$id)->update($validatedData);
-        return redirect('/product')->with('update','update Product Successfully!');
+        Product::where('id', $id)->update($validatedData);
+        return redirect('/product')->with('update', 'update Product Successfully!');
     }
 
     /**
@@ -129,6 +129,14 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::destroy($id);
-        return redirect('/product')->with('delete','Delete Product Success!');
+        return redirect('/product')->with('delete', 'Delete Product Success!');
+    }
+
+    public function cart()
+    {
+        return view('dashboard.cart.index', [
+            'products' => Product::latest()->paginate(),
+            'categories' => Category::all()
+        ]);
     }
 }
