@@ -35,18 +35,17 @@ Route::get('/', function () {
 });
 
 Auth::routes([
-    'login'=>false,
-    'register'=>false,
-    'password.request'=>false,
-    'verify'=>true, 
+    'login' => false,
+    'register' => false,
+    'password.request' => false,
+    'verify' => true,
 ]);
 
-Route::middleware('guest')->group(function() {
-    Route::get('/login',Login::class)->name('login');
-    Route::get('/register',Register::class)->name('register');
-    Route::get('/forgot-password',PasswordReset::class)->name('forgot-password');
-    Route::get('/confirm-reset',PwdResetConfirm::class)->name('confirm-reset');
-    
+Route::middleware('guest')->group(function () {
+    Route::get('/login', Login::class)->name('login');
+    Route::get('/register', Register::class)->name('register');
+    Route::get('/forgot-password', PasswordReset::class)->name('forgot-password');
+    Route::get('/confirm-reset', PwdResetConfirm::class)->name('confirm-reset');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -100,4 +99,7 @@ Route::view('/cart-list', 'dashboard.cart.cart_list');
 
 //profile
 Route::get('/profile', [ProfileController::class, 'index']);
-Route::post('/profile',[ProfileController::class,'update'])->name('profile_update');
+Route::post('/profile', [ProfileController::class, 'update'])->name('profile_update');
+
+// cart
+Route::get('/cart', [ProductController::class, 'cart'])->name('cart');
