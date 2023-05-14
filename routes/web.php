@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
 
@@ -103,3 +104,6 @@ Route::post('/profile', [ProfileController::class, 'update'])->name('profile_upd
 
 // cart
 Route::get('/cart', [ProductController::class, 'cart'])->name('cart');
+
+// transaction
+Route::view('/testingco', 'dashboard.transaction.transaction');
