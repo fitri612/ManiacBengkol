@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
 
@@ -18,6 +19,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\Auth\PwdResetConfirm;
 use App\Http\Controllers\CategoryController;
+use App\Http\Livewire\Transaction\Transaction;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,3 +105,7 @@ Route::post('/profile', [ProfileController::class, 'update'])->name('profile_upd
 
 // cart
 Route::get('/cart', [ProductController::class, 'cart'])->name('cart');
+
+// transaction
+Route::view('/testingco', 'dashboard.transaction.transaction');
+Route::post('/transaction', [Transaction::class, 'store'])->name('transaction.store');

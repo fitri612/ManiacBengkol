@@ -18,9 +18,10 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('code_invoice');
             $table->string('grand_total');
-            $table->string('nominal');
-            $table->string('transaction_note');
+            $table->string('nominal')->nullable();
+            $table->string('transaction_note')->nullable();
             $table->string('transaction_status');
+            $table->string('method_payment');
             $table->timestamps();
         });
     }
