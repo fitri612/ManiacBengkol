@@ -52,6 +52,6 @@ class CartList extends Component
         session()->flash('success', 'Product removed from cart !!!');
     }
     public function checkout(){
-        
+
     }    
 }
