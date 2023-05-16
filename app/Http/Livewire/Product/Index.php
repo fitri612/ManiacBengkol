@@ -60,10 +60,14 @@ class Index extends Component
 
     public function edit($id)
     {
-        $products = Product::find($id);
-        $this->selectedProduct = $products;
-        $this->name = $products->name;
-        
+        $product = Product::find($id);
+        $this->selectedProduct = $product;
+        $this->name = $product->name;
+        $this->price = $product->price;
+        $this->description = $product->description;
+        $this->image = $product->image;
+        $this->stock = $product->stock;
+        $this->category_id = $product->category_id;
     }
 
     public function update()
@@ -72,15 +76,14 @@ class Index extends Component
         $this->reset('name', 'selectedProduct');
         $this->products = Product::all();
         $this->reset(['selectedProduct', 'name']);
-        session()->flash('message', 'Category Update successfully!');
+        session()->flash('message', 'Product Update successfully!');
     }
 
     
     public function delete($id)
     {
-        Category::destroy($id);
-        $this->products = Category::all();
-        session()->flash('message', 'Category Delete successfully!');
+        Product::destroy($id);
+        session()->flash('message', 'Product Delete successfully!');
         
     }
 

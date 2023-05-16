@@ -61,7 +61,7 @@ class ProductController extends Controller
 
 
         if ($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('image_product');
+            $validatedData['image'] = $request->file('image')->store('products');
         }
 
         Product::create($validatedData);

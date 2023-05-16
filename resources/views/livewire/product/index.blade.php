@@ -21,6 +21,7 @@
         alert.style.display = 'none';}
     </script>
     
+    {{-- form insert data product --}}
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Add a new product</h2>
@@ -68,6 +69,10 @@
             </form>
         </div>
       </section>
+
+      {{--end-form-inser-data-product  --}}
+
+
 
 
     {{-- <form wire:submit.prevent="store">
@@ -128,6 +133,8 @@
             <input type="text" id="table-search" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
         </div>
     </div>
+
+    {{-- tabel-product --}}
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -185,14 +192,16 @@
                     {{ $item->price }}
                 </td>
                 <td class="px-6 py-4">
+                    <button type="button" wire:click="edit({{ $item->id }})" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">edit</button>                    
                     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">delete</a>
+                    <button type="button" wire:click="delete({{$item->id}})" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" >delete</button>
                 </td>
             </tr>
             @endforeach
             
         </tbody>
     </table>
+    {{-- end-tabel-product --}}
 </div>
 {{-- {{ $products->links() }} --}}
 </div>
