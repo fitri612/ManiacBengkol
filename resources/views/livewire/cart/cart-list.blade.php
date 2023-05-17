@@ -1,8 +1,9 @@
 <div>
+    
     @include('partials.success_toast')
     @include('partials.error_toast')
-    <div class="flex justify-center my-6">
-        <div class="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg pin-r pin-y md:w-4/5 lg:w-4/5">
+    <div class="flex justify-center my-6 ">
+        <div class="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg pin-r pin-y md:w-4/5 lg:w-4/5 ">
             <div class="flex-1">
                 <table class="w-full text-sm lg:text-base" cellspacing="0">
                     <thead>
@@ -101,11 +102,20 @@
                             </div>
                             {{-- transaction.store --}}
 
-                            <form action="{{ route('transaction.store') }}" method="post">
-                                @csrf
+
+                            <label for="small" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Select payment method</label>
+                            <select wire:model="payment_method" class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected disabled value="Choose payment method">Choose payment method</option>
+                            <option value="Transfer">Transfer</option>
+                            <option value="Cash">Cash</option>
+                            </select>
+                            @error('payment_method')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
+                            
                                 <button
                                     class="flex justify-center w-full px-10 py-3 mt-6 font-medium text-white uppercase bg-gray-800 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none"
-                                    wire:click="checkout" wire:loading.attr="disabled" type="submit">
+                                    wire:click="checkout" {{-- wire:loading.attr="disabled" --}} type="submit">
                                     <svg aria-hidden="true" data-prefix="far" data-icon="credit-card" class="w-8"
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                                         <path fill="currentColor"
@@ -113,7 +123,7 @@
                                     </svg>
                                     <span class="ml-2 mt-5px">Procceed to checkout</span>
                                 </button>
-                            </form>
+                            
                             <div wire:loading>Processing payment....</div>
 
                         </div>

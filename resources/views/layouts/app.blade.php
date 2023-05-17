@@ -36,7 +36,7 @@
 
 </head>
 
-<body>
+<body class="dark:bg-gray-900">
     @auth
     @include('partials.navbar')
     @else
