@@ -27,10 +27,8 @@
 
         {{-- tailwind --}}
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+        <script src="{{ asset('js/control.js') }}" defer></script>
 
-        <!-- Scripts -->
-        {{-- flowbite --}}
-        {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
         @vite('resources/css/app.css')
         @livewireStyles
 

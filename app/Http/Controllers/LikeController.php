@@ -46,28 +46,16 @@ class LikeController extends Controller
                 ->where('user_id', Auth::user()->id)
                 ->first();
 
-            
-            if($like_user){
+
+            if ($like_user != null) {
                 $like_user->delete();
-            }else{
+            } else {
                 Like::create([
                     'count' => 1,
                     'article_id' => $request->article_id,
                     'user_id' => Auth::user()->id,
                 ]);
-            }    
-
-
-            // if ($like) {
-            //     $like->count++;
-            //     $like->save();
-            // } else {
-            //     Like::create([
-            //         'count' => 1,
-            //         'article_id' => $request->article_id,
-            //         'user_id' => Auth::user()->id,
-            //     ]);
-            // }
+            }
 
             return redirect()->back()->with('success', 'Like successfully added');
         } catch (\Exception $e) {

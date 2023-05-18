@@ -37,10 +37,13 @@
 
                 <p>Total Like : {{ $article->likes->count() }}</p>
 
-                @if ($article->isLikeBy(Auth::user()))
-                    Unlike
-                @else
-                    Like
+
+                @if (Auth::check())
+                    @if ($article->isLikeBy(Auth::user()))
+                        Unlike
+                    @else
+                        Like
+                    @endif
                 @endif
 
                 <form action="{{ route('like.store') }}" method="POST">
@@ -109,18 +112,20 @@
                                             <button onclick="editComment({{ $comment->id }})"
                                                 class="edit-comment-btn block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</button>
                                         </li>
-                                        @if (Auth::user()->id == $comment->user_id || Auth::user()->is_admin == 1)
-                                            <form action="{{ route('comment.destroy', $comment->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</button>
-                                            </form>
-                                        @else
-                                            <li>
-                                                <a href="#"
-                                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                                            </li>
+                                        @if (Auth::check())
+                                            @if (Auth::user()->id == $comment->user_id || Auth::user()->is_admin == 1)
+                                                <form action="{{ route('comment.destroy', $comment->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</button>
+                                                </form>
+                                            @else
+                                                <li>
+                                                    <a href="#"
+                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
+                                                </li>
+                                            @endif
                                         @endif
                                     </ul>
                                 </div>
