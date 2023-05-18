@@ -153,4 +153,7 @@
                 </section>
 
             </article>
+
+        </div>
+        </div>
     @endsection
