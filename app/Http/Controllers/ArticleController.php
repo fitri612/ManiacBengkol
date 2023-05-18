@@ -20,7 +20,7 @@ class ArticleController extends Controller
         $articles = Article::with('likes')->get();
         $comments = Comment::all();
         // dd($comments);
-        return view('pages.articles.index', compact('articles', 'comments'));
+        return view('dashboard.articles.index', compact('articles', 'comments'));
     }
 
     /**
@@ -30,7 +30,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('pages.articles.create.index');
+        return view('dashboard.articles.create.index');
     }
 
     /**
@@ -63,9 +63,9 @@ class ArticleController extends Controller
             ]);
 
             $articles = Article::all();
-            return view('pages.Articles.index', compact('articles'))->with('success', 'Article created successfully.');
+            return view('dashboard.Articles.index', compact('articles'))->with('success', 'Article created successfully.');
         } catch (\Exception $e) {
-            return view('pages.Articles.create.index')->with('error', $e->getMessage());
+            return view('dashboard.Articles.create.index')->with('error', $e->getMessage());
         }
     }
 
@@ -89,7 +89,7 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $article = Article::findOrfail($id);
-        return view('pages.Articles.update.index', compact('article'));
+        return view('dashboard.Articles.update.index', compact('article'));
     }
 
     /**
@@ -126,7 +126,8 @@ class ArticleController extends Controller
             'author' => $request->author,
         ]);
 
-        return redirect()->back()->with('success', 'Article updated successfully.');
+        $articles = Article::all();
+        return view('dashboard.Articles.index', compact('articles'))->with('success', 'Article updated successfully.');
     }
 
     /**
@@ -150,6 +151,6 @@ class ArticleController extends Controller
     {
         $comments = Comment::where('article_id', $article->id)->get();
         $users = Auth::user();
-        return view('pages.Articles.detail.index', compact('article', 'comments', 'users'));
+        return view('dashboard.Articles.detail.index', compact('article', 'comments', 'users'));
     }
 }
