@@ -54,6 +54,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // 'views
 Route::view('/testing', 'layouts.admin');
+Route::view('/testprod', 'test.prod');
+
 
 // Articles
 // Route::Resource('articles', ArticleController::class);

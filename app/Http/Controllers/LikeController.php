@@ -49,21 +49,20 @@ class LikeController extends Controller
 
             if ($like != null) {
                 $like->delete();
-                $state = 'dislike';
             } else {
                 Like::create([
                     'count' => 1,
                     'article_id' => $request->article_id,
                     'user_id' => Auth::user()->id,
                 ]);
-                $state = 'like';
             }
 
-            $count = Like::where('article_id', $request->article_id)->count();
 
-            return Response::json(['state' => $state, 'count' => $count]);
+            return redirect()->back();
+            // return Response::json(['state' => $state, 'count' => $count]);
         } catch (\Exception $e) {
-            return Response::json(['state' => 'error', 'message' => $e->getMessage()]);
+            return redirect()->back();
+            // return Response::json(['state' => 'error', 'message' => $e->getMessage()]);
         }
     }
 
