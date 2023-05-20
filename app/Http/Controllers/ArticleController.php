@@ -41,32 +41,28 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'title' => 'required',
-                'body' => 'required',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'author' => 'required',
-            ]);
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'author' => 'required',
+        ]);
 
-            $file = $request->file('image');
-            $path = time() . '_' . $request->title . '.' . $file->getClientOriginalExtension();
+        $file = $request->file('image');
+        $path = time() . '_' . $request->title . '.' . $file->getClientOriginalExtension();
 
-            $file->move(public_path('images'), $path);
+        $file->move(public_path('images'), $path);
 
-            Article::create([
-                'title' => $request->title,
-                'body' => $request->body,
-                'slug' => Str::slug($request->title),
-                'image' => $path,
-                'author' => $request->author,
-            ]);
+        Article::create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'slug' => Str::slug($request->title),
+            'image' => $path,
+            'author' => $request->author,
+        ]);
 
-            $articles = Article::all();
-            return view('dashboard.Articles.index', compact('articles'))->with('success', 'Article created successfully.');
-        } catch (\Exception $e) {
-            return view('dashboard.Articles.create.index')->with('error', $e->getMessage());
-        }
+        $articles = Article::all();
+        return view('dashboard.Articles.index', compact('articles'))->with('success', 'Article created successfully.');
     }
 
     /**
