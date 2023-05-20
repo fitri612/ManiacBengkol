@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Product;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
+use Illuminate\Http\Request;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
@@ -33,10 +34,11 @@ class Index extends Component
     }
 
     protected $rules = [
-        'name' => 'required|unique:products,name',
+        // 'name' => 'required|unique:products,name',
+        'name'=>'required|string',
         'price' => 'required|numeric',
         'description' => 'required',
-        'image' => 'required|image|max:1024',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'category_id' => 'exists:categories,id',
         'stock' => 'required|numeric',
     ];
@@ -60,6 +62,7 @@ class Index extends Component
 
     public function edit($id)
     {
+        
         $product = Product::find($id);
         $this->selectedProduct = $product;
         $this->name = $product->name;
@@ -72,10 +75,32 @@ class Index extends Component
 
     public function update()
     {
-        $this->selectedProduct->update(['name' => $this->name]);
-        $this->reset('name', 'selectedProduct');
+
+        $validatedData = $this->validate([
+            'name'=>'required|string',
+            'price' => 'required|numeric',
+            'description' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category_id' => 'exists:categories,id',
+            'stock' => 'required|numeric',
+        ]);
+        if ($this->image != null) {
+            $validatedData['image'] = $this->image->store('products');
+        
+        }
+        $this->selectedProduct->update($validatedData,[
+            'name' => $this->name,
+            'price'=>$this->price,
+            'description'=>$this->description,
+            'stock'=>$this->stock,
+            'category_id'=>$this->category_id,
+            'image'=>$this->image
+        ]);
+
+
+        $this->reset('name','price','description','stock','image','category_id', 'selectedProduct');
         $this->products = Product::all();
-        $this->reset(['selectedProduct', 'name']);
+        $this->reset(['name','price','description','stock','image','category_id', 'selectedProduct']);
         session()->flash('message', 'Product Update successfully!');
     }
 
