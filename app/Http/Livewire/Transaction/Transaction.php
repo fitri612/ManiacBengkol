@@ -20,7 +20,7 @@ class Transaction extends Component
         return view('livewire.transaction.transaction');
     }
 
-    public function store(Request $request)
+    /* public function store(Request $request)
     {
         try {
             DB::beginTransaction();
@@ -65,5 +65,10 @@ class Transaction extends Component
                 'message' => $e->getMessage()
             ], 500);
         }
+    } */
+
+    public function index()
+    {
+        
     }
 }
