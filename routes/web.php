@@ -52,10 +52,8 @@ Route::middleware('guest')->group(function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// 'views testing aldi'  
-Route::view('/testing', 'test._test');
-Route::view('/testprod', 'test.prod');
-
+// 'views
+Route::view('/testing', 'layouts.admin');
 
 // Articles
 // Route::Resource('articles', ArticleController::class);

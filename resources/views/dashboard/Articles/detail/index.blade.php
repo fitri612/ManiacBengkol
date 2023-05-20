@@ -48,9 +48,9 @@
 
                 <form action="{{ route('like.store') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="article_id" value="{{ $article->id }}">
+                    <input type="hidden" name="article_id" value="{{ $article->id }}" id="{{ $article->id }}">
                     <button type="submit"
-                        class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                        class="likeDislike focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
                         <svg fill="none" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" class="w-5 h-5"
                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -60,6 +60,8 @@
                         <span class="ml-2">Like</span>
                     </button>
                 </form>
+
+
 
                 <section class="not-format">
                     <div class="flex justify-between items-center mb-6">
