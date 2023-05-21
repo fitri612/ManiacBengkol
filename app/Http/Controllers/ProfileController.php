@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,6 +16,12 @@ class ProfileController extends Controller
     public function index(){
         $user = Auth::user();
         return view('pages.profile.profile_user.index', compact('user'));
+    }
+
+    public function getData(){
+        $user = User::all();
+        // dd($user);
+        return view('dashboard.user.index', compact('user'));
     }
 
     public function update(Request $request){
