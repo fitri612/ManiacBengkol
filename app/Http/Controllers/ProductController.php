@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -15,18 +16,21 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        // dd($user);
         return view('dashboard.product.index', [
             'products' => Product::latest()->paginate(),
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'user' => $user,
         ]);
     }
 
     public function index_test()
     {
         # code...
-        return view('test.product_list',[
-            'products'=>Product::latest()->paginate(),
-            'categories'=>Category::all()
+        return view('test.product_list', [
+            'products' => Product::latest()->paginate(),
+            'categories' => Category::all()
         ]);
     }
 
