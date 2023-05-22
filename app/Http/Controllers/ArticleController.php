@@ -19,8 +19,9 @@ class ArticleController extends Controller
     {
         $articles = Article::with('likes')->get();
         $comments = Comment::all();
+        $user = Auth::user();
         // dd($comments);
-        return view('dashboard.articles.index', compact('articles', 'comments'));
+        return view('dashboard.articles.index', compact('articles', 'comments', 'user'));
     }
 
     /**

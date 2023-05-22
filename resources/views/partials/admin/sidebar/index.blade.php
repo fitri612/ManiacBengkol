@@ -137,10 +137,10 @@
                                 <div>
                                     <a href="#"
                                         class="text-base font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">
-                                        Travis Fuller
+                                        {{ Auth::user()->name }}
                                     </a>
                                     <p class="text-xs text-slate-400 dark:text-navy-300">
-                                        Product Designer
+                                        {{ Auth::user()->email }}
                                     </p>
                                 </div>
                             </div>
@@ -252,7 +252,18 @@
                                         </div>
                                     </div>
                                 </a>
+
                                 <div class="mt-3 px-4">
+                                    <a href="{{ route('logout') }}"
+                                        class="btn h-9 w-full space-x-2 bg-primary text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        Sign out</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                                {{-- <div class="mt-3 px-4">
                                     <button
                                         class="btn h-9 w-full space-x-2 bg-primary text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
@@ -262,7 +273,7 @@
                                         </svg>
                                         <span>Logout</span>
                                     </button>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
