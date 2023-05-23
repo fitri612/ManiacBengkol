@@ -5,7 +5,7 @@
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Maniac Bengkel</span>
         </a>
         <div class="flex items-center md:order-2">
-            
+
             @include('partials.darkmode')
             @guest
                 @if (Route::has('login'))
@@ -31,7 +31,7 @@
                         </button>
                     </form>
                 @endif
- 
+
             @endguest
 
             <button data-collapse-toggle="mobile-menu-2" type="button"
@@ -58,17 +58,13 @@
                 <li>
                     <a href="{{ url('/articles') }}"
                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-                        Aboutt</a>
+                        Article</a>
                 </li>
+
                 <li>
                     <a href="#"
                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-                        Services</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-                        Pricing</a>
+                        Product</a>
                 </li>
                 <li>
                     <a href="#"
