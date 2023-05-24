@@ -18,11 +18,18 @@ class ProductController extends Controller
     {
         $user = Auth::user();
         // dd($user);
-        return view('dashboard.product.index', [
-            'products' => Product::latest()->paginate(),
-            'categories' => Category::all(),
-            'user' => $user,
-        ]);
+        if ($user->is_admin == 1) {
+            return view('dashboard.product.index', [
+                'products' => Product::latest()->paginate(),
+                'categories' => Category::all(),
+                'user' => $user,
+            ]);
+        } else {
+            return view('user.product.index', [
+                'products' => Product::latest()->paginate(),
+                'categories' => Category::all()
+            ]);
+        }
     }
 
     public function index_test()
