@@ -10,6 +10,7 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@faker-js/faker": "^8.0.1",
         "@popperjs/core": "^2.11.6",
         "@vitejs/plugin-vue": "^4.1.0",
         "autoprefixer": "^10.4.14",
