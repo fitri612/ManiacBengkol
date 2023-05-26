@@ -28,10 +28,17 @@
                                     class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             </td>
                             <td colspan="4">Select All</td>
+                            <td>
+                                @if(count($selected_cart_items) > 0 && !$deletionCompleted)
+                                    <a class="text-green-600" href="#" wire:click.prevent="deleteSelectedItems" wire:loading.attr="disabled">
+                                        Delete Selected
+                                    </a>
+                                @endif                              
+                            </td>
                         </tr>
 
                         @foreach ($cartitems as $item)
-                            <tr>
+                            <tr  wire:key="cart-item-{{ $item->id }}">
                                 <td>
                                     <input wire:model="selected_cart_items" id="cart_check_{{ $item->id }}" type="checkbox"
                                         value="{{ $item->id }}"
@@ -91,6 +98,7 @@
                     <div class="lg:px-2 lg:w-1/2">
                         <div class="p-4 bg-gray-100 rounded-full">
                             <h1 class="ml-2 font-bold uppercase">Order Details</h1>
+                            
                         </div>
                         <div class="p-4">
                             <div class="flex justify-between border-b">

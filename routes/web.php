@@ -104,12 +104,13 @@ Route::get('/profile', [ProfileController::class, 'index']);
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile_update');
 
 // cart
-Route::get('/cart', [ProductController::class, 'cart'])->name('cart');
+Route::view('/detail_produk', 'dashboard.product.product_detail');
+Route::get('/product-list', [ProductController::class, 'list_product'])->name('product-list');
 Route::middleware(['auth'])->group(function () {
     Route::view('/cart-list', 'dashboard.cart.cart_list');
+    Route::view('/transaction', 'dashboard.transaction.transaction');
 });
 // transaction
-Route::view('/transaction', 'dashboard.transaction.transaction');
 // Route::post('/transaction', [Transaction::class, 'store'])->name('transaction.store');
 
 
