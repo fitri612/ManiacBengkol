@@ -9,12 +9,10 @@ class Cart extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
-    const STATUS  = [
-        'pending'       => 0,
-        'in_process'    => 1,
-        'success'       => 2,
-        'error'         => 3
+    protected $fillable = [
+        'user_id',
+        'product_id',
+        'amount'
     ];
 
     public function user()
