@@ -10,9 +10,9 @@
                 <p>Transaction ID: {{ $detail->transaction_id }}</p>
                 <p>product ID {{ $detail->product_id }}</p>
                 <p>product {{ $detail->product }}</p>
-                {{-- <img src="{{ asset('storage/' . $detail->product->image) }}" alt="Product Image"> --}}
+                <img src="{{ asset('storage/' . $detail->image) }}" alt="Product Image" height="100px" width="100px">
                 <p>jumlah yg dipesan : {{ $detail->qty }}</p>
-                <p>harga produk : {{ $detail->price }}</p>
+                <p>harga produk : Rp.{{ number_format($detail->price, 0, ',', '.') }}</p>
             </div>
             <br>
         @endforeach
@@ -39,14 +39,14 @@
                 <td class="text-gray-900 dark:text-white">
                     total harga ({{ $totalQty }}) : 
                 </td>
-                <td class="text-gray-900 dark:text-white">{{ $totalPrice  }}<td>
+                <td class="text-gray-900 dark:text-white">Rp.{{ number_format($totalPrice, 0, ',', '.') }}<td>
             </tr>
             <tr>
                 
                 <th class="p-3 text-gray-900 dark:text-white">
                     total tagihan :
                 </th>
-                <th class="text-gray-900 dark:text-white">{{ $totalPrice }}</th>
+                <th class="text-gray-900 dark:text-white">Rp.{{ number_format($totalPrice, 0, ',', '.') }}</th>
             </tr>
             {{-- @endforeach --}}
 

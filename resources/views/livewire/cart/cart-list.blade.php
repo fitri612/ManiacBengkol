@@ -52,7 +52,7 @@
                                 </td>
                                 <td>
                                     <p class="mb-2 md:ml-4">{{ $item->product->name }}</p>
-                                    <button type="submit" class="md:ml-4 text-red-700"
+                                    <button type="submit" class="md:ml-4 text-red-700" 
                                         wire:click="removeItem({{ $item->id }})">
                                         <small>(Remove item)</small>
                                     </button>
@@ -79,12 +79,12 @@
                                 </td>
                                 <td class="hidden text-right md:table-cell">
                                     <span class="text-sm lg:text-base font-medium">
-                                        {{ $item->product->price }}$
+                                        Rp.{{ number_format($item->product->price, 0, ',', '.') }}
                                     </span>
                                 </td>
                                 <td class="text-right">
                                     <span class="text-sm lg:text-base font-medium">
-                                        {{ $item->product->price * $item->quantity }}$
+                                        Rp.{{ number_format($item->product->price * $item->quantity, 0, ',', '.') }}
                                     </span>
                                 </td>
                             </tr>
@@ -106,7 +106,8 @@
                                     Subtotal
                                 </div>
                                 <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                                    {{ $sub_total }}$
+                                    {{-- {{ $sub_total }}$ --}}
+                                    Rp.{{ number_format($sub_total, 0, ',', '.') }}
                                 </div>
                             </div>
                             <div class="flex justify-between pt-4 border-b">
@@ -122,7 +123,9 @@
                                     Total
                                 </div>
                                 <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                                    {{ $this->total }}$
+                                    {{-- {{ $this->total }}$ --}}
+                                    Rp.{{ number_format($this->total, 0, ',', '.') }}
+                                    
                                 </div>
                             </div>
                             {{-- transaction.store --}}
