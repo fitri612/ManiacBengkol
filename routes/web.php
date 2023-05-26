@@ -52,8 +52,8 @@ Route::middleware('guest')->group(function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// 'views testing aldi'  
-Route::view('/testing', 'test._test');
+// 'views
+Route::view('/testing', 'layouts.admin');
 Route::view('/testprod', 'test.prod');
 
 
@@ -111,3 +111,7 @@ Route::middleware(['auth'])->group(function () {
 // transaction
 Route::view('/transaction', 'dashboard.transaction.transaction');
 // Route::post('/transaction', [Transaction::class, 'store'])->name('transaction.store');
+
+
+// user 
+Route::get('/user', [ProfileController::class, 'getData'])->name('user.index');

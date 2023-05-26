@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -15,18 +16,28 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('dashboard.product.index', [
-            'products' => Product::latest()->paginate(),
-            'categories' => Category::all()
-        ]);
+        $user = Auth::user();
+        // dd($user);
+        if ($user->is_admin == 1) {
+            return view('dashboard.product.index', [
+                'products' => Product::latest()->paginate(),
+                'categories' => Category::all(),
+                'user' => $user,
+            ]);
+        } else {
+            return view('user.product.index', [
+                'products' => Product::latest()->paginate(),
+                'categories' => Category::all()
+            ]);
+        }
     }
 
     public function index_test()
     {
         # code...
-        return view('test.product_list',[
-            'products'=>Product::latest()->paginate(),
-            'categories'=>Category::all()
+        return view('test.product_list', [
+            'products' => Product::latest()->paginate(),
+            'categories' => Category::all()
         ]);
     }
 
@@ -61,7 +72,7 @@ class ProductController extends Controller
 
 
         if ($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('image_product');
+            $validatedData['image'] = $request->file('image')->store('products');
         }
 
         Product::create($validatedData);
@@ -113,7 +124,7 @@ class ProductController extends Controller
 
 
         if ($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('image_product');
+            $validatedData['image'] = $request->file('image')->store('products');
         }
 
         Product::where('id', $id)->update($validatedData);
