@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
 
@@ -18,6 +19,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\Auth\PwdResetConfirm;
 use App\Http\Controllers\CategoryController;
+use App\Http\Livewire\Transaction\Transaction;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,8 +52,8 @@ Route::middleware('guest')->group(function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// 'views testing aldi'  
-Route::view('/testing', 'test._test');
+// 'views
+Route::view('/testing', 'layouts.admin');
 Route::view('/testprod', 'test.prod');
 
 
@@ -103,3 +105,11 @@ Route::post('/profile', [ProfileController::class, 'update'])->name('profile_upd
 
 // cart
 Route::get('/cart', [ProductController::class, 'cart'])->name('cart');
+
+// transaction
+Route::view('/testingco', 'dashboard.transaction.transaction');
+Route::post('/transaction', [Transaction::class, 'store'])->name('transaction.store');
+
+
+// user 
+Route::get('/user', [ProfileController::class, 'getData'])->name('user.index');

@@ -14,8 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('dashboard.category.index',[
-            'categories'=>Category::latest()->paginate()
+        return view('dashboard.category.index', [
+            'categories' => Category::latest()->paginate()
         ]);
     }
 
@@ -38,11 +38,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'category_name'=>'required|string|unique:categories',
+            'category_name' => 'required|string|unique:categories',
         ]);
 
         Category::create($validatedData);
-        return redirect('/category')->with('success','create category successfully!');
+        return redirect('/category')->with('success', 'create category successfully!');
     }
 
     /**
@@ -64,8 +64,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        return view('dashboard.category.index',[
-            'categories'=>Category::find($id)
+        return view('dashboard.category.index', [
+            'categories' => Category::find($id)
         ]);
     }
 
@@ -79,11 +79,11 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'category_name'=>'required|string|unique:categories',
+            'category_name' => 'required|string|unique:categories',
         ]);
 
-        Category::where('id',$id)->update($validatedData);
-        return redirect('/category')->with('success','Update Category Successfully!');
+        Category::where('id', $id)->update($validatedData);
+        return redirect('/category')->with('success', 'Update Category Successfully!');
     }
 
     /**
@@ -95,6 +95,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::destroy($id);
-        return redirect('/category')->with('delete','Delete Category Successfully');
+        return redirect('/category')->with('delete', 'Delete Category Successfully');
     }
 }
