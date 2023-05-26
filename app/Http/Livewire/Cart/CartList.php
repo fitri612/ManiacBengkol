@@ -17,6 +17,9 @@ class CartList extends Component
     public $uuid, $product, $payment_method;
     public $selected_cart_items = [];
     public $checkAll = false;
+
+    public $uuidi, $deletionCompleted;
+
     public function rules()
     {
         return [
@@ -26,6 +29,7 @@ class CartList extends Component
     
     public function render()
     {
+        
     
         $this->cartitems = Cart::with('product')
                 ->where(['user_id'=>auth()->user()->id])
@@ -84,6 +88,16 @@ class CartList extends Component
         session()->flash('success', 'Product removed from cart !!!');
     }
 
+    public function deleteSelectedItems()
+    {
+        Cart::whereIn('id', $this->selected_cart_items)->delete();
+        $this->deletionCompleted = true;
+        // dd($this->deletionCompleted);
+        $this->emit('updateCartCount');
+        session()->flash('success', 'Selected products removed from cart!');
+    }
+
+
 
     
     public function checkout(){
@@ -95,19 +109,7 @@ class CartList extends Component
 
         try {
             DB::beginTransaction();
-            // $this->cartitems = Cart::with('product')
-            // ->where(['user_id'=>auth()->user()->id])
-            // ->where('status', '!=', Cart::STATUS['success'])
-            // ->get();
-            // // dd($this->cartitems);
-
-            // $this->total = 0;
-            // $this->sub_total = 0; 
-            // $this->tax = 0;
-            // foreach($this->cartitems as $item){
-            //     $this->sub_total += $item->product->price * $item->quantity;
-            // }
-
+           
             $selectedCartItems = $this->cartitems->filter(function ($item) {
                 return in_array($item->id, $this->selected_cart_items);
             });
@@ -128,31 +130,18 @@ class CartList extends Component
                 'transaction_status' => 'pending',
                 'method_payment' => $this->payment_method,
             ]);
-
-            // session()->flash('success', 'checkout success !!!');
-
             
-        //    foreach($this->cartitems as $cart){
-        //     $product = $cart->product;
-        //     TransactionDetail::create([
-        //         'transaction_id' => $transaction->id,
-        //         'product' => $product->id,
-        //         'qty' => $cart->quantity,
-        //         'price' => $product->price,
-        //     ]);
-            
-        //         $current_stock = $product->stock - $cart->quantity;
-        //         $product->update([
-        //             'stock' => $current_stock
-        //         ]);
 
-        //         $cart->delete();
-        //     }
+            // useless
+            // $this->emit('codeInvoiceGenerated', $uuid);
+
+           
             foreach ($selectedCartItems as $cart) {
                 $product = $cart->product;
                 TransactionDetail::create([
                     'transaction_id' => $transaction->id,
                     'product' => $product->id,
+                    'product_id' => $product->id,
                     'qty' => $cart->quantity,
                     'price' => $product->price,
                 ]);
@@ -169,6 +158,9 @@ class CartList extends Component
             DB::commit();
             $this->emit('updateCartCount');
             session()->flash('success', 'Checkout success!');
+            return redirect('/transaction');
+            // return redirect('/transaction')->with('success', 'Checkout success!');
+
         } catch (\Exception $e) {
             DB::rollback();
 

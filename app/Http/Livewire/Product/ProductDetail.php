@@ -1,20 +1,30 @@
 <?php
 
-namespace App\Http\Livewire\Cart;
+namespace App\Http\Livewire\Product;
 
-use App\Models\cart;
+use App\Models\Cart;
 use App\Models\Product;
-
 use Livewire\Component;
+use App\Models\Category;
 
-class Index extends Component
+class ProductDetail extends Component
 {
+    public  $categories;
     public $products;
     public $selectedProduct;
+
+    // protected $listeners = ['productSelected'];
+    public function mount()
+    {
+        $this->products = Product::all();
+        $this->categories = Category::all();
+    }
     public function render()
     {
-        $this->products = Product::get();
-        return view('livewire.cart.index');
+        return view('livewire.product.product-detail',[
+        'selectedProduct' => $this->selectedProduct,
+        'products' => $this->products,
+        ]);
     }
 
     public function addToCart($id){
@@ -42,14 +52,9 @@ class Index extends Component
         }
     }
 
-    public function getProduct($id)
+    public function BackToList()
     {
-        $products = Product::find($id);
-
-        if ($products) {
-            $this->selectedProduct = $products;
-        }
-        $this->emit('productSelected', $id);
-        // session()->flash('success', 'click Product successfully '. $id);
+        $this->selectedProduct = null;
     }
+   
 }
