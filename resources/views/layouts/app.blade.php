@@ -22,10 +22,10 @@
     <script src="{{ asset('js/control.js') }}" defer></script>
 
     <!-- CSS Assets -->
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('css/admin.css') }}" /> --}}
 
     <!-- Javascript Assets -->
-    <script src="{{ asset('js/admin.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/admin.js') }}" defer></script> --}}
     @vite('resources/css/app.css')
     @livewireStyles
 </head>
