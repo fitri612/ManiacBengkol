@@ -40,5 +40,6 @@
 @endforeach
 </div>
 @endif
+@livewire('admin.transaction-list')
 </div>
 

@@ -49,7 +49,7 @@ class Index extends Component
         if ($products) {
             $this->selectedProduct = $products;
         }
-        $this->emit('productSelected', $id);
+        // $this->emit('productSelected', $id);
         // session()->flash('success', 'click Product successfully '. $id);
     }
 }
