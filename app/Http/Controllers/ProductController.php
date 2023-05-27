@@ -143,7 +143,7 @@ class ProductController extends Controller
         return redirect('/product')->with('delete', 'Delete Product Success!');
     }
 
-    public function cart()
+    public function list_product()
     {
         return view('dashboard.cart.index', [
             'products' => Product::latest()->paginate(),

@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('transaction_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('transaction_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+
+            $table->foreignId('product_id')->constrained('products')->cascadeOnUpdate()->cascadeOnDelete();
+            
             $table->json('product');
             $table->bigInteger('qty');
             $table->decimal('price', 48, 4); // harga satuan ketika dibeli
