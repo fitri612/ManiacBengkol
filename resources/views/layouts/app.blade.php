@@ -59,6 +59,7 @@
 
     @livewireScripts
     @include('partials.footer')
+    @stack('js')
 </body>
 
 </html>

@@ -14,6 +14,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Livewire\Auth\PasswordReset;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -109,3 +110,6 @@ Route::get('/cart', [ProductController::class, 'cart'])->name('cart');
 // transaction
 Route::view('/testingco', 'dashboard.transaction.transaction');
 Route::post('/transaction', [Transaction::class, 'store'])->name('transaction.store');
+
+// booking
+Route::resource('/booking',BookingController::class);
