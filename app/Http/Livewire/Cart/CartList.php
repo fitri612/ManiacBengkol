@@ -140,7 +140,7 @@ class CartList extends Component
                 $product = $cart->product;
                 TransactionDetail::create([
                     'transaction_id' => $transaction->id,
-                    'product' => $product->id,
+                    // 'product' => $product->id,
                     'product_id' => $product->id,
                     'qty' => $cart->quantity,
                     'price' => $product->price,
