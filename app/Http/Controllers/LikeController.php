@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Like;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
@@ -41,37 +42,27 @@ class LikeController extends Controller
                 'article_id' => 'required',
             ]);
 
-            // cek apakah user sudah pernah melakukan like
-            $like_user = Like::where('article_id', $request->article_id)
+            // Check if the user has already liked/disliked the article
+            $like = Like::where('article_id', $request->article_id)
                 ->where('user_id', Auth::user()->id)
                 ->first();
 
-            
-            if($like_user){
-                $like_user->delete();
-            }else{
+            if ($like != null) {
+                $like->delete();
+            } else {
                 Like::create([
                     'count' => 1,
                     'article_id' => $request->article_id,
                     'user_id' => Auth::user()->id,
                 ]);
-            }    
+            }
 
 
-            // if ($like) {
-            //     $like->count++;
-            //     $like->save();
-            // } else {
-            //     Like::create([
-            //         'count' => 1,
-            //         'article_id' => $request->article_id,
-            //         'user_id' => Auth::user()->id,
-            //     ]);
-            // }
-
-            return redirect()->back()->with('success', 'Like successfully added');
+            return redirect()->back();
+            // return Response::json(['state' => $state, 'count' => $count]);
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back();
+            // return Response::json(['state' => 'error', 'message' => $e->getMessage()]);
         }
     }
 
