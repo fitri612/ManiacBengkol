@@ -16,6 +16,7 @@ use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -111,6 +112,11 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/transaction', 'dashboard.transaction.transaction');
 });
 // transaction
+Route::view('/testingco', 'dashboard.transaction.transaction');
+Route::post('/transaction', [Transaction::class, 'store'])->name('transaction.store');
+
+// booking
+Route::resource('/booking',BookingController::class);
 // Route::post('/transaction', [Transaction::class, 'store'])->name('transaction.store');
 
 
