@@ -27,7 +27,8 @@ class ProductController extends Controller
         } else {
             return view('user.product.index', [
                 'products' => Product::latest()->paginate(),
-                'categories' => Category::all()
+                'categories' => Category::all(),
+                'user' => $user,
             ]);
         }
     }
@@ -143,7 +144,7 @@ class ProductController extends Controller
         return redirect('/product')->with('delete', 'Delete Product Success!');
     }
 
-    public function list_product()
+    public function cart()
     {
         return view('dashboard.cart.index', [
             'products' => Product::latest()->paginate(),

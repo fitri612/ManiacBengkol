@@ -70,7 +70,7 @@
                 </a>
 
                 <!-- Forms -->
-                <a href="#"
+                <a href="{{ url('articles') }}"
                     class="flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
                     x-tooltip.placement.right="'Article'">
                     <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -87,7 +87,7 @@
                 </a>
 
                 <!-- Components -->
-                <a href="#"
+                <a href="{{ url('/user') }}"
                     class="flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
                     x-tooltip.placement.right="'User'">
                     <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

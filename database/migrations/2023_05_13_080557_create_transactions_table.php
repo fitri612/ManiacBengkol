@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('nominal')->nullable();
             $table->string('transaction_note')->nullable();
             $table->string('transaction_status');
-            $table->string('method_payment')->nullable();
+            $table->string('method_payment');
             $table->timestamps();
         });
     }

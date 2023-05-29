@@ -14,49 +14,19 @@ use Illuminate\Support\Facades\Auth;
 class CartList extends Component
 {
     public $cartitems, $sub_total = 0, $total = 0, $tax = 0;
-    public $uuid, $product, $payment_method;
-    public $selected_cart_items = [];
-    public $checkAll = false;
-
-    public $uuidi, $deletionCompleted;
-
-    public function rules()
-    {
-        return [
-            'payment_method' => 'required|in:cash,transfer',
-        ];
-    }
-    
     public function render()
     {
-        
-    
         $this->cartitems = Cart::with('product')
                 ->where(['user_id'=>auth()->user()->id])
                 ->where('status', '!=', Cart::STATUS['success'])
                 ->get();
+        $this->total = 0;$this->sub_total = 0; $this->tax = 0;
 
-                $selectedCartItems = $this->cartitems->filter(function ($item) {
-                    return in_array($item->id, $this->selected_cart_items);
-                });
-            
-                // $this->total = 0;
-                $this->sub_total = 0;
-                $this->tax = 0;
-            
-                foreach ($selectedCartItems as $item) {
-                    $this->sub_total += $item->product->price * $item->quantity;
-                }
+        foreach($this->cartitems as $item){
+            $this->sub_total += $item->product->price * $item->quantity;
+        }
         $this->total = $this->sub_total - $this->tax;
         return view('livewire.cart.cart-list');
-    }
-    public function checkAllItems()
-    {
-        if ($this->checkAll) {
-            $this->selected_cart_items = $this->cartitems->pluck('id')->toArray();
-        } else {
-            $this->selected_cart_items = [];
-        }
     }
 
     public function incrementQty($id){
@@ -88,39 +58,25 @@ class CartList extends Component
         session()->flash('success', 'Product removed from cart !!!');
     }
 
-    public function deleteSelectedItems()
-    {
-        Cart::whereIn('id', $this->selected_cart_items)->delete();
-        $this->deletionCompleted = true;
-        // dd($this->deletionCompleted);
-        $this->emit('updateCartCount');
-        session()->flash('success', 'Selected products removed from cart!');
-    }
-
-
-
-    
+    public $payment_method, $uuid;
+    protected $rules = [
+        'payment_method' => 'not_in:Choose payment method',
+    ];
     public function checkout(){
-        if (empty($this->selected_cart_items)) {
-            
-            return;
-        }
-        $validatedData = $this->validate();
-
         try {
             DB::beginTransaction();
-           
-            $selectedCartItems = $this->cartitems->filter(function ($item) {
-                return in_array($item->id, $this->selected_cart_items);
-            });
-    
+            $this->cartitems = Cart::with('product')
+            ->where(['user_id'=>auth()->user()->id])
+            ->where('status', '!=', Cart::STATUS['success'])
+            ->get();
+            // dd($this->cartitems);
+
             $this->total = 0;
-            $this->sub_total = 0;
+            $this->sub_total = 0; 
             $this->tax = 0;
-            foreach ($selectedCartItems as $item) {
+            foreach($this->cartitems as $item){
                 $this->sub_total += $item->product->price * $item->quantity;
             }
-        
             $uuid = Str::uuid();
 
             $transaction = Transaction::create([
@@ -130,42 +86,82 @@ class CartList extends Component
                 'transaction_status' => 'pending',
                 'method_payment' => $this->payment_method,
             ]);
-            
 
-            // useless
-            // $this->emit('codeInvoiceGenerated', $uuid);
+            session()->flash('success', 'checkout success !!!');
 
-           
-            foreach ($selectedCartItems as $cart) {
-                $product = $cart->product;
-                TransactionDetail::create([
-                    'transaction_id' => $transaction->id,
-                    'product' => $product->id,
-                    'product_id' => $product->id,
-                    'qty' => $cart->quantity,
-                    'price' => $product->price,
-                ]);
+            // $this->cartitems = Cart::with('product')
+            // ->where(['user_id'=>auth()->user()->id])
+            // ->where('status', '!=', Cart::STATUS['success'])
+            // ->get();
+            // foreach ($carts as $cart) {
+            //     $product = Product::where('id', $cart->product_id)->first(['id', 'category_id', 'name', 'image', 'description', 'stock', 'price', 'stock']);
 
-                $current_stock = $product->stock - $cart->quantity;
-                $product->update([
-                    'stock' => $current_stock,
-                ]);
+            //     TransactionDetail::create([
+            //         'transaction_id' => $transaction->id,
+            //         'product' => $product,
+            //         'qty' => $cart->quantity,
+            //         'price' => $product->price,
+            //     ]);
 
-                $cart->delete();
-            }
+            //     $current_stock = $product->stock - $cart->quantity;
+            //     $product->update([
+            //         'stock' => $current_stock
+            //     ]);
 
+            //     $cart->delete();
+            // }
 
+            // dd($transaction);
             DB::commit();
-            $this->emit('updateCartCount');
-            session()->flash('success', 'Checkout success!');
-            return redirect('/transaction');
-            // return redirect('/transaction')->with('success', 'Checkout success!');
-
         } catch (\Exception $e) {
-            DB::rollback();
-
-            session()->flash('error', 'Checkout failed: ' . $e->getMessage());
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 500);
         }
     }    
-      
+    // public function checkout($id){
+    //     try {
+    //         DB::beginTransaction();
+    //         $user = Auth::user();
+    //         $carts = Cart::where('user_id', $user->id)->get();
+    //         $total = 0;
+    //         foreach ($carts as $cart) {
+    //             $total += (int) $cart->product->price * (int) $cart->quantity;
+    //         }
+
+    //         $uuid = Str::uuid();
+
+    //         $transaction = Transaction::create([
+    //             'user_id' => auth()->user()->id,
+    //             'code_invoice' => $uuid,
+    //             'grand_total' => $total,
+    //             'transaction_status' => 'pending'
+    //         ]);
+
+    //         foreach ($carts as $cart) {
+    //             $product = Product::where('id', $cart->product_id)->first(['id', 'category_id', 'name', 'image', 'description', 'stock', 'price', 'stock']);
+
+    //             TransactionDetail::create([
+    //                 'transaction_id' => $transaction->id,
+    //                 'product' => $product,
+    //                 'qty' => $cart->quantity,
+    //                 'price' => $product->price,
+    //             ]);
+
+    //             $current_stock = $product->stock - $cart->quantity;
+    //             $product->update([
+    //                 'stock' => $current_stock
+    //             ]);
+
+    //             $cart->delete();
+    //         }
+
+    //         // dd($transaction);
+    //         DB::commit();
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'message' => $e->getMessage()
+    //         ], 500);
+    //     }
+    // }    
 }

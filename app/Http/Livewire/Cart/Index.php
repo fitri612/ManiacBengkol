@@ -10,7 +10,6 @@ use Livewire\Component;
 class Index extends Component
 {
     public $products;
-    public $selectedProduct;
     public function render()
     {
         $this->products = Product::get();
@@ -18,38 +17,20 @@ class Index extends Component
     }
 
     public function addToCart($id){
-        if (auth()->user()) {
-            // Add to cart
+        if(auth()->user()){
+            // add to cart
             $data = [
                 'user_id' => auth()->user()->id,
                 'product_id' => $id,
             ];
-    
-            $cartItem = Cart::where($data)->first();
-    
-            if ($cartItem) {
-                $cartItem->increment('quantity');
-            } else {
-                Cart::create($data);
-            }
-    
+            cart::updateOrCreate($data);
+
             $this->emit('updateCartCount');
-    
-            session()->flash('success', 'Product added to the cart successfully');
-        } else {
-            
+
+            session()->flash('success','Product added to the cart successfully');
+        }else{
+            // redirect to login page
             return redirect(route('login'));
         }
-    }
-
-    public function getProduct($id)
-    {
-        $products = Product::find($id);
-
-        if ($products) {
-            $this->selectedProduct = $products;
-        }
-        // $this->emit('productSelected', $id);
-        // session()->flash('success', 'click Product successfully '. $id);
     }
 }

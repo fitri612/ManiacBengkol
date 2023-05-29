@@ -22,6 +22,7 @@ function cancelEdit(commentId) {
     editForm.style.display = "none";
 }
 
+
 // $(document).ready(function() {
 //     $('.likeDislike').click(function() {
 //         var button = $(this);
@@ -32,13 +33,13 @@ function cancelEdit(commentId) {
 //             method: 'POST',
 //             url: '{{ route('like') }}',
 //             // data: { item_id: itemId},
-//             data: {
+//             data: { 
 //                 item_id: itemId,
 //                 _token: csrfToken // Include the CSRF token in the request data
 //             },
 //             success: function(response) {
 //                 console.log('success');
-
+                 
 //             },
 //             error: function(xhr, status, error) {
 //                 // ddd

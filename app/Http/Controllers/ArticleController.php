@@ -20,8 +20,11 @@ class ArticleController extends Controller
         $articles = Article::with('likes')->get();
         $comments = Comment::all();
         $user = Auth::user();
-        // dd($comments);
-        return view('dashboard.articles.index', compact('articles', 'comments', 'user'));
+        if ($user->is_admin == 1) {
+            return view('dashboard.articles.index', compact('articles', 'comments', 'user'));
+        } else {
+            return view('user.Articles.index', compact('articles', 'comments', 'user'));
+        }
     }
 
     /**

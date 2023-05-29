@@ -19,18 +19,18 @@ class Login extends Component
     public function rules()
     {
         # code...
-        return[
+        return [
             'email' => 'required|email',
             'password' => 'required',
         ];
     }
-    
+
     public function messages()
     {
         return [
             'email.required' => 'Email harus diisi.',
             'password.required' => 'Password harus diisi.',
-            
+
         ];
     }
 
@@ -48,7 +48,7 @@ class Login extends Component
         $throttleKey = 'send-message:' . $user->id;
 
         if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
-            $this->addError('email',__('auth.throttle',[
+            $this->addError('email', __('auth.throttle', [
                 'seconds' => RateLimiter::availableIn($throttleKey)
             ]));
             return null;
@@ -63,11 +63,17 @@ class Login extends Component
             return null;
         }
 
-        if(!Auth::attempt($this->only(['email','password']),$this->remember)){
-            $this->addError('email',__('auth.failed'));
+        if (!Auth::attempt($this->only(['email', 'password']), $this->remember)) {
+            $this->addError('email', __('auth.failed'));
             return null;
         }
 
-        return redirect()->to(RouteServiceProvider::HOME);
+        $user = Auth::user();
+
+        if ($user->is_admin == 1) {
+            return redirect()->to('/category');
+        } else {
+            return redirect()->to(RouteServiceProvider::HOME);
+        }
     }
 }
