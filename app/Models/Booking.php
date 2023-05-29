@@ -5,17 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cart extends Model
+class Booking extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
-    const STATUS  = [
-        'pending'       => 0,
-        'in_process'    => 1,
-        'success'       => 2,
-        'error'         => 3
-    ];
+    protected $guarded=[];
 
     public function user()
     {
@@ -26,4 +20,5 @@ class Cart extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
 }

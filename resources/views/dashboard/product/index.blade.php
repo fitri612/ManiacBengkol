@@ -1,7 +1,59 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-    <div class="container">
+    <div class="container mx-auto px-5 py-4">
+        <div class="py-5" x-data="{ isSearchbarActive: false }"
+            x-effect="$store.breakpoints.smAndUp &amp;&amp; (isSearchbarActive = false)">
+            <div x-show="!isSearchbarActive" class="flex items-center justify-between">
+                <div>
+                    <div class="flex space-x-2">
+                        <p class="text-xl font-medium text-slate-800 dark:text-navy-50">
+                            Product
+                        </p>
+                    </div>
+                    <p class="mt-1 text-xs"><?php echo date('l, M. j'); ?></p>
+
+                </div>
+
+                <div class="flex items-center space-x-2">
+                    <label class="relative hidden sm:flex">
+                        <input
+                            class="form-input peer h-9 w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 text-xs+ placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                            placeholder="Search users..." type="text">
+                    </label>
+
+                    <div class="flex">
+                        <button
+                            class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25 sm:hidden sm:h-9 sm:w-9">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" stroke="currentColor" fill="none"
+                                viewBox="0 0 24 24">
+                                <circle cx="10.2" cy="10.2" r="7.2" stroke-width="1.5"></circle>
+                                <path stroke-width="1.5" stroke-linecap="round" d="M21 21l-3.6-3.6"></path>
+                            </svg>
+                        </button>
+                        <button
+                            class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25 sm:h-9 sm:w-9">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M3 5.109C3 4.496 3.47 4 4.05 4h16.79c.58 0 1.049.496 1.049 1.109 0 .612-.47 1.108-1.05 1.108H4.05C3.47 6.217 3 5.721 3 5.11zM5.798 12.5c0-.612.47-1.109 1.05-1.109H18.04c.58 0 1.05.497 1.05 1.109s-.47 1.109-1.05 1.109H6.848c-.58 0-1.05-.497-1.05-1.109zM9.646 18.783c-.58 0-1.05.496-1.05 1.108 0 .613.47 1.109 1.05 1.109h5.597c.58 0 1.05-.496 1.05-1.109 0-.612-.47-1.108-1.05-1.108H9.646z">
+                                </path>
+                            </svg>
+                        </button>
+                        <button
+                            class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25 sm:h-9 sm:w-9">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row justify-content-center">
             @if (Session::has('success'))
                 <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
@@ -24,7 +76,7 @@
             <div class="col-md-8">
                 {{-- modal create --}}
                 <a href="{{ url('product/create') }}"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-full hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-3">
+                    class="btn bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90 mb-4">
                     Create product
                 </a>
 
@@ -95,7 +147,7 @@
                                         <td class="px-6 py-4 ">
                                             <a href="/product/{{ $item->id }}/edit ">
                                                 <button
-                                                    class=" text-white bg-blue-700 hover:bg-red-800   rounded-full text-sm px-4 py-2"
+                                                    class=" btn border border-info font-medium text-info hover:bg-info hover:text-white focus:bg-info focus:text-white active:bg-info/90"
                                                     type="button">
                                                     Update
                                                 </button>
@@ -109,7 +161,7 @@
                                                 @method('delete')
                                                 @csrf
                                                 <button
-                                                    class=" text-white bg-blue-700 hover:bg-red-800   rounded-full text-sm px-4 py-2 "
+                                                    class=" btn border border-error font-medium text-error hover:bg-error hover:text-white focus:bg-error focus:text-white active:bg-error/90"
                                                     type="submit">
                                                     Delete
                                                 </button>
@@ -121,65 +173,10 @@
                             @endforeach
                         </table>
                     </div>
-                    <!-- Main modal create -->
-                    {{-- <div id="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <div class="relative w-full max-w-2xl max-h-full">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <!-- Modal header -->
-            <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                    Insert Category Name
-                </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
-                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
-            </div>
-            <!-- Modal body -->
-            <form action="{{url('product')}}" method="post" enctype="multipart/form-data">
-                @csrf
-                <div class="p-6 space-y-6">
-                    <div class="sm:col-span-3">
-                        <label  class="block text-sm font-medium leading-6 text-gray-900">Product Name</label>
-                        <div class="mt-2">
-                          <input type="text" name="name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 @error('name') is_invalid @enderror">
-                        </div>
-                        <label  class="block text-sm font-medium leading-6 text-gray-900">Price</label>
-                        <div class="mt-2">
-                          <input type="number" name="price" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 @error('price') is_invalid @enderror">
-                        </div>
-                        <label  class="block text-sm font-medium leading-6 text-gray-900">Description</label>
-                        <div class="mt-2">
-                          <input type="text" name="description" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 @error('description') is_invalid @enderror">
-                        </div>
-                        <label  class="block text-sm font-medium leading-6 text-gray-900">Stock</label>
-                        <div class="mt-2">
-                          <input type="number" name="stock" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 @error('stock') is_invalid @enderror">
-                        </div>
-                        <label  class="block text-sm font-medium leading-6 text-gray-900">Category</label>
-                        <select  name="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            @foreach ($categories as $item)
-                            @if (old('category_id') == $item->id)
-                            <option value="{{$item->id}}"selected>{{$item->category_name}}</option>
-                            @else
-                            <option value="{{$item->id}}">{{$item->category_name}}</option>
-                            @endif
-                            @endforeach
-                           </select>                                                               
-                        <div class="mt-2">
-                        <label  class="block text-sm font-medium leading-6 text-gray-900">Image</label>
-                          <input type="file" name="image" accept="image/*" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 @error('image') is_invalid @enderror">
-                        </div>
-                    </div>
-                          <button data-modal-hide="defaultModal" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add category</button>
-                </div>
-            </form>
-        </div>
-       </div>
-    </div> --}}
+
 
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
