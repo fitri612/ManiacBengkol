@@ -112,3 +112,6 @@ Route::middleware(['auth'])->group(function () {
 });
 // transaction
 // Route::post('/transaction', [Transaction::class, 'store'])->name('transaction.store');
+
+// user 
+Route::get('/user', [ProfileController::class, 'getData'])->name('user.index');
