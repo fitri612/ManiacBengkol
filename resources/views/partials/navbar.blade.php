@@ -6,7 +6,7 @@
         </a>
         <div class="flex items-center md:order-2">
             @livewire('cart.cart-counter')
-        s    @include('partials.darkmode')
+            @include('partials.darkmode')
             @guest
                 @if (Route::has('login'))
                     <form action="{{ route('login') }}">
