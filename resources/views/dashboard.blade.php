@@ -33,9 +33,9 @@
                     </section>
 
                     <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
-                        <a href="#"
+                        <a href="{{ url('/product') }}"
                             class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-                            Get started
+                            Belanja Sekarang 
                             <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -112,36 +112,36 @@
 
         <section class="py-16">
             <div class="container mx-auto px-2">
-                <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10">Mengapa Harus Di Maniac Bengkel?</h2>
+                <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">Mengapa Harus Di Maniac Bengkel?</h2>
                 <div class="flex gap-10">
 
-                    <div class="w-1/3 shadow-lg rounded-lg overflow-hidden">
-                        <img style="margin: auto;" width="150" height="200"
+                    <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
+                        <img style="margin: auto; padding-top: 40px;" width="150" height="200"
                             src="https://microsite.otoklix.com/assets/icons/transparency.svg" alt="">
                         <div class="px-4 py-6">
-                            <h4 style="text-align: center; font-size: 30px;" class="font-bold mb-2">Aman</h4>
-                            <p style="text-align: center; font-size: 20px;" class="mb-2">Semua mitra yang terdaftar sudah
+                            <h4 style="text-align: center; font-size: 30px;" class="font-bold mb-2 dark:text-white" >Aman</h4>
+                            <p style="text-align: center; font-size: 20px;" class="mb-2 dark:text-white">Semua mitra yang terdaftar sudah
                                 dilakukan pengecekan kualitas.</p>
                         </div>
                     </div>
 
-                    <div class="w-1/3 shadow-lg rounded-lg overflow-hidden">
-                        <img style="margin: auto;" width="150" height="200"
+                    <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
+                        <img style="margin: auto; padding-top: 40px;" width="150" height="200"
                             src="https://microsite.otoklix.com/assets/icons/money.svg" alt="">
                         <div class="px-4 py-6">
-                            <h4 style="text-align: center; font-size: 30px;" class="font-bold mb-2">Harga Terjangkau</h4>
-                            <p style="text-align: center; font-size: 20px;" class="mb-2">Bisa tahu harga sebelum datang
+                            <h4 style="text-align: center; font-size: 30px;" class="font-bold mb-2 dark:text-white">Harga Terjangkau</h4>
+                            <p style="text-align: center; font-size: 20px;" class="mb-2 dark:text-white">Bisa tahu harga sebelum datang
                                 ke bengkel.</p>
                         </div>
                     </div>
 
-                    <div class="w-1/3 shadow-lg rounded-lg overflow-hidden">
-                        <img style="margin: auto;" width="150" height="200"
+                    <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
+                        <img style="margin: auto; padding-top: 40px;" width="150" height="200"
                             src="https://microsite.otoklix.com/assets/icons/tool.svg" alt="">
                         <div class="px-4 py-6">
-                            <h4 style="text-align: center; font-size: 30px;" class="font-bold mb-2">Garansi hingga 14 Hari
+                            <h4 style="text-align: center; font-size: 30px;" class="font-bold mb-2 dark:text-white">Garansi hingga 14 Hari
                             </h4>
-                            <p style="text-align: center; font-size: 20px;" class="mb-2">Terdapat garansi 14 hari
+                            <p style="text-align: center; font-size: 20px;" class="mb-2 dark:text-white">Terdapat garansi 14 hari
                                 setelah servis.</p>
                         </div>
                     </div>
@@ -150,16 +150,16 @@
             </div>
         </section>
 
-        <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10">Apa kata mereka?</h2>
+        <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">Apa kata mereka?</h2>
         <div class="container mx-auto px-2">
             <div class="flex gap-10">
 
-                <div class="w-1/3 shadow-lg rounded-lg overflow-hidden">
+                <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
                     <img style="margin: auto;" class="w-50"
                         src="https://img.freepik.com/free-photo/handsome-corporate-man-real-estate-agent-assistant-smiling-hold-hands-together-how-may-i-help-you-smiling-friendly-polite-assist-customer-white-background_176420-45257.jpg?w=360">
                     <div class="px-4 py-6">
-                        <h4 style="text-align: center;" class="text-2xl font-bold mb-5 mt-3">Ujang</h4>
-                        <p style="text-align: center;" class="mb-4">Mahasiswa</p>
+                        <h4 style="text-align: center;" class="text-2xl font-bold mb-5 mt-3 dark:text-white">Ujang</h4>
+                        <p style="text-align: center;" class="mb-4 dark:text-white">Mahasiswa</p>
                         <div style="justify-content:center;" class="flex">
                             <svg aria-hidden="true" class="w-10 h-10 text-yellow-400" fill="currentColor"
                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -200,12 +200,12 @@
                     </div>
                 </div>
 
-                <div class="w-1/3 shadow-lg rounded-lg overflow-hidden">
+                <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
                     <img style="margin: auto;" class="w-50"
                         src="https://img.freepik.com/free-photo/handsome-corporate-man-real-estate-agent-assistant-smiling-hold-hands-together-how-may-i-help-you-smiling-friendly-polite-assist-customer-white-background_176420-45257.jpg?w=360">
                     <div class="px-4 py-6">
-                        <h4 style="text-align: center;" class="text-2xl font-bold mb-5 mt-3">Ahmad</h4>
-                        <p style="text-align: center;" class="mb-4">Pelajar</p>
+                        <h4 style="text-align: center;" class="text-2xl font-bold mb-5 mt-3 dark:text-white">Ahmad</h4>
+                        <p style="text-align: center;" class="mb-4 dark:text-white">Pelajar</p>
                         <div style="justify-content:center;" class="flex">
                             <svg aria-hidden="true" class="w-10 h-10 text-yellow-400" fill="currentColor"
                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -246,12 +246,12 @@
                     </div>
                 </div>
 
-                <div class="w-1/3 shadow-lg rounded-lg overflow-hidden">
+                <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
                     <img style="margin: auto;" class="w-50"
                         src="https://img.freepik.com/free-photo/handsome-corporate-man-real-estate-agent-assistant-smiling-hold-hands-together-how-may-i-help-you-smiling-friendly-polite-assist-customer-white-background_176420-45257.jpg?w=360">
                     <div class="px-4 py-6">
-                        <h4 style="text-align: center;" class="text-2xl font-bold mb-5 mt-3">Yesee</h4>
-                        <p style="text-align: center;" class="mb-4">Driver</p>
+                        <h4 style="text-align: center;" class="text-2xl font-bold mb-5 mt-3 dark:text-white">Slamet</h4>
+                        <p style="text-align: center;" class="mb-4 dark:text-white">Driver</p>
                         <div style="justify-content:center;" class="flex">
                             <svg aria-hidden="true" class="w-10 h-10 text-yellow-400" fill="currentColor"
                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -292,12 +292,12 @@
                     </div>
                 </div>
 
-                <div class="w-1/3 shadow-lg rounded-lg overflow-hidden">
+                <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
                     <img style="margin: auto;" class="w-50"
                         src="https://img.freepik.com/free-photo/handsome-corporate-man-real-estate-agent-assistant-smiling-hold-hands-together-how-may-i-help-you-smiling-friendly-polite-assist-customer-white-background_176420-45257.jpg?w=360">
                     <div class="px-4 py-6">
-                        <h4 style="text-align: center;" class="text-2xl font-bold mb-5 mt-3">Jawir</h4>
-                        <p style="text-align: center;" class="mb-4">Driver</p>
+                        <h4 style="text-align: center;" class="text-2xl font-bold mb-5 mt-3 dark:text-white">Jawir</h4>
+                        <p style="text-align: center;" class="mb-4 dark:text-white">Driver</p>
                         <div style="justify-content:center;" class="flex">
                             <svg aria-hidden="true" class="w-10 h-10 text-yellow-400" fill="currentColor"
                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -400,7 +400,7 @@
 
         <section class="py-16">
             <div class="container mx-auto px-2">
-                <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10">Artikel Terbaru</h2>
+                <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">Artikel Terbaru</h2>
                 <div class="flex gap-10">
                 </div>
             </div>
@@ -408,7 +408,7 @@
 
         <section class="py-20">
             <div class="container mx-auto px-2">
-                <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10">Butuh bantuan? Silahkan hubungi kami
+                <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">Butuh bantuan? Silahkan hubungi kami
                 </h2>
                 <div class="flex gap-10">
                     <a href="#" style="margin: auto;"

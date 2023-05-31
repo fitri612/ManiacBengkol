@@ -1,4 +1,4 @@
-<footer class="bg-grey dark:bg-gray-900">
+<footer class="mt-10 bg-grey dark:bg-gray-900">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
             <div class="mb-6 md:mb-0">
@@ -10,24 +10,24 @@
             </div>
             <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-5">
                 <div>
-                    <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
+                    <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Halaman</h2>
                     <ul class="text-gray-600 dark:text-gray-400 font-medium">
                         <li class="mb-4">
-                            <a href="https://flowbite.com/" class="hover:underline">Article</a>
+                            <a href="{{ url('/articles') }}" class="hover:underline">Artikel</a>
                         </li>
                         <li>
-                            <a href="https://tailwindcss.com/" class="hover:underline">Form</a>
+                            <a href="{{ url('/booking') }}" class="hover:underline">Booking</a>
                         </li>
                     </ul>
                 </div>
                 <div>
-                    <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h2>
+                    <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Ikuti Kami</h2>
                     <ul class="text-gray-600 dark:text-gray-400 font-medium">
                         <li class="mb-4">
                             <a href="https://github.com/themesberg/flowbite" class="hover:underline ">Github</a>
                         </li>
                         <li>
-                            <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Instagram</a>
+                            <a href="https://www.instagram.com/msibgits_kel17/" class="hover:underline">Instagram</a>
                         </li>
                     </ul>
                 </div>
