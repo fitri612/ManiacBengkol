@@ -10,8 +10,8 @@
             <div class="dark:text-white">
                 <p>Transaction ID: {{ $detail->transaction_id }}</p>
                 <p>product ID {{ $detail->product_id }}</p>
-                <p>product {{ $detail->product }}</p>
-                {{-- <img src="{{ asset('storage/' . $detail->product->image) }}" alt="Product Image"> --}}
+                
+                <img src="{{ asset('storage/' . $detail->image) }}" alt="Product Image">
                 <p>jumlah yg dipesan : {{ $detail->qty }}</p>
                 <p>harga produk : {{ $detail->price }}</p>
             </div>

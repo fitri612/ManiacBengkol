@@ -20,6 +20,8 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\BookingAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,9 +85,20 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('/categoryASL',index::class)->name('categoryASL');
 });
 
-// product and category
-Route::Resource('category', CategoryController::class);
-Route::Resource('product', ProductController::class);
+// category
+Route::get('/category',[CategoryController::class,'index']);
+Route::post('/category',[CategoryController::class,'store']);
+Route::get('/category/{id}/edit',[CategoryController::class,'edit']);
+Route::put('/category/{id}',[CategoryController::class,'update']);
+Route::delete('/category/{id}',[CategoryController::class,'destroy']);
+
+// product
+Route::get('/product',[ProductController::class,'index']);
+Route::get('/product/create',[ProductController::class,'create']);
+Route::post('/product',[ProductController::class,'store']);
+Route::get('/product/{id}/edit',[ProductController::class,'edit']);
+Route::put('/product/{id}',[ProductController::class,'update']);
+Route::delete('/product/{id}',[ProductController::class,'destroy']);
 
 // cart
 // Route::get('/cart', [ProductController::class, 'index_test']); 
@@ -112,3 +125,18 @@ Route::middleware(['auth'])->group(function () {
 });
 // transaction
 // Route::post('/transaction', [Transaction::class, 'store'])->name('transaction.store');
+
+// user 
+Route::get('/user', [ProfileController::class, 'getData'])->name('user.index');
+
+// booking
+Route::resource('/booking',BookingController::class);
+Route::get('/booking',[BookingController::class,'index']);
+Route::post('/booking',[BookingController::class,'create']);
+Route::post('/booking',[BookingController::class,'store']);
+
+// booking admin
+Route::get('/booking-admin',[BookingAdminController::class,'index']);
+Route::get('/booking-admin/{id}/edit',[BookingAdminController::class,'edit']);
+Route::post('/booking-admin/{id}',[BookingAdminController::class,'update']);
+Route::delete('/booking-admin/{id}',[BookingAdminController::class,'destroy']);

@@ -24,9 +24,19 @@ class TransactionDtl extends Component
 
         $latestTransaction = Transaction::latest('id')->first();
         if ($latestTransaction) {
+            // $this->transaction_detail = TransactionDetail::where('transaction_id', $latestTransaction->id)
+            //     ->with('product')
+            //     ->get();
+            // $this->transaction_detail = TransactionDetail::where('transaction_id', $latestTransaction->id)
+            //     ->with(['product' => function ($query) {
+            //         $query->select('id', 'image');
+            //     }])
+            //     ->get();
             $this->transaction_detail = TransactionDetail::where('transaction_id', $latestTransaction->id)
-                ->with('product')
-                ->get();
+            ->join('products', 'transaction_details.product_id', '=', 'products.id')
+            ->select('transaction_details.*', 'products.image')
+            ->get();
+            // dd($this->transaction_detail);
         } else {
             $this->transaction_detail = collect();
         }
