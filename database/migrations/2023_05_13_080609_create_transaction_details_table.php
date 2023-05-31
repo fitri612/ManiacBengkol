@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->foreignId('product_id')->constrained('products')->cascadeOnUpdate()->cascadeOnDelete();
             
-            $table->json('product');
+            // $table->json('product');
             $table->bigInteger('qty');
             $table->decimal('price', 48, 4); // harga satuan ketika dibeli
             $table->timestamps();
