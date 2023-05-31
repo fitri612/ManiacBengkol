@@ -1,23 +1,51 @@
 function editComment(commentId) {
-    var commentElement = document.getElementById('commentText' + commentId);
-    var editForm = document.getElementById('commentEdit' + commentId);
-    var dropdown = document.getElementById('dropdownComment' + commentId);
-    commentElement.style.display = 'none';
-    editForm.style.display = 'block';
-    dropdown.style.display = 'none';
+    var commentElement = document.getElementById("commentText" + commentId);
+    var editForm = document.getElementById("commentEdit" + commentId);
+    var dropdown = document.getElementById("dropdownComment" + commentId);
+    commentElement.style.display = "none";
+    editForm.style.display = "block";
+    dropdown.style.display = "none";
 
-    var commentValue = document.getElementById('commentValue' + commentId).textContent;
-    var commentTextarea = document.getElementById('commentTextarea' + commentId);
+    var commentValue = document.getElementById(
+        "commentValue" + commentId
+    ).textContent;
+    var commentTextarea = document.getElementById(
+        "commentTextarea" + commentId
+    );
     commentTextarea.value = commentValue;
 }
 
 function cancelEdit(commentId) {
-    var commentElement = document.getElementById('commentText' + commentId);
-    var editForm = document.getElementById('commentEdit' + commentId);
-    commentElement.style.display = 'block';
-    editForm.style.display = 'none';
-
+    var commentElement = document.getElementById("commentText" + commentId);
+    var editForm = document.getElementById("commentEdit" + commentId);
+    commentElement.style.display = "block";
+    editForm.style.display = "none";
 }
+
+// $(document).ready(function() {
+//     $('.likeDislike').click(function() {
+//         var button = $(this);
+//         var itemId = button.data('item-id');
+//         var csrfToken = $('meta[name="csrf-token"]').attr('content'); // Get the CSRF token from a meta tag
+
+//         $.ajax({
+//             method: 'POST',
+//             url: '{{ route('like') }}',
+//             // data: { item_id: itemId},
+//             data: {
+//                 item_id: itemId,
+//                 _token: csrfToken // Include the CSRF token in the request data
+//             },
+//             success: function(response) {
+//                 console.log('success');
+
+//             },
+//             error: function(xhr, status, error) {
+//                 // ddd
+//             }
+//         });
+//     });
+// });
 
 // function editComment(event, commentId) {
 //     event.preventDefault();

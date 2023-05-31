@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('note');
             $table->string('nopol');
             $table->dateTime('jam_kedatangan');
             $table->string('status_booking');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('product_id')->nullable()->constrained()->onDelete('cascade');
+            $table->string('total_service')->nullable();
+            $table->string('total_cash')->nullable();
+            $table->string('kembalian')->nullable();
             $table->timestamps();
         });
     }

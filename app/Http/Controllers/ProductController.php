@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -15,18 +16,28 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('dashboard.product.index', [
-            'products' => Product::latest()->paginate(),
-            'categories' => Category::all()
-        ]);
+        $user = Auth::user();
+        // dd($user);
+        if ($user->is_admin == 1) {
+            return view('dashboard.product.index', [
+                'products' => Product::latest()->paginate(),
+                'categories' => Category::all(),
+                'user' => $user,
+            ]);
+        } else {
+            return view('user.product.index', [
+                'products' => Product::latest()->paginate(),
+                'categories' => Category::all()
+            ]);
+        }
     }
 
     public function index_test()
     {
         # code...
-        return view('test.product_list',[
-            'products'=>Product::latest()->paginate(),
-            'categories'=>Category::all()
+        return view('test.product_list', [
+            'products' => Product::latest()->paginate(),
+            'categories' => Category::all()
         ]);
     }
 
@@ -132,7 +143,7 @@ class ProductController extends Controller
         return redirect('/product')->with('delete', 'Delete Product Success!');
     }
 
-    public function cart()
+    public function list_product()
     {
         return view('dashboard.cart.index', [
             'products' => Product::latest()->paginate(),

@@ -2,9 +2,12 @@
 
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
-
-
 use App\Http\Livewire\Cart\CartList;
+use App\Http\Livewire\Transaction\Transaction;
+use App\Http\Livewire\Auth\PwdResetConfirm;
+use App\Http\Livewire\Auth\PasswordReset;
+
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -12,15 +15,13 @@ use App\Http\Controllers\HomeController;
 
 
 use App\Http\Controllers\LikeController;
-use App\Http\Livewire\Auth\PasswordReset;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\BookingAdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Livewire\Auth\PwdResetConfirm;
 use App\Http\Controllers\CategoryController;
-use App\Http\Livewire\Transaction\Transaction;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,8 +54,8 @@ Route::middleware('guest')->group(function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// 'views testing aldi'  
-Route::view('/testing', 'test._test');
+// 'views
+Route::view('/testing', 'layouts.admin');
 Route::view('/testprod', 'test.prod');
 
 
@@ -84,18 +85,29 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('/categoryASL',index::class)->name('categoryASL');
 });
 
-// product and category
-Route::Resource('category', CategoryController::class);
-Route::Resource('product', ProductController::class);
+// category
+Route::get('/category',[CategoryController::class,'index']);
+Route::post('/category',[CategoryController::class,'store']);
+Route::get('/category/{id}/edit',[CategoryController::class,'edit']);
+Route::put('/category/{id}',[CategoryController::class,'update']);
+Route::delete('/category/{id}',[CategoryController::class,'destroy']);
+
+// product
+Route::get('/product',[ProductController::class,'index']);
+Route::get('/product/create',[ProductController::class,'create']);
+Route::post('/product',[ProductController::class,'store']);
+Route::get('/product/{id}/edit',[ProductController::class,'edit']);
+Route::put('/product/{id}',[ProductController::class,'update']);
+Route::delete('/product/{id}',[ProductController::class,'destroy']);
 
 // cart
 // Route::get('/cart', [ProductController::class, 'index_test']); 
 // Route::view('/cart', 'dashboard.cart.index');
-Route::get('/cart', function () {
-    return view('dashboard.cart.index');
-})->middleware(['auth']);
+// Route::get('/cart', function () {
+//     return view('dashboard.cart.index');
+// })->middleware(['auth']);
 
-Route::view('/cart-list', 'dashboard.cart.cart_list');
+
 // Route::get('/cart-list', CartList::class)->name('cart-list'); 
 
 
@@ -105,11 +117,26 @@ Route::get('/profile', [ProfileController::class, 'index']);
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile_update');
 
 // cart
-Route::get('/cart', [ProductController::class, 'cart'])->name('cart');
-
+Route::view('/detail_produk', 'dashboard.product.product_detail');
+Route::get('/product-list', [ProductController::class, 'list_product'])->name('product-list');
+Route::middleware(['auth'])->group(function () {
+    Route::view('/cart-list', 'dashboard.cart.cart_list');
+    Route::view('/transaction', 'dashboard.transaction.transaction');
+});
 // transaction
 Route::view('/testingco', 'dashboard.transaction.transaction');
 Route::post('/transaction', [Transaction::class, 'store'])->name('transaction.store');
 
 // booking
 Route::resource('/booking',BookingController::class);
+Route::get('/booking',[BookingAdminController::class,'index']);
+Route::post('/booking',[BookingAdminController::class,'store']);
+// Route::post('/transaction', [Transaction::class, 'store'])->name('transaction.store');
+
+// booking admin
+Route::get('/booking-admin',[BookingAdminController::class,'index']);
+Route::get('/booking-admin/{id}/edit',[BookingAdminController::class,'edit']);
+Route::post('/booking-admin/{id}',[BookingAdminController::class,'update']);
+Route::delete('/booking-admin/{id}',[BookingAdminController::class,'destroy']);
+// user 
+Route::get('/user', [ProfileController::class, 'getData'])->name('user.index');
