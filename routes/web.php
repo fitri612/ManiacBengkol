@@ -22,6 +22,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BookingAdminController;
+use App\Models\Article;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,9 +35,22 @@ use App\Http\Controllers\BookingAdminController;
 |
 */
 
+// Route::get('/', function () {
+//     $articles = Article::with('likes')->take(3)->get();
+//     return view('dashboard', compact('articles'));
+// });
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/', function () {
-    return view('dashboard');
+    $articles = Article::with('likes')->take(3)->get();
+    return view('dashboard', compact('articles'));
+})->name('home');
+
+Route::get('/home', function () {
+    $articles = Article::with('likes')->take(3)->get();
+    return view('dashboard', compact('articles'));
 });
+
 
 Auth::routes([
     'login' => false,
@@ -52,7 +66,6 @@ Route::middleware('guest')->group(function () {
     Route::get('/confirm-reset', PwdResetConfirm::class)->name('confirm-reset');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // 'views
 Route::view('/testing', 'layouts.admin');
@@ -87,19 +100,19 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // category
-Route::get('/category',[CategoryController::class,'index']);
-Route::post('/category',[CategoryController::class,'store']);
-Route::get('/category/{id}/edit',[CategoryController::class,'edit']);
-Route::put('/category/{id}',[CategoryController::class,'update']);
-Route::delete('/category/{id}',[CategoryController::class,'destroy']);
+Route::get('/category', [CategoryController::class, 'index']);
+Route::post('/category', [CategoryController::class, 'store']);
+Route::get('/category/{id}/edit', [CategoryController::class, 'edit']);
+Route::put('/category/{id}', [CategoryController::class, 'update']);
+Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
 
 // product
-Route::get('/product',[ProductController::class,'index']);
-Route::get('/product/create',[ProductController::class,'create']);
-Route::post('/product',[ProductController::class,'store']);
-Route::get('/product/{id}/edit',[ProductController::class,'edit']);
-Route::put('/product/{id}',[ProductController::class,'update']);
-Route::delete('/product/{id}',[ProductController::class,'destroy']);
+Route::get('/product', [ProductController::class, 'index']);
+Route::get('/product/create', [ProductController::class, 'create']);
+Route::post('/product', [ProductController::class, 'store']);
+Route::get('/product/{id}/edit', [ProductController::class, 'edit']);
+Route::put('/product/{id}', [ProductController::class, 'update']);
+Route::delete('/product/{id}', [ProductController::class, 'destroy']);
 
 // cart
 // Route::get('/cart', [ProductController::class, 'index_test']); 
@@ -108,10 +121,7 @@ Route::delete('/product/{id}',[ProductController::class,'destroy']);
 //     return view('dashboard.cart.index');
 // })->middleware(['auth']);
 
-
 // Route::get('/cart-list', CartList::class)->name('cart-list'); 
-
-
 
 //profile
 Route::get('/profile', [ProfileController::class, 'index']);
@@ -132,10 +142,10 @@ Route::view('/transaction-list', 'dashboard.transaction.transaction-list');
 Route::get('/user', [ProfileController::class, 'getData'])->name('user.index');
 
 // booking
-Route::resource('/booking',BookingController::class);
-Route::get('/booking',[BookingController::class,'index']);
-Route::post('/booking',[BookingController::class,'create']);
-Route::post('/booking',[BookingController::class,'store']);
+Route::resource('/booking', BookingController::class);
+Route::get('/booking', [BookingController::class, 'index']);
+Route::post('/booking', [BookingController::class, 'create']);
+Route::post('/booking', [BookingController::class, 'store']);
 
 // booking admin
 Route::get('/booking-admin',[BookingAdminController::class,'index']);
@@ -144,3 +154,5 @@ Route::post('/booking-admin/{id}',[BookingAdminController::class,'update']);
 Route::delete('/booking-admin/{id}',[BookingAdminController::class,'destroy']);
 
 
+// transaction
+Route::view('/transaction-list', 'livewire.admin.transaction-list');
