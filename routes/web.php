@@ -154,5 +154,5 @@ Route::post('/booking-admin/{id}',[BookingAdminController::class,'update']);
 Route::delete('/booking-admin/{id}',[BookingAdminController::class,'destroy']);
 
 
-// transaction
+
 
