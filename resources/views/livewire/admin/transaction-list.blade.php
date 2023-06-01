@@ -1,5 +1,5 @@
 
-<div>
+<div class="container mx-auto px-5 py-4">
     @include('partials.success_toast')
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
