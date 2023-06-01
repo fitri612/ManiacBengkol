@@ -40,6 +40,6 @@
 @endforeach
 </div>
 @endif
-@livewire('admin.transaction-list')
+{{-- @livewire('admin.transaction-list') --}}
 </div>
 

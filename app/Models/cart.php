@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cart extends Model
 {
@@ -15,7 +17,7 @@ class Cart extends Model
         'in_process'    => 1,
         'success'       => 2,
         'error'         => 3
-        //
+
     ];
 
     public function user()
