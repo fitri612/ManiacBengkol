@@ -6,30 +6,37 @@
             <div class="col-md-8">
                 <div class="mt-4 grid grid-cols-1 gap-4 sm:mt-5 sm:grid-cols-3 sm:gap-5 lg:mt-6 lg:gap-6">
                     @foreach ($articles as $item)
-                        <div class="card p-2 pb-3">
-                            <div class="relative w-full">
-                                <img class="h-56 w-full rounded-xl object-cover object-center"
-                                    src="{{ url('images/' . $item->image) }}" alt="image" />
+                        <article class="flex max-w-xl flex-col items-start justify-between">
+                            <div class="flex items-center gap-x-4 text-xs">
+                                <time datetime="2020-03-16" class="text-gray-500">
+                                    {{ $item->created_at->format('d M Y') }}
+                                </time>
                             </div>
-                            <div class="mx-2 mt-3">
-                                <a href="{{ route('articles.show', $item) }}"
-                                    class="mt-1.5 text-base font-medium text-slate-700 line-clamp-1 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">
-                                    {{ $item->title }}
-                                </a>
-                                <div class="mt-2 flex items-center justify-between">
-                                    <p class="text-xs text-slate-400 dark:text-navy-300">
-                                        {{ $item->created_at->diffForHumans() }}
+                            <div class="group relative">
+                                <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                                    <a href="{{ route('articles.show', $item) }}">
+                                        <span class="absolute inset-0"></span>
+                                        {{ $item->title }}
+                                    </a>
+                                </h3>
+                                <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
+                                    {{ $item->body }}
+                                </p>
+                            </div>
+                            <div class="relative mt-8 flex items-center gap-x-4">
+                                <img src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                    alt="" class="h-10 w-10 rounded-full bg-gray-50">
+                                <div class="text-sm leading-6">
+                                    <p class="font-semibold text-gray-900">
+                                        <a href="#">
+                                            <span class="absolute inset-0"></span>
+                                            {{ $item->author }}
+                                        </a>
                                     </p>
-                                    <p>
-                                        <span class="font-semibold text-slate-700 dark:text-navy-100">
-                                            <i class="fa-brands fa-ethereum text-sm+"></i>
-                                            5.01
-                                        </span>
-                                        <span class="text-slate-400 dark:text-navy-300">ETH</span>
-                                    </p>
+                                    <p class="text-gray-600">Creator</p>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     @endforeach
                 </div>
             </div>
