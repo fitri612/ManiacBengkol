@@ -14,7 +14,6 @@
     @extends('layouts.app')
 
     @section('content')
-        {{-- Jumbotron --}}
         <section class="bg-white dark:bg-gray-900">
             <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-16">
                 <div class="flex flex-col justify-center">
@@ -35,7 +34,7 @@
                     <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
                         <a href="{{ url('/product') }}"
                             class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-                            Belanja Sekarang 
+                            Belanja Sekarang
                             <svg aria-hidden="true" class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -112,15 +111,18 @@
 
         <section class="py-16">
             <div class="container mx-auto px-2">
-                <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">Mengapa Harus Di Maniac Bengkel?</h2>
+                <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">Mengapa Harus Di
+                    Maniac Bengkel?</h2>
                 <div class="flex gap-10">
 
                     <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
                         <img style="margin: auto; padding-top: 40px;" width="150" height="200"
                             src="https://microsite.otoklix.com/assets/icons/transparency.svg" alt="">
                         <div class="px-4 py-6">
-                            <h4 style="text-align: center; font-size: 30px;" class="font-bold mb-2 dark:text-white" >Aman</h4>
-                            <p style="text-align: center; font-size: 20px;" class="mb-2 dark:text-white">Semua mitra yang terdaftar sudah
+                            <h4 style="text-align: center; font-size: 30px;" class="font-bold mb-2 dark:text-white">Aman
+                            </h4>
+                            <p style="text-align: center; font-size: 20px;" class="mb-2 dark:text-white">Semua mitra yang
+                                terdaftar sudah
                                 dilakukan pengecekan kualitas.</p>
                         </div>
                     </div>
@@ -129,8 +131,10 @@
                         <img style="margin: auto; padding-top: 40px;" width="150" height="200"
                             src="https://microsite.otoklix.com/assets/icons/money.svg" alt="">
                         <div class="px-4 py-6">
-                            <h4 style="text-align: center; font-size: 30px;" class="font-bold mb-2 dark:text-white">Harga Terjangkau</h4>
-                            <p style="text-align: center; font-size: 20px;" class="mb-2 dark:text-white">Bisa tahu harga sebelum datang
+                            <h4 style="text-align: center; font-size: 30px;" class="font-bold mb-2 dark:text-white">Harga
+                                Terjangkau</h4>
+                            <p style="text-align: center; font-size: 20px;" class="mb-2 dark:text-white">Bisa tahu harga
+                                sebelum datang
                                 ke bengkel.</p>
                         </div>
                     </div>
@@ -139,9 +143,11 @@
                         <img style="margin: auto; padding-top: 40px;" width="150" height="200"
                             src="https://microsite.otoklix.com/assets/icons/tool.svg" alt="">
                         <div class="px-4 py-6">
-                            <h4 style="text-align: center; font-size: 30px;" class="font-bold mb-2 dark:text-white">Garansi hingga 14 Hari
+                            <h4 style="text-align: center; font-size: 30px;" class="font-bold mb-2 dark:text-white">
+                                Garansi hingga 14 Hari
                             </h4>
-                            <p style="text-align: center; font-size: 20px;" class="mb-2 dark:text-white">Terdapat garansi 14 hari
+                            <p style="text-align: center; font-size: 20px;" class="mb-2 dark:text-white">Terdapat garansi
+                                14 hari
                                 setelah servis.</p>
                         </div>
                     </div>
@@ -337,8 +343,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
 
@@ -402,13 +406,51 @@
             <div class="container mx-auto px-2">
                 <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">Artikel Terbaru</h2>
                 <div class="flex gap-10">
+                    <div
+                        class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+                        @foreach ($articles as $item)
+                            <article class="flex max-w-xl flex-col items-start justify-between">
+                                <div class="flex items-center gap-x-4 text-xs">
+                                    <time datetime="2020-03-16" class="text-gray-500">
+                                        {{ $item->created_at->format('d M Y') }}
+                                    </time>
+                                </div>
+                                <div class="group relative">
+                                    <h3
+                                        class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                                        <a href="{{ route('articles.show', $item) }}">
+                                            <span class="absolute inset-0"></span>
+                                            {{ $item->title }}
+                                        </a>
+                                    </h3>
+                                    <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
+                                        {{ $item->body }}
+                                    </p>
+                                </div>
+                                <div class="relative mt-8 flex items-center gap-x-4">
+                                    <img src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                        alt="" class="h-10 w-10 rounded-full bg-gray-50">
+                                    <div class="text-sm leading-6">
+                                        <p class="font-semibold text-gray-900">
+                                            <a href="#">
+                                                <span class="absolute inset-0"></span>
+                                                {{ $item->author }}
+                                            </a>
+                                        </p>
+                                        <p class="text-gray-600">Creator</p>
+                                    </div>
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </section>
 
         <section class="py-20">
             <div class="container mx-auto px-2">
-                <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">Butuh bantuan? Silahkan hubungi kami
+                <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">Butuh bantuan?
+                    Silahkan hubungi kami
                 </h2>
                 <div class="flex gap-10">
                     <a href="#" style="margin: auto;"
@@ -458,10 +500,7 @@
             window.onload = animateText;
         </script>
 
-
         <div id="gallery" class="relative w-full py-5" data-carousel="slide">
-            <!-- Carousel wrapper -->
-
             @if (session('success'))
                 <div id="toast-success"
                     class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 drop-shadow-lg border-solid-2 fixed bottom-5 right-5"
@@ -490,7 +529,8 @@
                     </button>
                 </div>
             @endif
-        @endsection
+        </div>
+    @endsection
 
 </body>
 
