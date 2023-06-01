@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container">
+    <div class="container mx-auto px-5 py-4">
         <div class="row justify-content-center">
 
             @if (Session::has('update'))

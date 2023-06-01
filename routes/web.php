@@ -152,3 +152,7 @@ Route::get('/booking-admin',[BookingAdminController::class,'index']);
 Route::get('/booking-admin/{id}/edit',[BookingAdminController::class,'edit']);
 Route::post('/booking-admin/{id}',[BookingAdminController::class,'update']);
 Route::delete('/booking-admin/{id}',[BookingAdminController::class,'destroy']);
+
+
+
+
