@@ -12,13 +12,13 @@
                             <th>
                                 
                             </th>
-                            <th class="text-left">Product</th>
+                            <th class="text-left">Produk</th>
                             <th class="lg:text-right text-left pl-5 lg:pl-0">
                                 <span class="lg:hidden" title="Quantity">Qtd</span>
-                                <span class="hidden lg:inline">Quantity</span>
+                                <span class="hidden lg:inline">Jumlah</span>
                             </th>
-                            <th class="hidden text-right md:table-cell">Unit price</th>
-                            <th class="text-right">Total price</th>
+                            <th class="hidden text-right md:table-cell">Harga per barang</th>
+                            <th class="text-right">Harga total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,11 +27,11 @@
                                 <input wire:model="checkAll" id="check_all" wire:click="checkAllItems" type="checkbox"
                                     class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             </td>
-                            <td colspan="4">Select All</td>
+                            <td colspan="4">Pilih semua</td>
                             <td>
                                 @if(count($selected_cart_items) > 0 && !$deletionCompleted)
                                     <a class="text-green-600" href="#" wire:click.prevent="deleteSelectedItems" wire:loading.attr="disabled">
-                                        Delete Selected
+                                        Hapus yang dipilih
                                     </a>
                                 @endif                              
                             </td>
@@ -54,7 +54,7 @@
                                     <p class="mb-2 md:ml-4">{{ $item->product->name }}</p>
                                     <button type="submit" class="md:ml-4 text-red-700"
                                         wire:click="removeItem({{ $item->id }})">
-                                        <small>(Remove item)</small>
+                                        <small>(Hapus produk)</small>
                                     </button>
                                 </td>
                                 <td class="justify-center md:justify-end md:flex mt-6">
@@ -97,7 +97,7 @@
                     <div class="lg:px-2 lg:w-1/2"></div>
                     <div class="lg:px-2 lg:w-1/2">
                         <div class="p-4 bg-gray-100 rounded-full">
-                            <h1 class="ml-2 font-bold uppercase">Order Details</h1>
+                            <h1 class="ml-2 font-bold uppercase">Detail produk</h1>
                             
                         </div>
                         <div class="p-4">
@@ -106,15 +106,15 @@
                                     Subtotal
                                 </div>
                                 <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                                    {{ $sub_total }}$
+                                    Rp {{ $sub_total }}
                                 </div>
                             </div>
                             <div class="flex justify-between pt-4 border-b">
                                 <div class="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800">
-                                    Tax
+                                    Pajak
                                 </div>
                                 <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                                    {{ $tax }}$
+                                    Rp {{ $tax }}
                                 </div>
                             </div>
                             <div class="flex justify-between pt-4 border-b">
@@ -122,17 +122,19 @@
                                     Total
                                 </div>
                                 <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                                    {{ $this->total }}$
+                                    Rp {{ $this->total }}
                                 </div>
                             </div>
                             {{-- transaction.store --}}
                             {{-- <form wire:submit.prevent="checkout"> --}}
 
-                            <label for="small" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Select payment method</label>
+                            <label for="small" class="block mt-8 mb-3 text-xl font-medium text-gray-900 dark:text-black">Silahkan pilih metode pembayaran</label>
                             <select wire:model="payment_method" id="payment_method" class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected value="">Choose payment method</option>
+                            <option selected value="">Pilih metode pembayaran</option>
                             <option value="cash">Cash</option>
-                            <option value="transfer">Transfer</option>
+                            <option value="transfer">Transfer Bank</option>
+                            <option value="ewallet">E-Wallet</option>
+                            <option value="creditcard">Kartu Kredit</option>
                             </select>
 
                             @if($errors->has('payment_method'))
@@ -141,7 +143,7 @@
                             
                             @if (empty($selected_cart_items))
                                 <div>
-                                    <span class="text-red-500 text-sm">Please select at least one item.</span>
+                                    <span class="text-red-500 text-sm">Pilih salah satu produk</span>
                                 </div>
                             @endif
 
@@ -157,10 +159,10 @@
                                         <path fill="currentColor"
                                             d="M527.9 32H48.1C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48.1 48h479.8c26.6 0 48.1-21.5 48.1-48V80c0-26.5-21.5-48-48.1-48zM54.1 80h467.8c3.3 0 6 2.7 6 6v42H48.1V86c0-3.3 2.7-6 6-6zm467.8 352H54.1c-3.3 0-6-2.7-6-6V256h479.8v170c0 3.3-2.7 6-6 6zM192 332v40c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v40c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12z" />
                                     </svg>
-                                    <span class="ml-2 mt-5px">Beli @if (!empty($selected_cart_items)) ({{ count($selected_cart_items) }}) @endif</span>
+                                    <span class="ml-2 mt-5px">CHECKOUT @if (!empty($selected_cart_items)) ({{ count($selected_cart_items) }}) @endif</span>
                                 </button>
                             {{-- </form> --}}
-                            <div wire:loading>Processing payment....</div>
+                            <div wire:loading>Pembayaran sedang di proses....</div>
 
                         </div>
                     </div>
