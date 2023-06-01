@@ -3,7 +3,7 @@
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Cart\CartList;
-use App\Http\Livewire\Transaction\Transaction;
+
 use App\Http\Livewire\Auth\PwdResetConfirm;
 use App\Http\Livewire\Auth\PasswordReset;
 
@@ -79,6 +79,7 @@ Route::post('like', [LikeController::class, 'store'])->name('like.store');
 
 
 Route::middleware(['admin'])->group(function () {
+    
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -125,6 +126,7 @@ Route::middleware(['auth'])->group(function () {
 });
 // transaction
 // Route::post('/transaction', [Transaction::class, 'store'])->name('transaction.store');
+Route::view('/transaction-list', 'dashboard.transaction.transaction-list');
 
 // user 
 Route::get('/user', [ProfileController::class, 'getData'])->name('user.index');
@@ -140,3 +142,5 @@ Route::get('/booking-admin',[BookingAdminController::class,'index']);
 Route::get('/booking-admin/{id}/edit',[BookingAdminController::class,'edit']);
 Route::post('/booking-admin/{id}',[BookingAdminController::class,'update']);
 Route::delete('/booking-admin/{id}',[BookingAdminController::class,'destroy']);
+
+
