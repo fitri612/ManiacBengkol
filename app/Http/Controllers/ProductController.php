@@ -15,18 +15,27 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('dashboard.product.index', [
-            'products' => Product::latest()->paginate(),
-            'categories' => Category::all()
-        ]);
+        $user = auth()->user();
+        if ($user && $user->is_admin == 1) {
+            return view('dashboard.product.index', [
+                'products' => Product::latest()->paginate(),
+                'categories' => Category::all()
+
+            ]);
+        } else {
+            return view('user.product.index', [
+                'products' => Product::latest()->paginate(),
+                'categories' => Category::all()
+            ]);
+        }
     }
 
     public function index_test()
     {
         # code...
-        return view('test.product_list',[
-            'products'=>Product::latest()->paginate(),
-            'categories'=>Category::all()
+        return view('test.product_list', [
+            'products' => Product::latest()->paginate(),
+            'categories' => Category::all()
         ]);
     }
 
