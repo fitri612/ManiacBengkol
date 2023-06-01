@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         
         Category::factory(5)->create();
-        // Product::factory(5)->create();
+        Product::factory(5)->create();
         Article::factory(5)->create();
         
         DB::table('users')->insert([
