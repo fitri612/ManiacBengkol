@@ -67,6 +67,14 @@ Route::middleware('guest')->group(function () {
 });
 
 
+Route::middleware(['admin'])->group(function () {
+});
+
+Route::middleware(['auth'])->group(function () {
+    // Route::get('/categoryASL',index::class)->name('categoryASL');
+});
+
+
 // 'views
 Route::view('/testing', 'layouts.admin');
 Route::view('/testprod', 'test.prod');
@@ -82,22 +90,12 @@ Route::get('articles/{article:slug}', [ArticleController::class, 'showArticle'])
 Route::put('articles/{article:slug}', [ArticleController::class, 'update'])->name('articles.update');
 Route::delete('articles/{article:slug}', [ArticleController::class, 'destroy'])->name('articles.destroy');
 
-// comment
 Route::post('comment', [CommentController::class, 'store'])->name('comment.store');
 Route::delete('comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
 Route::put('comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
 
 // like
 Route::post('like', [LikeController::class, 'store'])->name('like.store');
-
-
-Route::middleware(['admin'])->group(function () {
-    
-});
-
-Route::middleware(['auth'])->group(function () {
-    // Route::get('/categoryASL',index::class)->name('categoryASL');
-});
 
 // category
 Route::get('/category', [CategoryController::class, 'index']);
@@ -148,11 +146,7 @@ Route::post('/booking', [BookingController::class, 'create']);
 Route::post('/booking', [BookingController::class, 'store']);
 
 // booking admin
-Route::get('/booking-admin',[BookingAdminController::class,'index']);
-Route::get('/booking-admin/{id}/edit',[BookingAdminController::class,'edit']);
-Route::post('/booking-admin/{id}',[BookingAdminController::class,'update']);
-Route::delete('/booking-admin/{id}',[BookingAdminController::class,'destroy']);
-
-
-
-
+Route::get('/booking-admin', [BookingAdminController::class, 'index']);
+Route::get('/booking-admin/{id}/edit', [BookingAdminController::class, 'edit']);
+Route::post('/booking-admin/{id}', [BookingAdminController::class, 'update']);
+Route::delete('/booking-admin/{id}', [BookingAdminController::class, 'destroy']);
