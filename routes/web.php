@@ -155,4 +155,4 @@ Route::delete('/booking-admin/{id}',[BookingAdminController::class,'destroy']);
 
 
 // transaction
-Route::view('/transaction-list', 'livewire.admin.transaction-list');
+
