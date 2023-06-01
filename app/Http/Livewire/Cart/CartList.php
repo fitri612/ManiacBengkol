@@ -64,7 +64,7 @@ class CartList extends Component
         $cart->quantity += 1;
         $cart->save();
 
-        session()->flash('success', 'Product quantity updated !!!');
+        session()->flash('success', 'Jumlah produk berhasil diubah!');
     }
 
     public function decrementQty($id){
@@ -72,9 +72,9 @@ class CartList extends Component
         if($cart->quantity > 1){
             $cart->quantity -= 1;
             $cart->save();
-            session()->flash('success', 'Product quantity updated !!!');
+            session()->flash('success', 'Jumlah produk berhasil diubah!');
         }else{
-            session()->flash('error','You cannot have less than 1 quantity');
+            session()->flash('error','Jumlah barang tidak boleh kurang dari 1!');
         }
     }
 
@@ -85,7 +85,7 @@ class CartList extends Component
             $cart->delete();
             $this->emit('updateCartCount');
         }
-        session()->flash('success', 'Product removed from cart !!!');
+        session()->flash('success', 'Produk telah dihapus dari keranjang');
     }
 
     public function deleteSelectedItems()
@@ -94,7 +94,7 @@ class CartList extends Component
         $this->deletionCompleted = true;
         // dd($this->deletionCompleted);
         $this->emit('updateCartCount');
-        session()->flash('success', 'Selected products removed from cart!');
+        session()->flash('success', 'Produk yang dipilih telah dihapus dari keranjang');
     }
 
 
@@ -157,14 +157,14 @@ class CartList extends Component
 
             DB::commit();
             $this->emit('updateCartCount');
-            session()->flash('success', 'Checkout success!');
+            session()->flash('success', 'Checkout berhasil!');
             return redirect('/transaction');
             // return redirect('/transaction')->with('success', 'Checkout success!');
 
         } catch (\Exception $e) {
             DB::rollback();
 
-            session()->flash('error', 'Checkout failed: ' . $e->getMessage());
+            session()->flash('error', 'Checkout gagal: ' . $e->getMessage());
         }
     }    
       
