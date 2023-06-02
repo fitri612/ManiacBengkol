@@ -26,6 +26,7 @@ class ArticleController extends Controller
         else{
             return view('user.articles.index', compact('articles', 'comments'));
         }
+
     }
 
     /**
