@@ -14,11 +14,15 @@
                     <p class="mt-1 text-xs"><?php echo date('l, M. j'); ?></p>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <label class="relative hidden sm:flex">
-                        <input
-                            class="form-input peer h-9 w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 text-xs+ placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                            placeholder="Search users..." type="text">
-                    </label>
+                    <form action="">
+                        <label class="relative hidden sm:flex">
+                            <input
+                                onkeyup="searchByName()"
+                                id="searchInput"
+                                class="form-input peer h-9 w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 text-xs+ placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                placeholder="Search Articles..." type="text">
+                        </label>
+                    </form>
                     <div class="flex">
                         <button
                             class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25 sm:hidden sm:h-9 sm:w-9">
@@ -58,42 +62,53 @@
                     Article</a>
                 <div class="mt-4 grid grid-cols-1 gap-4 sm:mt-5 sm:grid-cols-3 sm:gap-5 lg:mt-6 lg:gap-6">
                     @foreach ($articles as $item)
-                        <div class="card p-2 pb-3">
-                            <div class="relative w-full">
-                                <img class="h-56 w-full rounded-xl object-cover object-center"
-                                    src="{{ url('images/' . $item->image) }}" alt="image" />
+                        <article
+                            class="flex max-w-xl flex-col items-start justify-between bg-white rounded-lg shadow-md p-6">
+                            <div class="flex items-center gap-x-4 text-xs">
+                                <time datetime="2020-03-16" class="text-gray-500">
+                                    {{ $item->created_at->format('d M Y') }}
+                                </time>
                             </div>
-                            <div class="mx-2 mt-3">
-                                <a href="{{ route('articles.show', $item) }}"
-                                    class="mt-1.5 text-base font-medium text-slate-700 line-clamp-1 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">
-                                    {{ $item->title }}
-                                </a>
-                                <div class="mt-2 flex items-center justify-between">
-                                    <p class="text-xs text-slate-400 dark:text-navy-300">
-                                        {{ $item->created_at->diffForHumans() }}
+                            <div class="group relative">
+                                <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                                    <a href="{{ route('articles.show', $item) }}">
+                                        <span class="absolute inset-0"></span>
+                                        {{ $item->title }}
+                                    </a>
+                                </h3>
+                                <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
+                                    {{ $item->body }}
+                                </p>
+                            </div>
+                            <div class="relative mt-8 flex items-center gap-x-4">
+                                <img src="{{ asset('img/creator_article.jpg') }}"
+                                    alt="" class="h-10 w-10 rounded-full bg-gray-50">
+                                <div class="text-sm leading-6">
+                                    <p class="font-semibold text-gray-900">
+                                        <a href="#">
+                                            {{ $item->author }}
+                                        </a>
                                     </p>
-                                    <p>
-                                        <span class="font-semibold text-slate-700 dark:text-navy-100">
-                                            <i class="fa-brands fa-ethereum text-sm+"></i>
-                                            5.01
-                                        </span>
-                                        <span class="text-slate-400 dark:text-navy-300">ETH</span>
-                                    </p>
+                                    <p class="text-gray-600">Creator</p>
                                 </div>
+
+                            </div>
+                            <div class="mt-6 grid w-full grid-cols-2 gap-2">
                                 <a href="{{ route('articles.edit', $item->id) }}"
-                                    class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+                                    class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 text-center">
                                     Edit
                                 </a>
                                 <form action="{{ route('articles.destroy', $item->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
-                                        class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
+                                        class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
                                         Delete
                                     </button>
                                 </form>
+
                             </div>
-                        </div>
+                        </article>
                     @endforeach
                 </div>
             </div>
