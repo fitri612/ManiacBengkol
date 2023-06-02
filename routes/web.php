@@ -74,21 +74,58 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/category/{id}/edit', [CategoryController::class, 'edit']);
     Route::put('/category/{id}', [CategoryController::class, 'update']);
     Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
+    // product
+    Route::get('/product', [ProductController::class, 'index']);
+    Route::get('/product/create', [ProductController::class, 'create']);
+    Route::post('/product', [ProductController::class, 'store']);
+    Route::get('/product/{id}/edit', [ProductController::class, 'edit']);
+    Route::put('/product/{id}', [ProductController::class, 'update']);
+    Route::delete('/product/{id}', [ProductController::class, 'destroy']);
+    // article
+    Route::get('articles', [ArticleController::class, 'index'])->name('articles.index');
+    Route::post('articles', [ArticleController::class, 'store'])->name('articles.store');
+    Route::get('articles/create', [ArticleController::class, 'create'])->name('articles.create');
+    Route::get('articles/{article:slug}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+    Route::get('articles/{article:slug}', [ArticleController::class, 'showArticle'])->name('articles.show');
+    Route::put('articles/{article:slug}', [ArticleController::class, 'update'])->name('articles.update');
+    Route::delete('articles/{article:slug}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+    Route::post('comment', [CommentController::class, 'store'])->name('comment.store');
+    Route::delete('comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+    Route::put('comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
+    Route::post('like', [LikeController::class, 'store'])->name('like.store');
+    // booking
+    Route::get('/booking-admin', [BookingAdminController::class, 'index']);
+    Route::get('/booking-admin/{id}/edit', [BookingAdminController::class, 'edit']);
+    Route::post('/booking-admin/{id}', [BookingAdminController::class, 'update']);
+    Route::delete('/booking-admin/{id}', [BookingAdminController::class, 'destroy']);
+    // user all
+    Route::get('/user', [ProfileController::class, 'getData'])->name('user.index');
 });
-// product
-Route::get('/product', [ProductController::class, 'index']);
-Route::get('/product/create', [ProductController::class, 'create']);
-Route::post('/product', [ProductController::class, 'store']);
-Route::get('/product/{id}/edit', [ProductController::class, 'edit']);
-Route::put('/product/{id}', [ProductController::class, 'update']);
-Route::delete('/product/{id}', [ProductController::class, 'destroy']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::view('/detail_produk', 'dashboard.product.product_detail');
     Route::get('/product-list', [ProductController::class, 'list_product'])->name('product-list');
+    Route::view('/detail_produk', 'dashboard.product.product_detail');
     Route::view('/cart-list', 'dashboard.cart.cart_list');
     Route::view('/transaction', 'dashboard.transaction.transaction');
+    // article
+    Route::get('articles', [ArticleController::class, 'index'])->name('articles.index');
+    Route::get('articles/{article:slug}', [ArticleController::class, 'showArticle'])->name('articles.show');
+    Route::post('comment', [CommentController::class, 'store'])->name('comment.store');
+    Route::delete('comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+    Route::put('comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
+    Route::post('like', [LikeController::class, 'store'])->name('like.store');
+    // booking
+    Route::get('/booking', [BookingController::class, 'index']);
+    Route::post('/booking', [BookingController::class, 'create']);
+    Route::post('/booking', [BookingController::class, 'store']);
+    // profile
+    Route::get('/profile', [ProfileController::class, 'index']);
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile_update');
 });
+
+
+
+
 
 
 // Route::middleware(['auth'])->group(function () {
@@ -103,19 +140,7 @@ Route::view('/testprod', 'test.prod');
 
 // Articles
 // Route::Resource('articles', ArticleController::class);
-Route::get('articles', [ArticleController::class, 'index'])->name('articles.index');
-Route::post('articles', [ArticleController::class, 'store'])->name('articles.store');
-Route::get('articles/create', [ArticleController::class, 'create'])->name('articles.create');
-Route::get('articles/{article:slug}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
-Route::get('articles/{article:slug}', [ArticleController::class, 'showArticle'])->name('articles.show');
-Route::put('articles/{article:slug}', [ArticleController::class, 'update'])->name('articles.update');
-Route::delete('articles/{article:slug}', [ArticleController::class, 'destroy'])->name('articles.destroy');
 
-Route::post('comment', [CommentController::class, 'store'])->name('comment.store');
-Route::delete('comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
-Route::put('comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
-
-Route::post('like', [LikeController::class, 'store'])->name('like.store');
 
 // like
 // cart
@@ -128,24 +153,10 @@ Route::post('like', [LikeController::class, 'store'])->name('like.store');
 // Route::get('/cart-list', CartList::class)->name('cart-list'); 
 
 //profile
-Route::get('/profile', [ProfileController::class, 'index']);
-Route::post('/profile', [ProfileController::class, 'update'])->name('profile_update');
+
 
 // transaction
 // Route::post('/transaction', [Transaction::class, 'store'])->name('transaction.store');
 Route::view('/transaction-list', 'dashboard.transaction.transaction-list');
 
 // user 
-Route::get('/user', [ProfileController::class, 'getData'])->name('user.index');
-
-// booking
-Route::resource('/booking', BookingController::class);
-Route::get('/booking', [BookingController::class, 'index']);
-Route::post('/booking', [BookingController::class, 'create']);
-Route::post('/booking', [BookingController::class, 'store']);
-
-// booking admin
-Route::get('/booking-admin', [BookingAdminController::class, 'index']);
-Route::get('/booking-admin/{id}/edit', [BookingAdminController::class, 'edit']);
-Route::post('/booking-admin/{id}', [BookingAdminController::class, 'update']);
-Route::delete('/booking-admin/{id}', [BookingAdminController::class, 'destroy']);
