@@ -134,10 +134,10 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/cart-list', 'dashboard.cart.cart_list');
     Route::view('/transaction', 'dashboard.transaction.transaction');
 });
-// transaction
-// Route::post('/transaction', [Transaction::class, 'store'])->name('transaction.store');
+// transaction-list admin
 Route::view('/transaction-list', 'dashboard.transaction.transaction-list');
-
+// transaction-list user
+Route::view('/user-transaction-list', 'dashboard.transaction.user-transaction-list');
 // user 
 Route::get('/user', [ProfileController::class, 'getData'])->name('user.index');
 
