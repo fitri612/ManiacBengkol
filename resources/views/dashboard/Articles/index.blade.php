@@ -77,7 +77,7 @@
                                 </p>
                             </div>
                             <div class="relative mt-8 flex items-center gap-x-4">
-                                <img src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                <img src="{{ asset('img/creator_article.jpg') }}"
                                     alt="" class="h-10 w-10 rounded-full bg-gray-50">
                                 <div class="text-sm leading-6">
                                     <p class="font-semibold text-gray-900">
@@ -89,18 +89,21 @@
                                 </div>
 
                             </div>
-                            <a href="{{ route('articles.edit', $item->id) }}"
-                                class="btn bg-warning font-medium text-white hover:bg-warning-focus focus:bg-warning-focus active:bg-warning-focus/90">
-                                Edit
-                            </a>
-                            <form action="{{ route('articles.destroy', $item->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
-                                    Delete
-                                </button>
-                            </form>
+                            <div class="mt-6 grid w-full grid-cols-2 gap-2">
+                                <a href="{{ route('articles.edit', $item->id) }}"
+                                    class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 text-center">
+                                    Edit
+                                </a>
+                                <form action="{{ route('articles.destroy', $item->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                                        Delete
+                                    </button>
+                                </form>
+
+                            </div>
                         </article>
                     @endforeach
                 </div>
