@@ -76,3 +76,24 @@ function cancelEdit(commentId) {
 //             alert(error.message);
 //         });
 // }
+function searchByName() {
+    // Ambil nilai input search
+    let input = document.getElementById("searchInput");
+    let filter = input.value.toUpperCase();
+
+    // Ambil semua product cards
+    let productCards = document.getElementsByClassName("tabel-produk");
+
+    // Looping semua product cards
+    for (let i = 0; i < productCards.length; i++) {
+        let productName = productCards[i].getElementsByClassName("nama")[0];
+        let productNameText = productName.textContent || productName.innerText;
+
+        // Cek apakah product name match dengan search query
+        if (productNameText.toUpperCase().indexOf(filter) > -1) {
+            productCards[i].style.display = "";
+        } else {
+            productCards[i].style.display = "none";
+        }
+    }
+}

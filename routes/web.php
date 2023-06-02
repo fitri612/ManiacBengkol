@@ -118,7 +118,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
     Route::post('like', [LikeController::class, 'store'])->name('like.store');
     // booking
-    Route::resource('booking', BookingController::class);
+    Route::get('/booking', [BookingController::class, 'index']);
+    Route::get('/booking/create', [BookingController::class, 'create']);
+    Route::post('/booking', [BookingController::class, 'store']);
+
     // profile
     Route::get('/profile', [ProfileController::class, 'index']);
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile_update');
