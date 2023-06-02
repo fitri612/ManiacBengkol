@@ -1,9 +1,9 @@
-<footer class="mt-10 bg-grey dark:bg-gray-900">
+<footer class=" mt-10 bg-grey dark:bg-gray-900">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
             <div class="mb-6 md:mb-0">
-                <a href="https://flowbite.com/" class="flex items-center">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
+                <a href="{{ url('/') }}" class="flex items-center">
+                    <img src="https://gcdnb.pbrd.co/images/4LUQpWQfxfra.png?o=1" width="55px" height="55px" class="mr-3" alt="FlowBite Logo" />
                     <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Maniac
                         Bengkel</span>
                 </a>
