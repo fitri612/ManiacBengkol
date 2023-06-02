@@ -149,5 +149,5 @@
             </article>
 
         </div>
-        </div>
-    @endsection
+    </main>
+@endsection
