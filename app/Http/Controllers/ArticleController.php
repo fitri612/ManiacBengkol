@@ -54,6 +54,8 @@ class ArticleController extends Controller
             'author' => 'required',
         ]);
 
+        // dd($request->all());
+
         $file = $request->file('image');
         $path = time() . '_' . $request->title . '.' . $file->getClientOriginalExtension();
 
