@@ -20,8 +20,13 @@ class ArticleController extends Controller
         $articles = Article::with('likes')->get();
         $comments = Comment::all();
         $user = Auth::user();
-        // dd($comments);
-        return view('dashboard.articles.index', compact('articles', 'comments', 'user'));
+        if($user && $user->is_admin == 1){
+            return view('dashboard.articles.index', compact('articles', 'comments'));
+        }
+        else{
+            return view('user.articles.index', compact('articles', 'comments'));
+        }
+
     }
 
     /**
@@ -148,6 +153,11 @@ class ArticleController extends Controller
     {
         $comments = Comment::where('article_id', $article->id)->get();
         $users = Auth::user();
-        return view('dashboard.Articles.detail.index', compact('article', 'comments', 'users'));
+        if($users && $users->is_admin == 1){
+            return view('dashboard.Articles.detail.index', compact('article', 'comments', 'users'));
+        }
+        else{
+            return view('user.articles.detail.index', compact('article', 'comments'));
+        }
     }
 }

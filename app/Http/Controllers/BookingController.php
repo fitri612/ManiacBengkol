@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Product;
+
 use App\Models\Booking;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -13,18 +12,17 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-     public function __construct()
+    public function __construct()
     {
          $this->middleware('auth');
     }
  
-    public function index()
+     public function index()
     {
-
-        return view('booking_user.index',[
+        return view('user.booking_user.index',[
             'bookings'=>Booking::all(),
         ]);
+
     }
 
     /**
@@ -34,9 +32,8 @@ class BookingController extends Controller
      */
     public function create()
     {
-        return view('booking_user.create',[
-            'products'=>Product::all()
-        ]);
+        return view('user.booking_user.create');
+ 
     }
 
     /**
@@ -47,29 +44,15 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
             "note"=>"required|max:255",
-            "nopol"=>"required|max:18",
+            "nopol"=>"required|min:7|max:18",
             "jam_kedatangan"=>"required",
             "status_booking"=>"required",
-            "user_id"=>"",
-            "product_id"=>"",
-
+            "user_id"=>"required"
         ]);
 
-        foreach ($request->product_id as $key => $value) {
-            Booking::create([
-                "note"=>$request->input("note"),
-                "product_id"=>$request->input("product_id")[$key],
-                "nopol"=>$request->input("nopol"),
-                "jam_kedatangan"=>$request->input("jam_kedatangan"),
-                "user_id"=>$request->input("user_id"),
-                "status_booking"=>$request->input("status_booking"),
-            ]);
-
-        }
-
+        Booking::create($validatedData);
         return redirect('/booking')->with('success','berhasil booking');
 
     }
@@ -82,6 +65,7 @@ class BookingController extends Controller
      */
     public function show(Booking $booking)
     {
+        //
     }
 
     /**

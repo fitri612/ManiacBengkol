@@ -1,11 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900">
         <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
             <article
                 class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
-
                 <header class="mb-4 lg:mb-6 not-format">
                     <address class="flex items-center mb-6 not-italic">
                         <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
@@ -22,10 +21,8 @@
                                         {{ $article->created_at->format('d F Y') }}
                                     </time>
                                 </p>
-
                             </div>
                         </div>
-
                     </address>
                     <figure><img src="{{ url('images/' . $article->image) }}" alt="">
                     </figure>
@@ -34,10 +31,7 @@
                         {{ $article->title }}</h1>
                 </header>
                 <p class="lead">{!! $article->body !!}</p>
-
                 <p>Total Like : {{ $article->likes->count() }}</p>
-
-
                 @if (Auth::check())
                     @if ($article->isLikeBy(Auth::user()))
                         Unlike
@@ -45,7 +39,6 @@
                         Like
                     @endif
                 @endif
-
                 <form action="{{ route('like.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="article_id" value="{{ $article->id }}" id="{{ $article->id }}">
@@ -60,9 +53,6 @@
                         <span class="ml-2">Like</span>
                     </button>
                 </form>
-
-
-
                 <section class="not-format">
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion (20)</h2>
@@ -78,7 +68,7 @@
                                 placeholder="Write a comment..." required></textarea>
                         </div>
                         <button type="submit"
-                            class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                            class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
                             Post comment
                         </button>
                     </form>
@@ -148,7 +138,7 @@
                                             placeholder="Write a comment..." required></textarea>
                                     </div>
                                     <button type="submit"
-                                        class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Update
+                                        class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Update
                                         comment</button>
 
                                     <button type="cancel" onclick="cancelEdit({{ $comment->id }})"

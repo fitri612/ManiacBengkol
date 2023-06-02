@@ -79,7 +79,6 @@
                     class="btn bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90 mb-4">
                     Create product
                 </a>
-
                 <div class="card">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -123,12 +122,10 @@
                                             {{ $loop->iteration }}
                                         </th>
                                         <td class="px-6 py-4">
-
                                             <img src="{{ asset('storage/' . $item->image) }}"
                                                 style="max-width: 70px;height:70px;margin:0;object-fit: cover;"
                                                 alt="">
                                         </td>
-
                                         <td class="px-6 py-4">
                                             {{ $item->name }}
                                         </td>
@@ -173,8 +170,6 @@
                             @endforeach
                         </table>
                     </div>
-
-
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 <div>
     @include('partials.success_toast')
     <p class="text-lg font-bold text-gray-900 dark:text-white">Checkout</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis, sequi.</p>
     <div class="grid grid-cols-2 gap-5  justify-center">
     <div class="max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
        
@@ -9,10 +10,10 @@
             <div class="dark:text-white">
                 <p>Transaction ID: {{ $detail->transaction_id }}</p>
                 <p>product ID {{ $detail->product_id }}</p>
-                <p>product {{ $detail->product }}</p>
-                <img src="{{ asset('storage/' . $detail->image) }}" alt="Product Image" height="100px" width="100px">
+                
+                <img src="{{ asset('storage/' . $detail->image) }}" alt="Product Image">
                 <p>jumlah yg dipesan : {{ $detail->qty }}</p>
-                <p>harga produk : Rp.{{ number_format($detail->price, 0, ',', '.') }}</p>
+                <p>harga produk : {{ $detail->price }}</p>
             </div>
             <br>
         @endforeach
@@ -39,14 +40,14 @@
                 <td class="text-gray-900 dark:text-white">
                     total harga ({{ $totalQty }}) : 
                 </td>
-                <td class="text-gray-900 dark:text-white">Rp.{{ number_format($totalPrice, 0, ',', '.') }}<td>
+                <td class="text-gray-900 dark:text-white">{{ $totalPrice  }}<td>
             </tr>
             <tr>
                 
                 <th class="p-3 text-gray-900 dark:text-white">
                     total tagihan :
                 </th>
-                <th class="text-gray-900 dark:text-white">Rp.{{ number_format($totalPrice, 0, ',', '.') }}</th>
+                <th class="text-gray-900 dark:text-white">{{ $totalPrice }}</th>
             </tr>
             {{-- @endforeach --}}
 

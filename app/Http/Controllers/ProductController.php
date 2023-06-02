@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -16,13 +15,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        // dd($user);
-        if ($user->is_admin == 1) {
+        $user = auth()->user();
+        if ($user && $user->is_admin == 1) {
             return view('dashboard.product.index', [
                 'products' => Product::latest()->paginate(),
-                'categories' => Category::all(),
-                'user' => $user,
+                'categories' => Category::all()
+
             ]);
         } else {
             return view('user.product.index', [

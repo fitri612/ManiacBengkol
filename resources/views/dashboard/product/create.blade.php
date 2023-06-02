@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="container mx-auto px-5 py-4">
-
         <div class="max-w-3xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <form action="{{ url('product') }}" method="post" enctype="multipart/form-data">
                 @csrf

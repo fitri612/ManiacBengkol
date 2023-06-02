@@ -1,0 +1,21 @@
+[
+    {
+      "name": "Ujang",
+      "image": "https://xsgames.co/randomusers/assets/avatars/male/22.jpg",
+      "occupation": "Mahasiswa", 
+      "rate": 5
+    },
+    {
+      "name": "Ahmad",
+      "image": "https://xsgames.co/randomusers/assets/avatars/male/55.jpg",
+      "occupation": "Pelajar",
+      "rate": 4
+    },
+    {
+      "name": "Budi",
+      "image": "https://xsgames.co/randomusers/assets/avatars/male/65.jpg",
+      "occupation": "Guru", 
+      "rate": 3
+    }
+  ]
+  

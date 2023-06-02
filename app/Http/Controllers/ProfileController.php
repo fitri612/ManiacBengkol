@@ -13,32 +13,34 @@ class ProfileController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
+    public function index()
+    {
         $user = Auth::user();
         return view('pages.profile.profile_user.index', compact('user'));
     }
 
-    public function getData(){
-        $user = User::all();
-        // dd($user);
-        return view('dashboard.user.index', compact('user'));
-    }
-
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         $user = Auth::user();
-        $validatedData= $request->validate([
-            'name'=>'required|max:50',
-            'image_profile'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'email'=>'required|email|unique:users,email,'.$user->id
+        $validatedData = $request->validate([
+            'name' => 'required|max:50',
+            'image_profile' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'email' => 'required|email|unique:users,email,' . $user->id
         ]);
 
-        if($request->file('image_profile')){
-            $validatedData['image_profile']=$request->file('image_profile')->store('profile_image');
+        if ($request->file('image_profile')) {
+            $validatedData['image_profile'] = $request->file('image_profile')->store('profile_image');
         }
 
         $user->update($validatedData);
 
-        return redirect('/profile')->with('update','success update data profile');
+        return redirect('/profile')->with('update', 'success update data profile');
     }
-    
+
+    public function getData()
+    {
+        $user = User::all();
+        // dd($user);
+        return view('dashboard.user.index', compact('user'));
+    }
 }
