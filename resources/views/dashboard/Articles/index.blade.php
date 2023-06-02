@@ -14,11 +14,15 @@
                     <p class="mt-1 text-xs"><?php echo date('l, M. j'); ?></p>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <label class="relative hidden sm:flex">
-                        <input
-                            class="form-input peer h-9 w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 text-xs+ placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                            placeholder="Search users..." type="text">
-                    </label>
+                    <form action="">
+                        <label class="relative hidden sm:flex">
+                            <input
+                                onkeyup="searchByName()"
+                                id="searchInput"
+                                class="form-input peer h-9 w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 text-xs+ placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                placeholder="Search Articles..." type="text">
+                        </label>
+                    </form>
                     <div class="flex">
                         <button
                             class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25 sm:hidden sm:h-9 sm:w-9">
