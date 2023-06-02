@@ -67,6 +67,35 @@ Route::middleware('guest')->group(function () {
 });
 
 
+Route::middleware(['admin'])->group(function () {
+    // category
+    Route::get('/category', [CategoryController::class, 'index']);
+    Route::post('/category', [CategoryController::class, 'store']);
+    Route::get('/category/{id}/edit', [CategoryController::class, 'edit']);
+    Route::put('/category/{id}', [CategoryController::class, 'update']);
+    Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
+});
+// product
+Route::get('/product', [ProductController::class, 'index']);
+Route::get('/product/create', [ProductController::class, 'create']);
+Route::post('/product', [ProductController::class, 'store']);
+Route::get('/product/{id}/edit', [ProductController::class, 'edit']);
+Route::put('/product/{id}', [ProductController::class, 'update']);
+Route::delete('/product/{id}', [ProductController::class, 'destroy']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::view('/detail_produk', 'dashboard.product.product_detail');
+    Route::get('/product-list', [ProductController::class, 'list_product'])->name('product-list');
+    Route::view('/cart-list', 'dashboard.cart.cart_list');
+    Route::view('/transaction', 'dashboard.transaction.transaction');
+});
+
+
+// Route::middleware(['auth'])->group(function () {
+//     // Route::get('/categoryASL',index::class)->name('categoryASL');
+// });
+
+
 // 'views
 Route::view('/testing', 'layouts.admin');
 Route::view('/testprod', 'test.prod');
@@ -82,38 +111,13 @@ Route::get('articles/{article:slug}', [ArticleController::class, 'showArticle'])
 Route::put('articles/{article:slug}', [ArticleController::class, 'update'])->name('articles.update');
 Route::delete('articles/{article:slug}', [ArticleController::class, 'destroy'])->name('articles.destroy');
 
-// comment
 Route::post('comment', [CommentController::class, 'store'])->name('comment.store');
 Route::delete('comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
 Route::put('comment/{comment}', [CommentController::class, 'update'])->name('comment.update');
 
-// like
 Route::post('like', [LikeController::class, 'store'])->name('like.store');
 
-
-Route::middleware(['admin'])->group(function () {
-    
-});
-
-Route::middleware(['auth'])->group(function () {
-    // Route::get('/categoryASL',index::class)->name('categoryASL');
-});
-
-// category
-Route::get('/category', [CategoryController::class, 'index']);
-Route::post('/category', [CategoryController::class, 'store']);
-Route::get('/category/{id}/edit', [CategoryController::class, 'edit']);
-Route::put('/category/{id}', [CategoryController::class, 'update']);
-Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
-
-// product
-Route::get('/product', [ProductController::class, 'index']);
-Route::get('/product/create', [ProductController::class, 'create']);
-Route::post('/product', [ProductController::class, 'store']);
-Route::get('/product/{id}/edit', [ProductController::class, 'edit']);
-Route::put('/product/{id}', [ProductController::class, 'update']);
-Route::delete('/product/{id}', [ProductController::class, 'destroy']);
-
+// like
 // cart
 // Route::get('/cart', [ProductController::class, 'index_test']); 
 // Route::view('/cart', 'dashboard.cart.index');
@@ -127,13 +131,6 @@ Route::delete('/product/{id}', [ProductController::class, 'destroy']);
 Route::get('/profile', [ProfileController::class, 'index']);
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile_update');
 
-// cart
-Route::view('/detail_produk', 'dashboard.product.product_detail');
-Route::get('/product-list', [ProductController::class, 'list_product'])->name('product-list');
-Route::middleware(['auth'])->group(function () {
-    Route::view('/cart-list', 'dashboard.cart.cart_list');
-    Route::view('/transaction', 'dashboard.transaction.transaction');
-});
 // transaction
 // Route::post('/transaction', [Transaction::class, 'store'])->name('transaction.store');
 Route::view('/transaction-list', 'dashboard.transaction.transaction-list');
@@ -148,11 +145,7 @@ Route::post('/booking', [BookingController::class, 'create']);
 Route::post('/booking', [BookingController::class, 'store']);
 
 // booking admin
-Route::get('/booking-admin',[BookingAdminController::class,'index']);
-Route::get('/booking-admin/{id}/edit',[BookingAdminController::class,'edit']);
-Route::post('/booking-admin/{id}',[BookingAdminController::class,'update']);
-Route::delete('/booking-admin/{id}',[BookingAdminController::class,'destroy']);
-
-
-
-
+Route::get('/booking-admin', [BookingAdminController::class, 'index']);
+Route::get('/booking-admin/{id}/edit', [BookingAdminController::class, 'edit']);
+Route::post('/booking-admin/{id}', [BookingAdminController::class, 'update']);
+Route::delete('/booking-admin/{id}', [BookingAdminController::class, 'destroy']);
