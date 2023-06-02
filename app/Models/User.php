@@ -52,9 +52,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Like::class);
     }
-    
+
     public function bookings()
     {
         return $this->hasMany(Booking::class);
     }
+
 }

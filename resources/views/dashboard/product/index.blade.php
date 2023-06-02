@@ -16,11 +16,16 @@
                 </div>
 
                 <div class="flex items-center space-x-2">
-                    <label class="relative hidden sm:flex">
-                        <input
-                            class="form-input peer h-9 w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 text-xs+ placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                            placeholder="Search users..." type="text">
-                    </label>
+                    <form >
+                       
+                        <label class="relative hidden sm:flex">
+                            <input
+                                onkeyup="searchByName()"
+                                id="searchInput"
+                                class="form-input peer h-9 w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 text-xs+ placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                placeholder="Search Product..." type="text">
+                            </label>
+                   </form>
 
                     <div class="flex">
                         <button
@@ -114,7 +119,7 @@
                                 </tr>
                             </thead>
                             @foreach ($products as $item)
-                                <tbody>
+                                <tbody class="tabel-produk">
                                     <tr
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <th scope="row"
@@ -126,7 +131,7 @@
                                                 style="max-width: 70px;height:70px;margin:0;object-fit: cover;"
                                                 alt="">
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-6 py-4 nama">
                                             {{ $item->name }}
                                         </td>
                                         <td class="px-6 py-4">

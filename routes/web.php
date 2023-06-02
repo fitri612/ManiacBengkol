@@ -42,13 +42,16 @@ use App\Models\Article;
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/', function () {
+    $userReview = file_get_contents(base_path('resources/json/user_review.json'));
+    // dd(json_decode($jsonData));
     $articles = Article::with('likes')->take(3)->get();
-    return view('dashboard', compact('articles'));
+    return view('dashboard', compact('articles', 'userReview'));
 })->name('home');
 
 Route::get('/home', function () {
+    $userReview = file_get_contents(base_path('resources/json/user_review.json'));
     $articles = Article::with('likes')->take(3)->get();
-    return view('dashboard', compact('articles'));
+    return view('dashboard', compact('articles', 'userReview'));
 });
 
 
@@ -116,12 +119,19 @@ Route::middleware(['auth'])->group(function () {
     Route::post('like', [LikeController::class, 'store'])->name('like.store');
     // booking
     Route::get('/booking', [BookingController::class, 'index']);
-    Route::post('/booking', [BookingController::class, 'create']);
+    Route::get('/booking/create', [BookingController::class, 'create']);
     Route::post('/booking', [BookingController::class, 'store']);
+
     // profile
     Route::get('/profile', [ProfileController::class, 'index']);
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile_update');
 });
+
+
+// Route::get('/booking', [BookingController::class, 'index']);
+// Route::post('/booking', [BookingController::class, 'create']);
+// Route::post('/booking', [BookingController::class, 'store']);
+
 
 
 

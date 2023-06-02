@@ -8,13 +8,12 @@
                 <header class="mb-4 lg:mb-6 not-format">
                     <address class="flex items-center mb-6 not-italic">
                         <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                            <img class="mr-4 w-16 h-16 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Jese Leos">
+                            <img class="mr-4 w-16 h-16 rounded-full" src="{{ asset('img/creator_article.jpg') }}"
+                                alt="Jese Leos">
                             <div>
                                 <a href="#" rel="author"
                                     class="text-xl font-bold text-gray-900 dark:text-white">{{ $article->author }}</a>
-                                <p class="text-base font-light text-gray-500 dark:text-gray-400">Graphic Designer, educator
-                                    & CEO Flowbite</p>
+                                <p class="text-base font-light text-gray-500 dark:text-gray-400">Creator</p>
                                 <p class="text-base font-light text-gray-500 dark:text-gray-400">
                                     <time pubdate datetime="{{ $article->created_at }}"
                                         title="{{ $article->created_at->format('d F Y') }}">
@@ -52,7 +51,7 @@
                 </form>
                 <section class="not-format">
                     <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion (20)</h2>
+                        <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion</h2>
                     </div>
                     <form class="mb-6" action="{{ route('comment.store') }}" method="POST">
                         @csrf
@@ -75,7 +74,7 @@
                                 <div class="flex items-center">
                                     <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
                                             class="mr-2 w-6 h-6 rounded-full"
-                                            src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                                            src={{ $comment->user->image_profile == null ? asset('img/profile.png') : asset('storage/' . Auth::user()->image_profile) }}
                                             alt="Michael Gough">{{ $comment->user->name }}</p>
                                     <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
                                             title="February 8th, 2022">{{ $comment->created_at }}</time></p>
@@ -149,5 +148,5 @@
             </article>
 
         </div>
-        </div>
-    @endsection
+    </main>
+@endsection
