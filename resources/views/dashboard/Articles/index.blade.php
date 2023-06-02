@@ -14,11 +14,15 @@
                     <p class="mt-1 text-xs"><?php echo date('l, M. j'); ?></p>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <label class="relative hidden sm:flex">
-                        <input
-                            class="form-input peer h-9 w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 text-xs+ placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                            placeholder="Search users..." type="text">
-                    </label>
+                    <form action="">
+                        <label class="relative hidden sm:flex">
+                            <input
+                                onkeyup="searchByName()"
+                                id="searchInput"
+                                class="form-input peer h-9 w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 text-xs+ placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                placeholder="Search Article..." type="text">
+                        </label>
+                    </form>
                     <div class="flex">
                         <button
                             class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25 sm:hidden sm:h-9 sm:w-9">
@@ -58,7 +62,7 @@
                     Article</a>
                 <div class="mt-4 grid grid-cols-1 gap-4 sm:mt-5 sm:grid-cols-3 sm:gap-5 lg:mt-6 lg:gap-6">
                     @foreach ($articles as $item)
-                    <article class="flex max-w-xl flex-col items-start justify-between bg-white rounded-lg shadow-md p-6">
+                    <article class="flex max-w-xl flex-col items-start justify-between bg-white rounded-lg shadow-md p-6 artikel ">
                         <div class="flex items-center gap-x-4 text-xs">
                             <time datetime="2020-03-16" class="text-gray-500">
                                 {{ $item->created_at->format('d M Y') }}
@@ -66,7 +70,7 @@
                         </div>
                         <div class="group relative">
                             <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                                <a href="{{ route('articles.show', $item) }}">
+                                <a href="{{ route('articles.show', $item) }}" class="title">
                                     <span class="absolute inset-0"></span>
                                     {{ $item->title }}
                                 </a>

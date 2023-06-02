@@ -83,6 +83,7 @@ function searchByName() {
 
     // Ambil semua product cards
     let productCards = document.getElementsByClassName("tabel-produk");
+    let article = document.getElementsByClassName("artikel");
 
     // Looping semua product cards
     for (let i = 0; i < productCards.length; i++) {
@@ -94,6 +95,18 @@ function searchByName() {
             productCards[i].style.display = "";
         } else {
             productCards[i].style.display = "none";
+        }
+    }
+
+    for (let i = 0; i < article.length; i++) {
+        let articleName = article[i].getElementsByClassName("title")[0];
+        let articleNameText = articleName.textContent || articleName.innerText;
+
+        // Cek apakah product name match dengan search query
+        if (articleNameText.toUpperCase().indexOf(filter) > -1) {
+            article[i].style.display = "";
+        } else {
+            article[i].style.display = "none";
         }
     }
 }
