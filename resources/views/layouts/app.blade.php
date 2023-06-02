@@ -39,8 +39,7 @@
     <div class="container mx-auto px-5 py-4">
         @yield('content')
     </div>
-    
-    @include('partials.footer')
+
 
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
