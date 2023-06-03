@@ -49,12 +49,19 @@
                 </th>
                 <th class="text-gray-900 dark:text-white">{{ $totalPrice }}</th>
             </tr>
+            <tr>
+                <th>metode pembayaran : {{ $latestTransaction->method_payment }}</th>
+            </tr>
             {{-- @endforeach --}}
 
         </table>
 
         
-
+    @if ($latestTransaction && $latestTransaction->method_payment === 'cash')
+    <div class="dark:text-gray-400 font-semibold">
+        <p>silahkan pergi ke tkp langsung </p>
+    </div>
+    @elseif ($latestTransaction && $latestTransaction->method_payment === 'transfer')
         <p class="mt-2 text-center text-md text-gray-500 dark:text-gray-400 font-semibold">upload bukti transfer</p>
         <div class="m-5 flex items-center justify-center w-full">
             <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-80 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -73,6 +80,7 @@
             </label>
         </div>
         <button wire:click="confirm_payment" type="button" class=" mt-5 text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">confirm payment</button>
+    @endif
     </div>
     </div>
 </div>

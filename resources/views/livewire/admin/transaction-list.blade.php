@@ -1,5 +1,7 @@
 <div class="container mx-auto px-5 py-4">
     @include('partials.success_toast')
+
+
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div class="py-5" x-data="{ isSearchbarActive: false }"
             x-effect="$store.breakpoints.smAndUp &amp;&amp; (isSearchbarActive = false)">
@@ -169,5 +171,6 @@
             </tbody>
         </table>
     </div>
+
 
 </div>

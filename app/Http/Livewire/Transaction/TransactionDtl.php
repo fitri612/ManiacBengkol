@@ -15,27 +15,19 @@ class TransactionDtl extends Component
     use WithFileUploads;
     
     
-    public $transaction_detail, $codeInvoice, $product, $totalPrice;
+    public $transaction_detail, $codeInvoice, $product, $totalPrice, $latestTransaction;
     public  $total = 0;
     public $image;
     
     public function mount()
     {
 
-        $latestTransaction = Transaction::latest('id')->first();
-        if ($latestTransaction) {
-            // $this->transaction_detail = TransactionDetail::where('transaction_id', $latestTransaction->id)
-            //     ->with('product')
-            //     ->get();
-            // $this->transaction_detail = TransactionDetail::where('transaction_id', $latestTransaction->id)
-            //     ->with(['product' => function ($query) {
-            //         $query->select('id', 'image');
-            //     }])
-            //     ->get();
-            $this->transaction_detail = TransactionDetail::where('transaction_id', $latestTransaction->id)
-            ->join('products', 'transaction_details.product_id', '=', 'products.id')
-            ->select('transaction_details.*', 'products.image')
-            ->get();
+        $this->latestTransaction = Transaction::latest('id')->first();
+        if ($this->latestTransaction) {
+            $this->transaction_detail = TransactionDetail::where('transaction_id', $this->latestTransaction->id)
+                ->join('products', 'transaction_details.product_id', '=', 'products.id')
+                ->select('transaction_details.*', 'products.image')
+                ->get();
             // dd($this->transaction_detail);
         } else {
             $this->transaction_detail = collect();
