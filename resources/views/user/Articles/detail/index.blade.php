@@ -8,13 +8,12 @@
                 <header class="mb-4 lg:mb-6 not-format">
                     <address class="flex items-center mb-6 not-italic">
                         <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                            <img class="mr-4 w-16 h-16 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Jese Leos">
+                            <img class="mr-4 w-16 h-16 rounded-full" src="{{ asset('img/creator_article.jpg') }}"
+                                alt="Jese Leos">
                             <div>
                                 <a href="#" rel="author"
                                     class="text-xl font-bold text-gray-900 dark:text-white">{{ $article->author }}</a>
-                                <p class="text-base font-light text-gray-500 dark:text-gray-400">Graphic Designer, educator
-                                    & CEO Flowbite</p>
+                                <p class="text-base font-light text-gray-500 dark:text-gray-400">Creator</p>
                                 <p class="text-base font-light text-gray-500 dark:text-gray-400">
                                     <time pubdate datetime="{{ $article->created_at }}"
                                         title="{{ $article->created_at->format('d F Y') }}">
@@ -37,8 +36,8 @@
                     <input type="hidden" name="article_id" value="{{ $article->id }}" id="{{ $article->id }}">
                     <button type="submit"
                         class="likeDislike focus:outline-none flex items-center justify-center gap-2 text-white
-                        {{ $article->isLikeBy(Auth::user()) ? 'bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900' : 'bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900' }}
-                        font-medium rounded-lg text-sm px-5 py-2.5 mb-2">
+                    {{ Auth::guest() ? 'bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900' : ($article->isLikeBy(Auth::user()) ? 'bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900' : 'bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900') }}
+                    font-medium rounded-lg text-sm px-5 py-2.5 mb-2">
                         <svg fill="none" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" class="w-5 h-5"
                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -50,10 +49,9 @@
                         </span>
                     </button>
                 </form>
-
                 <section class="not-format">
                     <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion (20)</h2>
+                        <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion</h2>
                     </div>
                     <form class="mb-6" action="{{ route('comment.store') }}" method="POST">
                         @csrf
@@ -76,7 +74,7 @@
                                 <div class="flex items-center">
                                     <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
                                             class="mr-2 w-6 h-6 rounded-full"
-                                            src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                                            src={{ $comment->user->image_profile == null ? asset('img/profile.png') : asset('storage/' . Auth::user()->image_profile) }}
                                             alt="Michael Gough">{{ $comment->user->name }}</p>
                                     <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
                                             title="February 8th, 2022">{{ $comment->created_at }}</time></p>
@@ -150,5 +148,5 @@
             </article>
 
         </div>
-        </div>
-    @endsection
+    </main>
+@endsection

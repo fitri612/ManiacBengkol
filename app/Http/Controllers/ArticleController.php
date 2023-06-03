@@ -26,6 +26,7 @@ class ArticleController extends Controller
         else{
             return view('user.articles.index', compact('articles', 'comments'));
         }
+
     }
 
     /**
@@ -52,6 +53,8 @@ class ArticleController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'author' => 'required',
         ]);
+
+        // dd($request->all());
 
         $file = $request->file('image');
         $path = time() . '_' . $request->title . '.' . $file->getClientOriginalExtension();

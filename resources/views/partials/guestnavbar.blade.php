@@ -1,11 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+</head>
+<body>
+    
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="{{ url('/') }}" class="flex items-center">
-            <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" />
+            <img src="https://gcdnb.pbrd.co/images/4LUQpWQfxfra.png?o=1" width="40px" height="40px" class="mr-3" alt="Flowbite Logo" />
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Maniac Bengkol</span>
         </a>
         <div class="flex items-center md:order-2">
-            
+
             @include('partials.darkmode')
             @guest
                 @if (Route::has('login'))
@@ -31,7 +42,7 @@
                         </button>
                     </form>
                 @endif
- 
+
             @endguest
 
             <button data-collapse-toggle="mobile-menu-2" type="button"
@@ -46,7 +57,8 @@
                 </svg>
             </button>
         </div>
-        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
+
+        {{-- <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
             <ul
                 class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
@@ -71,6 +83,55 @@
                         Booking</a>
                 </li>
             </ul>
-        </div>
+        </div> --}}
+
+        <nav class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
+            <ul
+                class="navigation flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 dark:text-white">
+                <li><a href="{{ url('/') }}" class="nav-item" data-nav="home">Home</a></li>
+                <li><a href="{{ url('/articles') }}" class="nav-item" data-nav="artikel">Artikel</a></li>
+                <li><a href="{{ url('/product-list') }}" class="nav-item" data-nav="daftarproduk">Daftar Produk</a>
+                </li>
+                <li><a href="{{ url('/booking') }}" class="nav-item" data-nav="booking">Booking</a></li>
+            </ul>
+        </nav>
+
     </div>
 </nav>
+
+</body>
+
+<script>
+    // Get all the navbar items
+    const navItems = document.querySelectorAll('.nav-item');
+
+    // Add click event listener to each navbar item
+    navItems.forEach(item => {
+        item.addEventListener('click', function() {
+            // Remove "active" class from the previously active item
+            const activeNavItem = document.querySelector('.nav-item.active');
+            if (activeNavItem) {
+                activeNavItem.classList.remove('active');
+            }
+
+            // Add "active" class to the clicked navbar item
+            this.classList.add('active');
+
+            // Store the active item in local storage
+            const navId = this.getAttribute('data-nav');
+            localStorage.setItem('activeNavItem', navId);
+        });
+    });
+
+    // Check if there is an active item stored in local storage
+    const storedActiveNavItem = localStorage.getItem('activeNavItem');
+    if (storedActiveNavItem) {
+        // Add "active" class to the stored active item
+        const activeNavItem = document.querySelector(`.nav-item[data-nav="${storedActiveNavItem}"]`);
+        if (activeNavItem) {
+            activeNavItem.classList.add('active');
+        }
+    }
+</script>
+
+</html>
