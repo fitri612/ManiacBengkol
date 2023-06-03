@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionList extends Component
 {
@@ -25,12 +26,18 @@ class TransactionList extends Component
 
     public function mount()
     {
-        
-        // $this->getdata = Transaction::get();
-        $this->getdata = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
-        ->select('transactions.*', 'users.name')
-        ->get();
-        // $this->updateData();
+        if (Auth::check() && !Auth::user()->is_admin) {
+            $userId = Auth::id();
+    
+            $this->getdata = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
+                ->select('transactions.*', 'users.name')
+                ->where('users.id', $userId)
+                ->get();
+        } else {
+            $this->getdata = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
+                ->select('transactions.*', 'users.name')
+                ->get();
+        }
         
     }
     public function render()
