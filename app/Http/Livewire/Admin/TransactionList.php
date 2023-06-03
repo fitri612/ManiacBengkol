@@ -13,12 +13,21 @@ class TransactionList extends Component
         'Done',
         'Rejected'
     ];
+
+    public function updateData()
+    {
+        $this->getdata = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
+            ->select('transactions.*', 'users.name')
+            ->get();
+    }
+
     public function mount()
     {
         // $this->getdata = Transaction::get();
-        $this->getdata = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
-        ->select('transactions.*', 'users.name')
-        ->get();
+        // $this->getdata = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
+        // ->select('transactions.*', 'users.name')
+        // ->get();
+        $this->updateData();
         
     }
     public function render()
@@ -28,16 +37,7 @@ class TransactionList extends Component
         ]);
     }
 
-    // public function GetID($id)
-    // {
-    //     $getdata = Transaction::find($id);
-    //     if ($getdata) {
-    //         $this->selectedID = $getdata;
-    //         $this->selectedStatus = $getdata->transaction_status;
-    //     }
-    //     // session()->flash('success', 'transaction id');
-
-    // }
+    
 
     public function updateStatus($id)
     {
