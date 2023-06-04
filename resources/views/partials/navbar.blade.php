@@ -50,8 +50,8 @@
                         data-dropdown-placement="bottom">
                         <span class="sr-only">Open user menu</span>
                         <img class="w-8 h-8 rounded-full"
-                            src="{{ Auth::user()->image_profile == null ? asset('img/profile.png') : asset('storage/' . Auth::user()->image_profile) }}"
-                            alt="user photo">
+                        src="{{ Auth::user()->image_profile ? asset(Auth::user()->image_profile) : asset('img/profile.png') }}"
+                        alt="user photo">
                     </button>
                     <!-- Dropdown menu -->
                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
@@ -73,12 +73,12 @@
                         </div>
                         <ul class="py-2" aria-labelledby="user-menu-button">
                             <li>
-                                <a href="#"
+                                <a href="{{ url('/user-transaction-list') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                     Riwayat Transaksi </a>
                             </li>
                             <li>
-                                <a href="{{ url('/profile') }}"
+                                <a href="{{ url('/booking') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                     Riwayat Booking</a>
                             </li>
