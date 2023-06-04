@@ -145,7 +145,7 @@ Route::middleware(['auth'])->group(function () {
 
 // 'views
 Route::view('/testing', 'layouts.admin');
-Route::view('/testprod', 'test.prod');
+Route::view('/testprod', 'test.test');
 
 
 // Articles
