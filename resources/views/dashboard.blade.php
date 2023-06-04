@@ -113,9 +113,10 @@
             <div class="container mx-auto px-2">
                 <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">Mengapa Harus Di
                     Maniac Bengkol?</h2>
-                <div class="flex gap-10">
 
-                    <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
+                <div class="mt-4 grid grid-cols-1 gap-4 sm:mt-5 sm:grid-cols-3 sm:gap-5 lg:mt-6 lg:gap-6">
+                    <div
+                        class="flex max-w-xl flex-col items-start justify-between dark:bg-gray-700 rounded-lg shadow-md p-6">
                         <img style="margin: auto; padding-top: 40px;" width="150" height="200"
                             src="https://microsite.otoklix.com/assets/icons/transparency.svg" alt="">
                         <div class="px-4 py-6">
@@ -127,7 +128,8 @@
                         </div>
                     </div>
 
-                    <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
+                    
+                    <div class="flex max-w-xl flex-col items-start justify-between dark:bg-gray-700 rounded-lg shadow-md p-6">
                         <img style="margin: auto; padding-top: 40px;" width="150" height="200"
                             src="https://microsite.otoklix.com/assets/icons/money.svg" alt="">
                         <div class="px-4 py-6">
@@ -139,7 +141,7 @@
                         </div>
                     </div>
 
-                    <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
+                    <div class="flex max-w-xl flex-col items-start justify-between dark:bg-gray-700 rounded-lg shadow-md p-6">
                         <img style="margin: auto; padding-top: 40px;" width="150" height="200"
                             src="https://microsite.otoklix.com/assets/icons/tool.svg" alt="">
                         <div class="px-4 py-6">
@@ -151,18 +153,17 @@
                                 setelah servis.</p>
                         </div>
                     </div>
-
+                    
                 </div>
             </div>
         </section>
 
         <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">Apa kata mereka?</h2>
         <div class="container mx-auto px-2">
-            <div class="flex gap-10">
+            <div class="flex gap-4 sm:card-width-50 md:card-width-75 lg:card-width-100">
                 @foreach (json_decode($userReview) as $item)
                     <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
-                        <img style="margin: auto;" class="w-50"
-                            src="{{ $item->image }}" alt="">
+                        <img style="margin: auto;" class="w-50" src="{{ $item->image }}" alt="">
                         <div class="px-4 py-6">
                             <h4 style="text-align: center;" class="text-2xl font-bold mb-5 mt-3 dark:text-white">
                                 {{ $item->name }}</h4>
@@ -224,7 +225,8 @@
                         placeholder="Beritahu apa yang bisa kami bantu" required>
                 </div>
                 <div class="mb-6">
-                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pesan</label>
+                    <label for="message"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pesan</label>
                     <textarea id="message" rows="4"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Silahkan isi pesan..."></textarea>
