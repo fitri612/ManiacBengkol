@@ -50,7 +50,7 @@
                         data-dropdown-placement="bottom">
                         <span class="sr-only">Open user menu</span>
                         <img class="w-8 h-8 rounded-full"
-                        src="{{ Auth::user()->image_profile ? asset(Auth::user()->image_profile) : asset('img/profile.png') }}"
+                        src="{{ Auth::user()->image_profile ? asset('storage/'.Auth::user()->image_profile) : asset('img/profile.png') }}"
                         alt="user photo">
                     </button>
                     <!-- Dropdown menu -->
