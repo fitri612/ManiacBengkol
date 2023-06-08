@@ -26,7 +26,7 @@ class TransactionDtl extends Component
         if ($this->latestTransaction) {
             $this->transaction_detail = TransactionDetail::where('transaction_id', $this->latestTransaction->id)
                 ->join('products', 'transaction_details.product_id', '=', 'products.id')
-                ->select('transaction_details.*', 'products.image')
+                ->select('transaction_details.*', 'products.image','products.name')
                 ->get();
             // dd($this->transaction_detail);
         } else {

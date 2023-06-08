@@ -22,35 +22,16 @@
                             class="form-input peer h-9 w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 text-xs+ placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
                             placeholder="Search users..." type="text">
                     </label>
-
+                    
                     <div class="flex">
-                        <button
-                            class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25 sm:hidden sm:h-9 sm:w-9">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" stroke="currentColor" fill="none"
-                                viewBox="0 0 24 24">
-                                <circle cx="10.2" cy="10.2" r="7.2" stroke-width="1.5"></circle>
-                                <path stroke-width="1.5" stroke-linecap="round" d="M21 21l-3.6-3.6"></path>
-                            </svg>
-                        </button>
-                        <button
-                            class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25 sm:h-9 sm:w-9">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24">
-                                <path fill="currentColor"
-                                    d="M3 5.109C3 4.496 3.47 4 4.05 4h16.79c.58 0 1.049.496 1.049 1.109 0 .612-.47 1.108-1.05 1.108H4.05C3.47 6.217 3 5.721 3 5.11zM5.798 12.5c0-.612.47-1.109 1.05-1.109H18.04c.58 0 1.05.497 1.05 1.109s-.47 1.109-1.05 1.109H6.848c-.58 0-1.05-.497-1.05-1.109zM9.646 18.783c-.58 0-1.05.496-1.05 1.108 0 .613.47 1.109 1.05 1.109h5.597c.58 0 1.05-.496 1.05-1.109 0-.612-.47-1.108-1.05-1.108H9.646z">
-                                </path>
-                            </svg>
-                        </button>
-                        <button
-                            class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25 sm:h-9 sm:w-9">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
-                                </path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                        </button>
+                        <select wire:model="statusFilter" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected value="all">Semua Satus</option>
+                        <option value="done">Done</option>
+                        <option value="rejected">Rejected</option>
+                        <option value="pending">Pending</option>
+                        
+                        </select>
+
                     </div>
                 </div>
             </div>
@@ -80,7 +61,7 @@
                         method payment
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        <span class="sr-only">Edit</span>
+                        Action
                     </th>
                 </tr>
             </thead>
@@ -92,8 +73,8 @@
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $item->id }}
                         </th>
-                        <td class="px-6 py-4">
-                            {{ $item->user_id }} ( {{ $item->name }} )
+                        <td class="px-6 py-4" >
+                            {{ $item->user_id }}  {{ $item->name }} 
                         </td>
                         <td class="px-6 py-4">
                             {{ $item->code_invoice }}
@@ -106,7 +87,8 @@
                                 width="100px">
                         </td>
                         <td class="px-6 py-4">
-                            <span wire:poll.500ms="">{{ $item->transaction_status }}</span>
+                            {{-- <span wire:poll.500ms="">{{ $item->transaction_status }}</span> --}}
+                            <span>{{ $item->transaction_status }}</span>
                             @if(auth()->check() && auth()->user()->is_admin)
                             <select wire:model="selectedStatus.{{ $item->id }}"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option selected>
@@ -118,20 +100,70 @@
                             </select>
                             <button wire:click="updateStatus({{ $item->id }})">Save</button>
                             @else
+                            {{-- <span>{{ $item->transaction_status }}</span> --}}
                             @endif
                         </td>
                         <td class="px-6 py-4">
                             {{ $item->method_payment }}
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <a href="#"
-                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+
+                        <!-- Modal toggle -->
+                        <button wire:click="showdata({{ $item->id }})" wire:loading.attr="disabled" data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                            show detail
+                        </button>
+                        
+                        <!-- Main modal -->
+                        <div id="defaultModal" wire:ignore.self tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                            <div class="relative w-full max-w-2xl max-h-full">
+                                <!-- Modal content -->
+                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                    <!-- Modal header -->
+                                    <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                            detail transaksi
+                                        </h3>
+                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
+                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                            <span class="sr-only">Close modal</span>
+                                        </button>
+                                    </div>
+                                    <!-- Modal body -->
+                                    <div class="p-6 space-y-2">
+                                        @if ($transactionDetail)
+                                        @foreach ($transactionDetail as $detail)
+                                        <div  class=" mt-3 max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <div class="flex items-center col-span-1">
+                                                
+                                                <img src="{{ asset('storage/' . $detail->image) }}" class="h-20 w-20 rounded-md">
+                                            </div>
+                                            <div class="col-span-1 space-y-2">
+                                                <h3 class="text-lg font-semibold">{{ $detail->name }}</h3>
+                                                <p class="">harga/pcs : {{ 'Rp ' . number_format($detail->price, 0, ',', '.') }}</p>
+                                                <span class="p-2">jumlah pesanan : {{ $detail->qty }}</span>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                        <h3 class="text-lg font-bold">Total Harga: {{ number_format($grandTotal, 0, ',', '.') }}</h3>
+                                        
+                                        @endif
+                                    </div>
+                                    <!-- Modal footer -->
+                                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                        <button data-modal-hide="defaultModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+  
+                            
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-
 
 </div>

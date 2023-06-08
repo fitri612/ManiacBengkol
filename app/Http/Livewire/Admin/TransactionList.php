@@ -4,11 +4,16 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\Auth;
 
 class TransactionList extends Component
 {
-    public $getdata, $selectedID, $selectedStatus;
+    public $getdata, $selectedID;
+    public $transactionDetail, $grandTotal;
+    public $transactionId;
+    public $selectedStatus = [];
+    public $statusFilter = 'all';
     
 
     public $status = [
@@ -17,35 +22,56 @@ class TransactionList extends Component
         'Rejected'
     ];
 
-    // public function updateData()
-    // {
-    //     $this->getdata = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
-    //         ->select('transactions.*', 'users.name')
-    //         ->get();
-    // }
 
     public function mount()
     {
         if (Auth::check() && !Auth::user()->is_admin) {
             $userId = Auth::id();
     
-            $this->getdata = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
+            $this->getdata = Transaction::where('users.id', $userId)
+                ->join('users', 'transactions.user_id', '=', 'users.id')
                 ->select('transactions.*', 'users.name')
-                ->where('users.id', $userId)
                 ->get();
+
         } else {
             $this->getdata = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
                 ->select('transactions.*', 'users.name')
                 ->get();
         }
+       
         
     }
     public function render()
     {
-        return view('livewire.admin.transaction-list',[
+        $query = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
+        ->select('transactions.*', 'users.name');
+
+        //filter
+        if ($this->statusFilter !== 'all') {
+            $query->where('transactions.transaction_status', $this->statusFilter);
+        }
+
+        $this->getdata = $query->get();
+
+        return view('livewire.admin.transaction-list', [
             'transactions' => $this->getdata,
+            'grandTotal' => $this->grandTotal,
         ]);
     }
+
+    public function showdata($transactionId)
+    {
+        
+        $this->transactionDetail = TransactionDetail::where('transaction_id', $transactionId)
+            ->join('products', 'transaction_details.product_id', '=', 'products.id')
+            ->select('transaction_details.*', 'products.image','products.name')
+            ->get();
+        // dd($this->transactionDetail);
+        $this->grandTotal = Transaction::where('id', $transactionId)->value('grand_total');
+
+        
+    }
+
 
     
 
@@ -58,12 +84,16 @@ class TransactionList extends Component
             $transaction->save();
             session()->flash('success', 'Status updated successfully!');
             // $this->emit('statusUpdated', $id, $this->selectedStatus);
+            
         } else {
             session()->flash('error', 'Transaction not found.');
         }
         
+        
         // $this->render();
     }
+
+    
 
     
 }

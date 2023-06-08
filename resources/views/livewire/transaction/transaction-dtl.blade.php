@@ -10,7 +10,7 @@
             <div class="dark:text-white">
                 <p>Transaction ID: {{ $detail->transaction_id }}</p>
                 <p>product ID {{ $detail->product_id }}</p>
-                
+                <p>product name: {{ $detail->name }}</p>
                 <img src="{{ asset('storage/' . $detail->image) }}" alt="Product Image">
                 <p>jumlah yg dipesan : {{ $detail->qty }}</p>
                 <p>harga produk : {{ $detail->price }}</p>
@@ -66,7 +66,7 @@
     </div>
     @elseif ($latestTransaction && $latestTransaction->method_payment === 'transfer')
         <p class="mt-2 text-center text-md text-gray-500 dark:text-gray-400 font-semibold">upload bukti transfer</p>
-        <div class="m-5 flex items-center justify-center w-full">
+        {{-- <div class="m-5 flex items-center justify-center w-full">
             <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-80 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                 <div class="flex flex-col items-center justify-center pt-5 pb-6">
                     @if ($image)
@@ -81,7 +81,11 @@
                 </div>
                 <input id="dropzone-file" type="file" wire:model="image" class="hidden"/>
             </label>
-        </div>
+        </div> --}}
+        
+        <input  wire:model="image" id="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" onchange="previewImage(event)">
+
+        <img id="imgPreview" class="img-preview" src="#" alt="Image Preview" style="display: none; max-width: 250px;max-height:250px;margin:0;">
         <button wire:click="confirm_payment" type="button" class=" mt-5 text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">confirm payment</button>
         {{-- <div class="flex items-center justify-center w-full">
             <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -118,6 +122,27 @@
           </script> --}}
           
     @endif
+    
+    
+    
+
+    <script>
+        function previewImage(event) {
+            const image = event.target.files[0];
+            const imgPreview = document.getElementById('imgPreview');
+
+            imgPreview.style.display = 'block';
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                imgPreview.src = e.target.result;
+            }
+
+            reader.readAsDataURL(image);
+        }
+    </script>
+
+
     </div>
     </div>
 </div>
