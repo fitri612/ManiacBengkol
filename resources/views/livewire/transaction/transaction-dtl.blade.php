@@ -32,7 +32,7 @@
             <br>
         <table class="table-auto">
             <tr>
-                <th colspan="2" class="text-gray-900 dark:text-white">ringkasan belanja</th>
+                <th colspan="2" class="text-gray-900 dark:text-white">Ringkasan belanja</th>
                 <th rowspan="3"></th>
             </tr>
             {{-- @foreach ($payment_detail as $item) --}}
