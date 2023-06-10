@@ -112,7 +112,7 @@
         <section class="py-16">
             <div class="container mx-auto px-2">
                 <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">Mengapa Harus Di
-                    Maniac Bengkel?</h2>
+                    Maniac Bengkol?</h2>
                 <div class="flex gap-10">
 
                     <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
@@ -235,7 +235,7 @@
                     message</button>
             </form>
             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                <a href="#" class="hover:underline">contact@maniacbengkel.com</a>
+                <a href="#" class="hover:underline">contact@maniacbengkol.com</a>
             </p>
             <p class="text-sm text-gray-500 dark:text-gray-400">
                 <a href="#" class="hover:underline"></a>021-456-7890</a>

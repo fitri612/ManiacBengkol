@@ -145,7 +145,7 @@ Route::middleware(['auth'])->group(function () {
 
 // 'views
 Route::view('/testing', 'layouts.admin');
-Route::view('/testprod', 'test.prod');
+Route::view('/testprod', 'test.test');
 
 
 // Articles
@@ -164,9 +164,7 @@ Route::view('/testprod', 'test.prod');
 
 //profile
 
-
-// transaction
-// Route::post('/transaction', [Transaction::class, 'store'])->name('transaction.store');
 Route::view('/transaction-list', 'dashboard.transaction.transaction-list');
-
+// transaction-list user
+Route::view('/user-transaction-list', 'dashboard.transaction.user-transaction-list');
 // user 

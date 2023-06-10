@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -29,7 +31,7 @@ class ProfileController extends Controller
         ]);
 
         if ($request->file('image_profile')) {
-            $validatedData['image_profile'] = $request->file('image_profile')->store('profile_image');
+            $validatedData['image_profile'] = $request->file('image_profile')->store('/profile_image');
         }
 
         $user->update($validatedData);

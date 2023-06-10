@@ -1,7 +1,7 @@
 <div>
     @include('partials.success_toast')
     <p class="text-lg font-bold text-gray-900 dark:text-white">Checkout</p>
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis, sequi.</p>
+    
     <div class="grid grid-cols-2 gap-5  justify-center">
     <div class="max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
        
@@ -49,12 +49,22 @@
                 </th>
                 <th class="text-gray-900 dark:text-white">{{ $totalPrice }}</th>
             </tr>
+            <tr>
+                
+                <th class="dark:text-white font-semibold">
+                    metode pembayaran : {{ $latestTransaction->method_payment }}
+                <p>silahkan tranfer dana ovo gopay</p></th>
+            </tr>
             {{-- @endforeach --}}
 
         </table>
 
         
-
+    @if ($latestTransaction && $latestTransaction->method_payment === 'cash')
+    <div class="dark:text-white font-semibold">
+        <p>silahkan pergi ke tkp langsung </p>
+    </div>
+    @elseif ($latestTransaction && $latestTransaction->method_payment === 'transfer')
         <p class="mt-2 text-center text-md text-gray-500 dark:text-gray-400 font-semibold">upload bukti transfer</p>
         <div class="m-5 flex items-center justify-center w-full">
             <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-80 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -73,6 +83,41 @@
             </label>
         </div>
         <button wire:click="confirm_payment" type="button" class=" mt-5 text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">confirm payment</button>
+        {{-- <div class="flex items-center justify-center w-full">
+            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+              <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                </svg>
+                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG, or GIF (MAX. 800x400px)</p>
+              </div>
+              <input wire:model="image" id="dropzone-file" type="file" class="hidden" onchange="previewImage(event)" />
+            </label>
+          </div>
+          <button wire:click="confirm_payment" type="button" class=" mt-5 text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">confirm payment</button>
+          
+          <script>
+            function previewImage(event) {
+              const file = event.target.files[0];
+              const reader = new FileReader();
+          
+              reader.onload = function() {
+                const imgElement = document.createElement('img');
+                imgElement.src = reader.result;
+                imgElement.classList.add('w-32', 'h-auto', 'mt-4');
+          
+                const previewContainer = document.querySelector('.flex.items-center.justify-center.w-full');
+                previewContainer.appendChild(imgElement);
+              };
+          
+              if (file) {
+                reader.readAsDataURL(file);
+              }
+            }
+          </script> --}}
+          
+    @endif
     </div>
     </div>
 </div>

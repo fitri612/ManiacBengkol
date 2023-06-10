@@ -13,7 +13,7 @@
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="{{ url('/') }}" class="flex items-center">
-                <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" />
+                <img src="https://gcdnb.pbrd.co/images/4LUQpWQfxfra.png?o=1" width="40px" height="40px" class="mr-3" alt="maniac Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Maniac Bengkol</span>
             </a>
             <div class="flex items-center md:order-2">
@@ -50,8 +50,8 @@
                         data-dropdown-placement="bottom">
                         <span class="sr-only">Open user menu</span>
                         <img class="w-8 h-8 rounded-full"
-                            src="{{ Auth::user()->image_profile == null ? asset('img/profile.png') : asset('storage/' . Auth::user()->image_profile) }}"
-                            alt="user photo">
+                        src="{{ Auth::user()->image_profile ? asset('storage/'.Auth::user()->image_profile) : asset('img/profile.png') }}"
+                        alt="user photo">
                     </button>
                     <!-- Dropdown menu -->
                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
@@ -73,12 +73,12 @@
                         </div>
                         <ul class="py-2" aria-labelledby="user-menu-button">
                             <li>
-                                <a href="#"
+                                <a href="{{ url('/user-transaction-list') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                     Riwayat Transaksi </a>
                             </li>
                             <li>
-                                <a href="{{ url('/profile') }}"
+                                <a href="{{ url('/booking') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                     Riwayat Booking</a>
                             </li>
@@ -99,7 +99,9 @@
                             </li>
                         </ul>
                     </div>
+
                 @endguest
+
 
                 <button data-collapse-toggle="mobile-menu-2" type="button"
                     class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -115,7 +117,7 @@
             </div>
             <nav class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
                 <ul
-                    class="navigation flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    class="navigation flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 dark:text-white">
                     <li><a href="{{ url('/') }}" class="nav-item" data-nav="beranda">Beranda</a></li>
                     <li><a href="{{ url('/articles') }}" class="nav-item" data-nav="artikel">Artikel</a></li>
                     <li><a href="{{ url('/product-list') }}" class="nav-item" data-nav="daftarproduk">Daftar Produk</a>
@@ -123,11 +125,26 @@
                     <li><a href="{{ url('/booking') }}" class="nav-item" data-nav="booking">Booking</a></li>
                 </ul>
             </nav>
+            
         </div>
     </nav>
 
-    <hr>
-    <hr>
+        {{-- <nav class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
+            <ul
+                class="navigation flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 dark:text-white">
+                <li><a href="{{ url('/') }}" class="nav-item" data-nav="beranda">Beranda</a></li>
+                <li><a href="{{ url('/articles') }}" class="nav-item" data-nav="artikel">Artikel</a></li>
+                <li><a href="{{ url('/product-list') }}" class="nav-item" data-nav="daftarproduk">Daftar Produk</a>
+                </li>
+                <li><a href="{{ url('/booking') }}" class="nav-item" data-nav="booking">Booking</a></li>
+            </ul>
+        </nav> --}}
+        
+    </div>
+</nav>
+
+<hr>
+<hr>
 
 </body>
 
