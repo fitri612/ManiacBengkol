@@ -63,14 +63,14 @@
                 <div class="mt-4 grid grid-cols-1 gap-4 sm:mt-5 sm:grid-cols-3 sm:gap-5 lg:mt-6 lg:gap-6">
                     @foreach ($articles as $item)
                         <article
-                            class="flex max-w-xl flex-col items-start justify-between bg-white rounded-lg shadow-md p-6">
+                            class="artikel flex max-w-xl flex-col items-start justify-between bg-white rounded-lg shadow-md p-6">
                             <div class="flex items-center gap-x-4 text-xs">
                                 <time datetime="2020-03-16" class="text-gray-500">
                                     {{ $item->created_at->format('d M Y') }}
                                 </time>
                             </div>
                             <div class="group relative">
-                                <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                                <h3 class="title mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
                                     <a href="{{ route('articles.show', $item) }}">
                                         <span class="absolute inset-0"></span>
                                         {{ $item->title }}
