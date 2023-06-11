@@ -217,7 +217,7 @@
                 <a href="#" class="hover:underline"></a>021-456-7890</a>
             </p>
         </div>
-
+{{-- ceck --}}
         <section class="py-12">
             <div class="container mx-auto px-2">
                 <h2 style="text-align: center;" class="text-4xl font-extrabold mb-5 dark:text-white">Artikel Terbaru</h2>
