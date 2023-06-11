@@ -65,7 +65,7 @@
                                 {{ $item->is_admin == 1 ? 'Admin' : 'User' }}
                             </a>
                         </div>
-                        <div class="mt-6 grid w-full grid-cols-2 gap-2">
+                        {{-- <div class="mt-6 grid w-full grid-cols-2 gap-2">
                             <button
                                 class="btn space-x-2 bg-primary px-0 font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" fill="none"
@@ -84,7 +84,7 @@
                                 </svg>
                                 <span> edit </span>
                             </button>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             @endforeach
