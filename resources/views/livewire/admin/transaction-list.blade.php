@@ -83,8 +83,71 @@
                             {{ $item->grand_total }}
                         </td>
                         <td class="px-6 py-4">
-                            <img src="{{ asset('storage/' . $item->transaction_note) }}" alt="tf note" height="100px"
+                            <img src="{{ asset('storage/' . $item->transaction_note) }}" alt="bukti transfer belum di upload" height="100px"
                                 width="100px">
+                            @unless ($item->transaction_note)
+                            <button wire:click="uploadTransactionNote({{ $item->id }})" wire:loading.attr="disabled" type="button" data-modal-target="staticModal_{{ $item->id }}" data-modal-toggle="staticModal_{{ $item->id }}" class="text-white font-sm bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Upload bukti
+                            </button>
+                            
+                            @endunless
+                            <!-- Main modal -->
+<div  id="staticModal_{{ $item->id }}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 {{ $showModalimg && $transactionNoteId == $item->id ? '' : 'hidden' }} flex items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Upload Bukti Transfer
+                </h3>
+                <button wire:click="closeModalimg" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"  data-modal-hide="staticModal_{{ $item->id }}">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form wire:submit.prevent="uploadTransactionNote({{ $item->id }})" id="uploadForm_{{ $item->id }}">
+                @csrf
+            <div class="p-6 space-y-6">
+                
+                <input wire:model="image" id="image" type="file" onchange="previewImage(event)">
+
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button {{-- wire:click="uploadTransactionNote({{ $item->id }})" --}}  data-modal-hide="staticModal_{{ $item->id }}" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Upload</button>
+            </form>
+                <button wire:click="closeModalimg"  data-modal-hide="staticModal_{{ $item->id }}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- @push('scripts')
+    <script>
+        document.addEventListener('livewire:load', function () {
+            Livewire.on('submitForm', function () {
+                // Trigger form submission
+                const form = document.getElementById('uploadForm_{{ $item->id }}');
+                form.submit();
+            });
+        });
+    </script>
+@endpush --}}
+@push('scripts')
+    <script>
+        document.addEventListener('livewire:load', function () {
+            Livewire.on('hideModal', function (itemId) {
+                const modal = document.getElementById('staticModal_' + itemId);
+                modal.classList.add('hidden'); // Hide the modal
+                setTimeout(function() {
+                    Livewire.emit('closeModalimg'); // Close the modal completely
+                }, 300); // Adjust the delay as needed
+            });
+        });
+    </script>
+@endpush
+
+
                         </td>
                         <td class="px-6 py-4">
                             {{-- <span wire:poll.500ms="">{{ $item->transaction_status }}</span> --}}
@@ -109,28 +172,33 @@
                         <td class="px-6 py-4 text-right">
 
                         <!-- Modal toggle -->
-                        <button wire:click="showdata({{ $item->id }})" wire:loading.attr="disabled" data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                        {{-- <button wire:click="showdata({{ $item->id }})" wire:loading.attr="disabled" data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                             show detail
-                        </button>
-                        
-                        <!-- Main modal -->
-                        <div id="defaultModal" wire:ignore.self tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                        </button> --}}
+                        <button wire:click="openModal({{ $item->id }})" wire:loading.attr="disabled" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                            Show Detail
+                        </button>                 
+                        <!--  modal show details -->
+                        {{-- <div id="defaultModal" wire:key="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 {{ $showModal ? '' : 'hidden' }} flex items-center justify-center w-full h-full overflow-y-auto"> --}}
+                        <div id="defaultModal" wire:key="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 {{ $showModal ? '' : 'hidden' }} flex items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                             <div class="relative w-full max-w-2xl max-h-full">
+                                <div class="fixed top-0 left-0 right-0 bottom-0 bg-black opacity-10"></div>
                                 <!-- Modal content -->
-                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 ">
                                     <!-- Modal header -->
                                     <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                                        @if ($transactionDetail)
                                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                            detail transaksi
+                                            Detail Transaction on {{ $createdAt  }}
                                         </h3>
-                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
+                                        <button wire:click="closeModal" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
                                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                             <span class="sr-only">Close modal</span>
                                         </button>
                                     </div>
                                     <!-- Modal body -->
                                     <div class="p-6 space-y-2">
-                                        @if ($transactionDetail)
+                                        
                                         @foreach ($transactionDetail as $detail)
                                         <div  class=" mt-3 max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:text-white">
                                             <div class="grid grid-cols-2 gap-2">
@@ -152,7 +220,7 @@
                                     </div>
                                     <!-- Modal footer -->
                                     <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                        <button data-modal-hide="defaultModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">close</button>
+                                        <button wire:click="closeModal" data-modal-hide="defaultModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">close</button>
                                     </div>
                                 </div>
                             </div>
