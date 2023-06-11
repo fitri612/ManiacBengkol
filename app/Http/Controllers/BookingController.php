@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
@@ -19,8 +20,9 @@ class BookingController extends Controller
  
      public function index()
     {
+        $user = Auth::User();
         return view('user.booking_user.index',[
-            'bookings'=>Booking::all(),
+            'bookings'=>Booking::all()->where('user',$user),
         ]);
 
     }
