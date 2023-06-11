@@ -113,9 +113,10 @@
             <div class="container mx-auto px-2">
                 <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">Mengapa Harus Di
                     Maniac Bengkol?</h2>
-                <div class="flex gap-10">
 
-                    <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
+                <div class="mt-4 grid grid-cols-1 gap-4 sm:mt-5 sm:grid-cols-3 sm:gap-5 lg:mt-6 lg:gap-6">
+                    <div
+                        class="flex max-w-xl flex-col items-start justify-between dark:bg-gray-700 rounded-lg shadow-md p-6">
                         <img style="margin: auto; padding-top: 40px;" width="150" height="200"
                             src="https://microsite.otoklix.com/assets/icons/transparency.svg" alt="">
                         <div class="px-4 py-6">
@@ -127,7 +128,8 @@
                         </div>
                     </div>
 
-                    <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
+                    
+                    <div class="flex max-w-xl flex-col items-start justify-between dark:bg-gray-700 rounded-lg shadow-md p-6">
                         <img style="margin: auto; padding-top: 40px;" width="150" height="200"
                             src="https://microsite.otoklix.com/assets/icons/money.svg" alt="">
                         <div class="px-4 py-6">
@@ -139,7 +141,7 @@
                         </div>
                     </div>
 
-                    <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
+                    <div class="flex max-w-xl flex-col items-start justify-between dark:bg-gray-700 rounded-lg shadow-md p-6">
                         <img style="margin: auto; padding-top: 40px;" width="150" height="200"
                             src="https://microsite.otoklix.com/assets/icons/tool.svg" alt="">
                         <div class="px-4 py-6">
@@ -151,14 +153,14 @@
                                 setelah servis.</p>
                         </div>
                     </div>
-
+                    
                 </div>
             </div>
         </section>
 
         <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">Apa kata mereka?</h2>
         <div class="container mx-auto px-2">
-            <div class="flex gap-10">
+            <div class="flex gap-4 sm:card-width-50 md:card-width-75 lg:card-width-100">
                 @foreach (json_decode($userReview) as $item)
                     <div class="w-1/3 shadow-lg rounded-lg overflow-hidden dark:bg-gray-700">
                         <img style="margin: auto;" class="w-50" src="{{ $item->image }}" alt="">
@@ -195,7 +197,7 @@
                     <path fill-rule="evenodd"
                         d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                         clip-rule="evenodd"></path>
-                </svg>Contact us
+                </svg>
             </h5>
             <button type="button" data-drawer-hide="drawer-contact" aria-controls="drawer-contact"
                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -207,32 +209,7 @@
                 </svg>
                 <span class="sr-only">Close menu</span>
             </button>
-            <form action="#" class="mb-6">
-                <div class="mb-6">
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                        email</label>
-                    <input type="email" id="email"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="name@company.com" required>
-                </div>
-                <div class="mb-6">
-                    <label for="subject"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subject</label>
-                    <input type="text" id="subject"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Let us know how we can help you" required>
-                </div>
-                <div class="mb-6">
-                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                        message</label>
-                    <textarea id="message" rows="4"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Your message..."></textarea>
-                </div>
-                <button type="submit"
-                    class="text-white bg-blue-700 hover:bg-blue-800 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 block">Send
-                    message</button>
-            </form>
+
             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
                 <a href="#" class="hover:underline">contact@maniacbengkol.com</a>
             </p>
@@ -240,7 +217,7 @@
                 <a href="#" class="hover:underline"></a>021-456-7890</a>
             </p>
         </div>
-
+{{-- ceck --}}
         <section class="py-12">
             <div class="container mx-auto px-2">
                 <h2 style="text-align: center;" class="text-4xl font-extrabold mb-5 dark:text-white">Artikel Terbaru</h2>
