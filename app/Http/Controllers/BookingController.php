@@ -78,7 +78,7 @@ class BookingController extends Controller
      */
     public function edit(Booking $booking)
     {
-        //
+        
     }
 
     /**
