@@ -8,11 +8,11 @@
             <div x-show="!isSearchbarActive" class="flex items-center justify-between">
                 <div>
                     <div class="flex space-x-2">
-                        <p class="text-xl font-medium text-slate-800 dark:text-navy-50">
+                        <p class="text-xl font-medium text-slate-800 dark:text-white">
                             History Transaksi Product
                         </p>
                     </div>
-                    <p class="mt-1 text-xs"><?php echo date('l, M. j'); ?></p>
+                    <p class="mt-1 text-xs dark:text-white"><?php echo date('l, M. j'); ?></p>
 
                 </div>
 
@@ -36,20 +36,43 @@
                 </div>
             </div>
         </div>
+       
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        trasaction id
+                        <div class="flex items-center"> 
+                            ID
+                            <a wire:click="sortBy('transactions.id')" href="#sort"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
+                        </div>
+                        @if ($sortField === 'transactions.id')
+                                @if ($sortDirection === 'asc')
+                                <span class="text-red-500 ">Older</span>
+                                @else
+                                <span class="text-green-500 ">Latest</span>
+                                @endif
+                        @endif
                     </th>
+                    @if (auth()->check() && auth()->user()->is_admin)
                     <th scope="col" class="px-6 py-3">
-                        user id
+                        user id and name
                     </th>
+                    @endif
                     <th scope="col" class="px-6 py-3">
                         code invoice
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        total
+                        <div class="flex items-center"> 
+                            Total
+                            <a wire:click="sortBy('transactions.grand_total')" href="#sort"><svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
+                        </div>
+                        @if ($sortField === 'transactions.grand_total')
+                            @if ($sortDirection === 'asc')
+                            <span class="text-green-500 ml-1">Min</span>
+                            @else
+                            <span class="text-red-500 ml-1">Max</span>
+                            @endif
+                        @endif
                     </th>
                     <th scope="col" class="px-6 py-3">
                         transaction note
@@ -73,9 +96,11 @@
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $item->id }}
                         </th>
+                        @if (auth()->check() && auth()->user()->is_admin)
                         <td class="px-6 py-4" >
                             {{ $item->user_id }}  {{ $item->name }} 
                         </td>
+                        @endif
                         <td class="px-6 py-4">
                             {{ $item->code_invoice }}
                         </td>

@@ -14,7 +14,10 @@ class TransactionList extends Component
     public $showModal = false;
     public $showModalimg = false;
 
-    public $getdata;
+    public $sortField = 'transactions.id'; // Default sort field
+    public $sortDirection = 'asc'; // Default sort direction
+
+    public $getdata, $dateFilter;
     public $transactionDetail, $grandTotal, $image;
     public $transactionId, $transaction, $transactionNoteId;
     public $selectedStatus = [];
@@ -22,17 +25,40 @@ class TransactionList extends Component
 
     use WithFileUploads;
     
-
     public $status = [
         'Pending',
         'Done',
         'Rejected'
     ];
+
     public function rules()
     {
         return [
             'image' => 'required|image',
         ];
+    }
+
+    public function sortBy($field)
+    {
+        // If the same field is clicked again, reverse the sort direction
+        if ($this->sortField === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            // If a new field is clicked, set the sort field and default to ascending order
+            $this->sortField = $field;
+            $this->sortDirection = 'asc';
+        }
+        if ($this->sortField === 'transactions.grand_total') {
+            if ($this->sortDirection === 'asc') {
+                $this->getdata = $this->getdata->sortBy(function ($item) {
+                    return array_sum(str_split($item->grand_total));
+                })->values();
+            } else {
+                $this->getdata = $this->getdata->sortByDesc(function ($item) {
+                    return array_sum(str_split($item->grand_total));
+                })->values();
+            }
+        }
     }
 
 
@@ -49,7 +75,8 @@ class TransactionList extends Component
                         $query->where('transactions.transaction_status', $this->statusFilter);
                     }
             
-                    $this->getdata = $query->get();
+            $query->orderBy($this->sortField, $this->sortDirection);
+            $this->getdata = $query->get();
         
             return view('livewire.admin.transaction-list', [
                 'transactions' => $this->getdata,
