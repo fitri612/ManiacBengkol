@@ -50,11 +50,8 @@
                     <div class="mt-2">
                         <label class="block text-sm font-medium leading-6 text-gray-900">Profile Image</label>
                         @if ($user->image_profile)
-
-                            <img class="img-preview " src="{{ asset('storage/'.$user->image_profile) }}"
-
+                            <img class="img-preview " src="{{ asset('storage/' . $user->image_profile) }}"
                                 style="max-width: 250px;max-height:250px;margin:0;">
-                                
                         @else
                             <img class="img-preview " src="{{ asset('img/profile.png') }}"
                                 style="max-width: 250px;max-height:250px;margin:0;">
@@ -98,6 +95,4 @@
             }
         }
     </script>
-
 @endsection
-
