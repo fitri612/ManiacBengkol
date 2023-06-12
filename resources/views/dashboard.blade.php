@@ -266,6 +266,15 @@
 
         <section class="py-20">
             <div class="container mx-auto px-2">
+            <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">
+                lokasi kami
+            </h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15825.197449719015!2d109.28002777951659!3d-7.432087950968882!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e655fc5fd2563ff%3A0x380e92389461dcf7!2sBengkel%20Mobil%2088%20Pak%20Naryo!5e0!3m2!1sid!2sid!4v1686057591689!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+
+        <section class="py-20">
+            <div class="container mx-auto px-2">
                 <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">Butuh bantuan?
                     Silahkan hubungi kami
                 </h2>
@@ -285,6 +294,8 @@
                 </div>
             </div>
         </section>
+
+        
 
         <script>
             const txts = document.querySelector(".animate-text").children,

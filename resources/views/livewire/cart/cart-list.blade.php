@@ -51,7 +51,7 @@
           
         </div>
       
-        <div class="max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+        <div  class=" max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:text-white">
           <div class="container mx-auto">
             <div class="rounded-md p-6">
               <h2 class="text-2xl font-semibold">Order Summary</h2>
@@ -107,5 +107,8 @@
           </div>
           
         </div>
+      
+        
+      
       </div>   
 </div>
