@@ -35,15 +35,8 @@ use App\Models\Article;
 |
 */
 
-// Route::get('/', function () {
-//     $articles = Article::with('likes')->take(3)->get();
-//     return view('dashboard', compact('articles'));
-// });
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::get('/', function () {
     $userReview = file_get_contents(base_path('resources/json/user_review.json'));
-    // dd(json_decode($jsonData));
     $articles = Article::with('likes')->take(3)->get();
     return view('dashboard', compact('articles', 'userReview'));
 })->name('home');
@@ -103,6 +96,7 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('/booking-admin/{id}', [BookingAdminController::class, 'destroy']);
     // user all
     Route::get('/user', [ProfileController::class, 'getData'])->name('user.index');
+    Route::view('/transaction-list', 'dashboard.transaction.transaction-list');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -125,6 +119,7 @@ Route::middleware(['auth'])->group(function () {
     // profile
     Route::get('/profile', [ProfileController::class, 'index']);
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile_update');
+    Route::view('/user-transaction-list', 'dashboard.transaction.user-transaction-list');
 });
 
 
@@ -164,7 +159,5 @@ Route::view('/testprod', 'test.test');
 
 //profile
 
-Route::view('/transaction-list', 'dashboard.transaction.transaction-list');
 // transaction-list user
-Route::view('/user-transaction-list', 'dashboard.transaction.user-transaction-list');
 // user 
