@@ -28,10 +28,15 @@ class TransactionDtl extends Component
     {
 
         $this->latestTransaction = Transaction::latest('id')->first();
+        // if ($this->latestTransaction) {
+        //     $this->transaction_detail = TransactionDetail::where('transaction_id', $this->latestTransaction->id)
+        //         ->join('products', 'transaction_details.product_id', '=', 'products.id')
+        //         // ->select('transaction_details.*', 'products.image','products.name')
+        //         ->select('transaction_details.*', 'products.image as product_image', 'products.name as product_name')
+        //         ->get();
         if ($this->latestTransaction) {
-            $this->transaction_detail = TransactionDetail::where('transaction_id', $this->latestTransaction->id)
-                ->join('products', 'transaction_details.product_id', '=', 'products.id')
-                ->select('transaction_details.*', 'products.image','products.name')
+            $this->transaction_detail = TransactionDetail::with('product')
+                ->where('transaction_id', $this->latestTransaction->id)
                 ->get();
             // dd($this->transaction_detail);
         } else {
@@ -84,12 +89,12 @@ class TransactionDtl extends Component
             
             $latestTransaction->nominal = $totalPrice;
             $latestTransaction->save();
-            $this->loadTransactionDetails();
+            
             $this->reset(['image']);
         }
         
         session()->flash('success', 'upload payment note success!');
-        // return redirect('/');
+        return redirect('/user-transaction-list');
 
     }
 }
