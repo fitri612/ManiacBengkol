@@ -14,12 +14,17 @@ class TransactionDtl extends Component
 {
     use WithFileUploads;
     
-    
+    public $showModal = false;
     public $transaction_detail, $codeInvoice, $product, $totalPrice, $latestTransaction;
     public  $total = 0;
     public $image;
-    
+
     public function mount()
+    {
+        $this->loadTransactionDetails();
+    }
+    
+    public function loadTransactionDetails()
     {
 
         $this->latestTransaction = Transaction::latest('id')->first();
@@ -65,7 +70,7 @@ class TransactionDtl extends Component
 
     public function confirm_payment()
     {
-       
+        
         $latestTransaction = Transaction::latest('id')->first();
 
         if ($latestTransaction) {
@@ -79,6 +84,7 @@ class TransactionDtl extends Component
             
             $latestTransaction->nominal = $totalPrice;
             $latestTransaction->save();
+            $this->loadTransactionDetails();
             $this->reset(['image']);
         }
         
