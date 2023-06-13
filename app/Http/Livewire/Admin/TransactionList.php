@@ -4,11 +4,23 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithFileUploads;
+use Carbon\Carbon;
 
 class TransactionList extends Component
 {
-    public $getdata, $selectedID, $selectedStatus;
+    public $showModal = false;
+    public $showModalimg = false;
+
+    public $getdata;
+    public $transactionDetail, $grandTotal, $image;
+    public $transactionId, $transaction, $transactionNoteId;
+    public $selectedStatus = [];
+    public $statusFilter = 'all';
+
+    use WithFileUploads;
     
 
     public $status = [
@@ -16,54 +28,117 @@ class TransactionList extends Component
         'Done',
         'Rejected'
     ];
-
-    // public function updateData()
-    // {
-    //     $this->getdata = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
-    //         ->select('transactions.*', 'users.name')
-    //         ->get();
-    // }
-
-    public function mount()
+    public function rules()
     {
-        if (Auth::check() && !Auth::user()->is_admin) {
-            $userId = Auth::id();
-    
-            $this->getdata = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
-                ->select('transactions.*', 'users.name')
-                ->where('users.id', $userId)
-                ->get();
-        } else {
-            $this->getdata = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
-                ->select('transactions.*', 'users.name')
-                ->get();
-        }
-        
+        return [
+            'image' => 'required|image',
+        ];
     }
+
+
+    
     public function render()
     {
-        return view('livewire.admin.transaction-list',[
-            'transactions' => $this->getdata,
-        ]);
+        $userId = Auth::id();
+        $query = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
+            ->select('transactions.*', 'users.name');
+            if (Auth::check() && !Auth::user()->is_admin) {
+                $query->where('users.id', $userId);
+            }
+            if ($this->statusFilter !== 'all') {
+                        $query->where('transactions.transaction_status', $this->statusFilter);
+                    }
+            
+                    $this->getdata = $query->get();
+        
+            return view('livewire.admin.transaction-list', [
+                'transactions' => $this->getdata,
+                'grandTotal' => $this->grandTotal,
+            ]);
     }
 
+    public function showdata($transactionId)
+    {
+        
+        $this->transactionDetail = TransactionDetail::where('transaction_id', $transactionId)
+            ->join('products', 'transaction_details.product_id', '=', 'products.id')
+            ->select('transaction_details.*', 'products.image','products.name')
+            ->get();
+        // dd($this->transactionDetail);
+        // $this->grandTotal = Transaction::where('id', $transactionId)->value('grand_total');
+        $transaction = Transaction::find($transactionId);
+        $this->grandTotal = $transaction->grand_total;
+        // $this->createdAt = $transaction->created_at;
+        $this->createdAt = Carbon::parse($transaction->created_at)->format('F d, Y \a\t H:i');
+        
+    }
+
+    public function uploadTransactionNote($transactionNoteId)
+    {
+        $this->showModalimg = true;
+        $this->transactionNoteId = $transactionNoteId;
+        $transaction = Transaction::find($this->transactionNoteId);
+        if ($transaction && $this->image && $this->image->getSize() > 0) {
+            $path = $this->image->store('transaction_note', 'public');
+            $transaction->transaction_note = $path;
+            $transaction->save();
+            session()->flash('success', 'Transaction note uploaded successfully!');
+            $this->showModalimg = false;
+            
+            // $this->dispatchBrowserEvent('submit-form');
+            $this->dispatchBrowserEvent('hide-modal', ['itemId' => $transactionNoteId]);
+            $this->image = null;
+        }
+       
+    }
+    
+    
     
 
     public function updateStatus($id)
     {
         $transaction = Transaction::find($id);
-       
+        
         if ($transaction) {
             $transaction->transaction_status = $this->selectedStatus[$id];
             $transaction->save();
             session()->flash('success', 'Status updated successfully!');
             // $this->emit('statusUpdated', $id, $this->selectedStatus);
+            
         } else {
             session()->flash('error', 'Transaction not found.');
         }
         
+        
         // $this->render();
     }
+
+
+
+    public function openModal($transactionId)
+    {
+        $this->transactionId = $transactionId;
+        $this->transactionDetail = TransactionDetail::where('transaction_id', $transactionId)->get();
+        $this->showModal = true;
+        $this->transactionDetail = TransactionDetail::where('transaction_id', $transactionId)
+        ->join('products', 'transaction_details.product_id', '=', 'products.id')
+        ->select('transaction_details.*', 'products.image','products.name')
+        ->get();
+        $transaction = Transaction::find($transactionId);
+        $this->grandTotal = $transaction->grand_total;
+        $this->createdAt = Carbon::parse($transaction->created_at)->format('F d, Y \a\t H:i');
+    }
+    
+    public function closeModal()
+    {
+        $this->showModal = false;
+    }
+    public function closeModalimg()
+    {
+        $this->showModalimg = false;
+    }
+
+
 
     
 }

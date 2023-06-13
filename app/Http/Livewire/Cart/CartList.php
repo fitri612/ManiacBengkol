@@ -18,7 +18,7 @@ class CartList extends Component
     public $selected_cart_items = [];
     public $checkAll = false;
 
-    public $uuidi, $deletionCompleted;
+    public  $deletionCompleted;
 
     public function rules()
     {
@@ -95,6 +95,9 @@ class CartList extends Component
         // dd($this->deletionCompleted);
         $this->emit('updateCartCount');
         session()->flash('success', 'Produk yang dipilih telah dihapus dari keranjang');
+        $this->selectAll = false;
+        $this->deletionCompleted = false;
+        $this->selected_cart_items = [];
     }
 
 

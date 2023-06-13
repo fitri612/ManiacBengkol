@@ -40,7 +40,7 @@
                                         Nama
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Nomor Polisi
+                                        Nomor Telfon
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Keluhan

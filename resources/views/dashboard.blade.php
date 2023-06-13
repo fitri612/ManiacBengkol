@@ -128,8 +128,9 @@
                         </div>
                     </div>
 
-                    
-                    <div class="flex max-w-xl flex-col items-start justify-between dark:bg-gray-700 rounded-lg shadow-md p-6">
+
+                    <div
+                        class="flex max-w-xl flex-col items-start justify-between dark:bg-gray-700 rounded-lg shadow-md p-6">
                         <img style="margin: auto; padding-top: 40px;" width="150" height="200"
                             src="https://microsite.otoklix.com/assets/icons/money.svg" alt="">
                         <div class="px-4 py-6">
@@ -141,7 +142,8 @@
                         </div>
                     </div>
 
-                    <div class="flex max-w-xl flex-col items-start justify-between dark:bg-gray-700 rounded-lg shadow-md p-6">
+                    <div
+                        class="flex max-w-xl flex-col items-start justify-between dark:bg-gray-700 rounded-lg shadow-md p-6">
                         <img style="margin: auto; padding-top: 40px;" width="150" height="200"
                             src="https://microsite.otoklix.com/assets/icons/tool.svg" alt="">
                         <div class="px-4 py-6">
@@ -153,7 +155,7 @@
                                 setelah servis.</p>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </section>
@@ -209,32 +211,7 @@
                 </svg>
                 <span class="sr-only">Close menu</span>
             </button>
-            <form action="#" class="mb-6">
-                <div class="mb-6">
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email
-                        Anda</label>
-                    <input type="email" id="email"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="name@company.com" required>
-                </div>
-                <div class="mb-6">
-                    <label for="subject"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Judul</label>
-                    <input type="text" id="subject"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Beritahu apa yang bisa kami bantu" required>
-                </div>
-                <div class="mb-6">
-                    <label for="message"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pesan</label>
-                    <textarea id="message" rows="4"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Silahkan isi pesan..."></textarea>
-                </div>
-                <button type="submit"
-                    class="text-white bg-blue-700 hover:bg-blue-800 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 block">Kirim
-                    Pesan</button>
-            </form>
+
             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
                 <a href="#" class="hover:underline">contact@maniacbengkol.com</a>
             </p>
@@ -242,7 +219,7 @@
                 <a href="#" class="hover:underline"></a>021-456-7890</a>
             </p>
         </div>
-
+        {{-- ceck --}}
         <section class="py-12">
             <div class="container mx-auto px-2">
                 <h2 style="text-align: center;" class="text-4xl font-extrabold mb-5 dark:text-white">Artikel Terbaru</h2>
@@ -270,8 +247,8 @@
                                     </p>
                                 </div>
                                 <div class="relative mt-8 flex items-center gap-x-4">
-                                    <img src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                        alt="" class="h-10 w-10 rounded-full bg-gray-50">
+                                    <img src="{{ asset('img/creator_article.jpg') }}" alt=""
+                                        class="h-10 w-10 rounded-full bg-gray-50">
                                     <div class="text-sm leading-6">
                                         <p class="font-semibold text-gray-900">
                                             <a href="#">
@@ -285,6 +262,20 @@
                             </article>
                         @endforeach
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20">
+            <div class="container mx-auto px-2">
+                <h2 style="text-align: center;" class="text-4xl font-extrabold mb-10 dark:text-white">
+                    lokasi kami
+                </h2>
+                <div class="justify-center flex">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15825.197449719015!2d109.28002777951659!3d-7.432087950968882!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e655fc5fd2563ff%3A0x380e92389461dcf7!2sBengkel%20Mobil%2088%20Pak%20Naryo!5e0!3m2!1sid!2sid!4v1686057591689!5m2!1sid!2sid"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </section>
@@ -310,6 +301,8 @@
                 </div>
             </div>
         </section>
+
+
 
         <script>
             const txts = document.querySelector(".animate-text").children,
