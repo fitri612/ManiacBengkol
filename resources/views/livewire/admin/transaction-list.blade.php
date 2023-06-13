@@ -1,5 +1,6 @@
 <div class="container mx-auto px-5 py-4">
     @include('partials.success_toast')
+    @include('partials.error_toast')
 
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -13,12 +14,12 @@
                         </p>
                         
                     </div>
-                    <div class="flex space-x-2 mt-3">
+                    {{-- <div class="flex space-x-2 mt-3">
                         <p class="text-xl  font-medium text-slate-800 dark:text-white">
                             Transaksi hari ini 
                         </p>
                         
-                    </div>
+                    </div> --}}
                     <p class="mt-1 text-xs dark:text-white"><?php echo date('l, M. j'); ?></p>
 
                 </div>
@@ -62,7 +63,7 @@
                     </th>
                     @if (auth()->check() && auth()->user()->is_admin)
                     <th scope="col" class="px-6 py-3">
-                        user id and name
+                        UID
                     </th>
                     @endif
                     <th scope="col" class="px-6 py-3">
@@ -116,18 +117,9 @@
                         </td>
                         <td class="px-6 py-4">
                             @if ($item->method_payment !== 'cash')
-                                <img src="{{ asset('storage/' . $item->transaction_note) }}" alt="bukti transfer belum di upload" height="100px"
-                                    width="100px">
-                                {{-- @if ($item->transaction_status === 'pending' || $item->transaction_status === 'rejected')
-                                    <button wire:click="uploadTransactionNote({{ $item->id }})" wire:loading.attr="disabled" type="button" data-modal-target="staticModal_{{ $item->id }}" data-modal-toggle="staticModal_{{ $item->id }}" class="text-white font-sm bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                        Reupload bukti
-                                    </button>
-                                @endif
-                                @unless ($item->transaction_note)
-                                    <button wire:click="uploadTransactionNote({{ $item->id }})" wire:loading.attr="disabled" type="button" data-modal-target="staticModal_{{ $item->id }}" data-modal-toggle="staticModal_{{ $item->id }}" class="text-white font-sm bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                        Upload bukti
-                                    </button>
-                                @endunless --}}
+                            <a href="{{ asset('storage/' . $item->transaction_note) }}" target="_blank">
+                                <img src="{{ asset('storage/' . $item->transaction_note) }}" alt="bukti transfer belum di upload" height="100px" width="100px" title="Click to view larger image">
+                            </a>
                                 @if (auth()->check() && !auth()->user()->is_admin)
                                     @if ($item->transaction_status === 'pending' || $item->transaction_status === 'rejected')
                                         @if ($item->transaction_note)
@@ -172,8 +164,9 @@
                                         <div class="p-6 space-y-6">
                                             
                                             <input wire:model="image" id="image" type="file" onchange="previewImage(event)">
+                                            
                                             @if ($image)
-                                                <img src="{{ $image->temporaryUrl() }}" alt="Selected Image" height="300px" width="300px">
+                                                <img  src="{{ $image->temporaryUrl() }}" alt="Selected Image" height="300px" width="300px">
                                             @endif
 
                                         </div>
@@ -181,6 +174,7 @@
                                         <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                                             <button {{-- wire:click="uploadTransactionNote({{ $item->id }})" --}}  data-modal-hide="staticModal_{{ $item->id }}" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Upload</button>
                                         </form>
+                                        
                                             <button wire:click="closeModalimg"  data-modal-hide="staticModal_{{ $item->id }}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
                                         </div>
                                     </div>
@@ -215,17 +209,20 @@
                         </td>
                         <td class="px-6 py-4">
                             {{-- <span wire:poll.500ms="">{{ $item->transaction_status }}</span> --}}
-                            <span>{{ $item->transaction_status }}</span>
+                            <span class="font-bold">{{ $item->transaction_status }}</span>
                             @if(auth()->check() && auth()->user()->is_admin)
-                            <select wire:model="selectedStatus.{{ $item->id }}"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected>
+                            <p class="text-sm">change status</p>
+                            <select wire:model="selectedStatus.{{ $item->id }}"  class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected disabled >
                                     Change Status
                                     </option>
                                 @foreach ($status as $stat)
                                     <option value="{{ $stat }}">{{ $stat }}</option>
                                 @endforeach
                             </select>
-                            <button wire:click="updateStatus({{ $item->id }})">Save</button>
+                            
+                            <button wire:click="updateStatus({{ $item->id }})" type="button" class="mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">save <i class="fa-solid fa-floppy-disk"></i></button>
+                            
                             @else
                             {{-- <span>{{ $item->transaction_status }}</span> --}}
                             @endif
