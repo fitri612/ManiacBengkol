@@ -78,9 +78,13 @@
                     <th scope="col" class="px-6 py-3">
                         Payment Method
                     </th>
+                    @if (auth()->check() && auth()->user()->is_admin)
                     <th scope="col" class="px-6 py-3">
                         Edit Status
                     </th>
+                    
+                    @endif
+                    
                 </tr>
             </thead>
             <tbody>
@@ -111,8 +115,8 @@
                             {{ $item->method_payment }}
                         </td>
                         <td class="px-6 py-4 text-right">
+                            @if (auth()->check() && auth()->user()->is_admin)
                             <div style="display: flex; justify-content: center;">
-                                @if (auth()->check() && auth()->user()->is_admin)
                                     <select wire:model="selectedStatus.{{ $item->id }}"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         {{-- <option selected>
@@ -147,9 +151,8 @@
                                                     fill="#757575" />
                                             </svg></button>
                                     </div>
-                                @else
+                                </div>
                                 @endif
-                            </div>
                             {{-- <a href="#"
                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> --}}
                         </td>
