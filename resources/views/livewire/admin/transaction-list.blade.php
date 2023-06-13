@@ -8,9 +8,16 @@
             <div x-show="!isSearchbarActive" class="flex items-center justify-between">
                 <div>
                     <div class="flex space-x-2">
-                        <p class="text-xl font-medium text-slate-800 dark:text-white">
+                        <p class="text-xl border-b border-gray-300 font-medium text-slate-800 dark:text-white">
                             History Transaksi Product
                         </p>
+                        
+                    </div>
+                    <div class="flex space-x-2 mt-3">
+                        <p class="text-xl  font-medium text-slate-800 dark:text-white">
+                            Transaksi hari ini 
+                        </p>
+                        
                     </div>
                     <p class="mt-1 text-xs dark:text-white"><?php echo date('l, M. j'); ?></p>
 
@@ -89,7 +96,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($getdata as $item)
+                @foreach ($getdataAll as $item)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row"
@@ -289,6 +296,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{-- {{ $transactionsAll->links() }} --}}
     </div>
 
 </div>
