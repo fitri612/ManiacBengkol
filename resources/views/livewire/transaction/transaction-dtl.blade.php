@@ -58,11 +58,20 @@
                   <span class="text-xl font-semibold">{{ 'Rp ' . number_format($totalPrice, 0, ',', '.') }}</span>
                 </div>
                 @if ($latestTransaction && $latestTransaction->method_payment === 'cash')
+                  
                   <div class="border-t border-gray-300 py-2">
                     <p class="text-md">silahkan pergi ke bengkel langsung dan kirimkan kode berikut beserta nama ke whatsapp admin </p>
-                    <p class="mt-2 mb-2 font-semibold">@if ($InvoiceCode)
-                      {{ $InvoiceCode->code_invoice }}
-                      @endif</p>
+                    @if ($InvoiceCode)
+                    <a href="#" style="display: flex;justify-content: center; background-color: rgb(0, 139, 254);border-radius:5px; padding: 10px;"  onclick="copyText()">  
+                      <div style="justify-content: center; background-color: rgb(0, 139, 254);border-radius:5px; " class="flex">
+                          <h2 id="text-to-copy" style="color: white">{{ $InvoiceCode->code_invoice }}</h2>
+                            <button style="cursor: pointer; margin-left: 8px; color:white;padding-left:30px;"
+                                class="fas fa-copy"></button>
+                              </div>
+                              </a>
+                    @else
+                    @endif
+
                     <p>whatsapp admin : 0854-7854-9082</p>
                   </div>
                 @elseif ($latestTransaction && $latestTransaction->method_payment === 'transfer')
@@ -125,6 +134,31 @@
         
       
     </div> 
-    
+    <script>
+      function copyText() {
+          // Get the text content from the <h2> element
+          var textToCopy = document.getElementById("text-to-copy").textContent;
+
+          // Create a temporary input element
+          var tempInput = document.createElement("input");
+          tempInput.setAttribute("value", textToCopy);
+
+          // Append the input element to the document
+          document.body.appendChild(tempInput);
+
+          // Select the text content
+          tempInput.select();
+          tempInput.setSelectionRange(0, 99999); // For mobile devices
+
+          // Copy the text to the clipboard
+          document.execCommand("copy");
+
+          // Remove the temporary input element
+          document.body.removeChild(tempInput);
+
+          //   Alert or perform any desired action
+          //   alert("Text copied: " + textToCopy);
+      }
+  </script>
     
 </div>
