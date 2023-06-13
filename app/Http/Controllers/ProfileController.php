@@ -31,8 +31,7 @@ class ProfileController extends Controller
         ]);
 
         if ($request->file('image_profile')) {
-            $path = $request->file('image_profile')->store('public/profile_image');
-            $validatedData['image_profile'] = Storage::url($path);
+            $validatedData['image_profile'] = $request->file('image_profile')->store('/profile_image');
         }
 
         $user->update($validatedData);

@@ -24,10 +24,10 @@
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Ikuti Kami</h2>
                     <ul class="text-gray-600 dark:text-gray-400 font-medium">
                         <li class="mb-4">
-                            <a href="https://github.com/themesberg/flowbite" class="hover:underline ">Github</a>
+                            <a href="#" >Github</a>
                         </li>
                         <li>
-                            <a href="https://www.instagram.com/msibgits_kel17/" class="hover:underline">Instagram</a>
+                            <a href="#" >Instagram</a>
                         </li>
                     </ul>
                 </div>
@@ -35,10 +35,10 @@
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
                     <ul class="text-gray-600 dark:text-gray-400 font-medium">
                         <li class="mb-4">
-                            <a href="#" class="hover:underline">Privacy Policy</a>
+                            <a href="#" >Privacy Policy</a>
                         </li>
                         <li>
-                            <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                            <a href="#" >Terms &amp; Conditions</a>
                         </li>
                     </ul>
                 </div>
