@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Modal toggle -->
-<button data-modal-target="large-modal" data-modal-toggle="large-modal" class="block w-full md:w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+{{-- <button data-modal-target="large-modal" data-modal-toggle="large-modal" class="block w-full md:w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
   Large modal
   </button>
 
@@ -57,6 +57,60 @@
           </div>
       </div>
   </div>
-</div>
+</div> --}}
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+  
+  <div class="max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex items-center justify-between dark:text-white">
+      <h2 class="text-2xl font-semibold">Transaction Detail</h2>
+    </div>
+    
+    
+    <hr class="my-4 border-t border-gray-300">
+    @foreach ($transaction_detail as $detail)
+    <div class=" mt-3 max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+      <div class="grid grid-cols-4 gap-4">
+          <div class="flex items-center col-span-1">
+            
+          <img src="{{ asset('storage/' . $detail->product->image) }}" class="h-20 w-20 rounded-md">
+        </div>
+        <div class="col-span-2">
+          <h3 class="text-lg font-semibold">{{ $detail->product->name }}</h3>
+          <p class="text-gray-500">jumlah pesanan : {{ $detail->qty }}</p>
+          <p class="text-gray-500">Harga/pcs : {{ $detail->price }}</p>
+        </div>
+        {{--  --}}
+      </div>
+    </div>
+    @endforeach
+    
+  </div>
+
+  <div  class=" max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+    <div class="container mx-auto">
+      <div class="rounded-md p-6">
+        <h2 class="text-2xl font-semibold">Order Summary</h2>
+        <div class="mt-4">
+          <div class="flex justify-between py-2">
+            <span class="text-gray-700 dark:text-gray-400">Subtotal ({{ $totalQty }}) items</span>
+            <span class="font-semibold">{{ $totalPrice  }}</span>
+          </div>
+          <div class="flex justify-between py-2">
+            <span class="text-gray-700 dark:text-gray-400">Tax estimate</span>
+            <span class="font-semibold">  0 </span>
+          </div>
+          <div class="flex justify-between border-t border-gray-300 py-2">
+            <span class="text-xl font-semibold">Order total</span>
+            <span class="text-xl font-semibold">{{ $totalPrice  }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  
+
+</div> 
 
 @endsection
