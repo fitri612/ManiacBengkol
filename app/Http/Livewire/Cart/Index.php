@@ -15,6 +15,7 @@ class Index extends Component
     {
         $this->products = Product::get();
         return view('livewire.cart.index');
+        // aa
     }
 
     public function addToCart($id){
