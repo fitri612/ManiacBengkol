@@ -7,27 +7,33 @@ use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 use Carbon\Carbon;
+
+
 
 class TransactionList extends Component
 {
     public $showModal = false;
     public $showModalimg = false;
 
-    public $getdata;
+    public $sortField = 'transactions.id'; // Default sort field
+    public $sortDirection = 'asc'; // Default sort direction
+
+    public $getdata, $dateFilter;
     public $transactionDetail, $grandTotal, $image;
     public $transactionId, $transaction, $transactionNoteId;
     public $selectedStatus = [];
     public $statusFilter = 'all';
-
+    use WithPagination;
     use WithFileUploads;
     
-
     public $status = [
         'Pending',
         'Done',
         'Rejected'
     ];
+
     public function rules()
     {
         return [
@@ -35,24 +41,62 @@ class TransactionList extends Component
         ];
     }
 
+    public function sortBy($field)
+    {
+        // If the same field is clicked again, reverse the sort direction
+        if ($this->sortField === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            // If a new field is clicked, set the sort field and default to ascending order
+            $this->sortField = $field;
+            $this->sortDirection = 'asc';
+        }
+        if ($this->sortField === 'transactions.grand_total') {
+            if ($this->sortDirection === 'asc') {
+                $this->getdata = $this->getdata->sortBy(function ($item) {
+                    return array_sum(str_split($item->grand_total));
+                })->values();
+            } else {
+                $this->getdata = $this->getdata->sortByDesc(function ($item) {
+                    return array_sum(str_split($item->grand_total));
+                })->values();
+            }
+        }
+    }
+
 
     
     public function render()
     {
         $userId = Auth::id();
-        $query = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
-            ->select('transactions.*', 'users.name');
+        $queryAll = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
+        ->select('transactions.*', 'users.name');
+
+        $queryToday = Transaction::join('users', 'transactions.user_id', '=', 'users.id')
+        ->select('transactions.*', 'users.name')
+        ->whereDate('transactions.created_at', today());
+
             if (Auth::check() && !Auth::user()->is_admin) {
-                $query->where('users.id', $userId);
+                $queryAll->where('users.id', $userId);
+                $queryToday->where('users.id', $userId);
             }
             if ($this->statusFilter !== 'all') {
-                        $query->where('transactions.transaction_status', $this->statusFilter);
-                    }
+                $queryAll->where('transactions.transaction_status', $this->statusFilter);
+                $queryToday->where('transactions.transaction_status', $this->statusFilter);
+            }
             
-                    $this->getdata = $query->get();
+            $queryAll->orderBy($this->sortField, $this->sortDirection);
+            $queryToday->orderBy($this->sortField, $this->sortDirection);
+
+            $this->getdataAll = $queryAll->paginate(5);
+            $this->getdataToday = $queryToday->paginate(5);
+
+            $this->getdataAll = $queryAll->get();
+            $this->getdataToday = $queryToday->get();
         
             return view('livewire.admin.transaction-list', [
-                'transactions' => $this->getdata,
+                'transactionsAll' => $this->getdataAll,
+                'transactionsToday' => $this->getdataToday,
                 'grandTotal' => $this->grandTotal,
             ]);
     }
