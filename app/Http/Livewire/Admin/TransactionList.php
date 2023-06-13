@@ -53,14 +53,14 @@ class TransactionList extends Component
         }
         if ($this->sortField === 'transactions.grand_total') {
             if ($this->sortDirection === 'asc') {
-                $this->getdata = $this->getdata->sortBy(function ($item) {
-                    return array_sum(str_split($item->grand_total));
-                })->values();
+                $this->getdataAll = $this->getdataAll->sortBy('grand_total')->values();
+                $this->sortValue = 'max';
             } else {
-                $this->getdata = $this->getdata->sortByDesc(function ($item) {
-                    return array_sum(str_split($item->grand_total));
-                })->values();
+                $this->getdataAll = $this->getdataAll->sortByDesc('grand_total')->values();
+                $this->sortValue = 'min';
             }
+        } else {
+            $this->sortValue = '';
         }
     }
 
@@ -88,8 +88,8 @@ class TransactionList extends Component
             $queryAll->orderBy($this->sortField, $this->sortDirection);
             $queryToday->orderBy($this->sortField, $this->sortDirection);
 
-            $this->getdataAll = $queryAll->paginate(5);
-            $this->getdataToday = $queryToday->paginate(5);
+            // $this->getdataAll = $queryAll->paginate(5);
+            // $this->getdataToday = $queryToday->paginate(5);
 
             $this->getdataAll = $queryAll->get();
             $this->getdataToday = $queryToday->get();
