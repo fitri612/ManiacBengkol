@@ -71,7 +71,7 @@
                               </a>
                     @else
                     @endif
-
+                              {{-- yooo guys --}}
                     <p>whatsapp admin : 0854-7854-9082</p>
                   </div>
                 @elseif ($latestTransaction && $latestTransaction->method_payment === 'transfer')
