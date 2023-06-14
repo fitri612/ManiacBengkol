@@ -15,7 +15,7 @@
             <div class="is-scrollbar-hidden flex grow flex-col space-y-4 overflow-y-auto pt-6">
                 <!-- Dashobards -->
                 <a href="{{ url('/category') }}"
-                    class="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-navy-600 dark:text-accent-light dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90"
+                    class="{{ Request::is('category*') ? 'bg-primary/10  text-primary' : ''}} flex h-11 w-11 items-center justify-center rounded-lg   outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-navy-600 dark:text-accent-light dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90"
                     x-tooltip.placement.right="'Category'">
                     <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
                         <path
@@ -26,7 +26,7 @@
 
                 <!-- Apps -->
                 <a href="{{ url('/product') }}"
-                    class="flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+                    class="{{ Request::is('product*') ? 'bg-primary/10 text-primary' : ''}} flex h-11 w-11 items-center justify-center rounded-lg  transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
                     x-tooltip.placement.right="'Product'">
                     <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
                         <path
@@ -37,7 +37,7 @@
 
                 <!-- Pages And Layouts -->
                 <a href="{{ url('/booking-admin') }}"
-                    class="flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+                    class="{{ Request::is('booking-admin*') ? 'bg-primary/10 text-primary' : ''}} flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
                     x-tooltip.placement.right="'Booking list'">
                     <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                         <path
@@ -47,9 +47,9 @@
                 </a>
 
                 <a href="{{ url('transaction-list') }}"
-                    class="flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+                    class="{{ Request::is('transaction-list*') ? 'bg-primary/10 text-primary' : ''}} flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
                     x-tooltip.placement.right="'History Transaksi'">
-                    <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                    <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg text-primary" height="1em" viewBox="0 0 512 512">
                         <path
                             d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H192c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
                             fill="currentColor" />
@@ -58,7 +58,7 @@
 
                 <!-- Forms -->
                 <a href="{{ url('articles') }}"
-                    class="flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+                    class="{{ Request::is('articles*') ? 'bg-primary/10 text-primary' : ''}} flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
                     x-tooltip.placement.right="'Article'">
                     <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
                         <path
@@ -69,7 +69,7 @@
 
                 <!-- Components -->
                 <a href="{{ url('/user') }}"
-                    class="flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
+                    class="{{ Request::is('user*') ? 'bg-primary/10 text-primary' : ''}} flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25"
                     x-tooltip.placement.right="'User'">
                     <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-opacity="0.5"
