@@ -27,9 +27,11 @@
                 <div class="flex items-center space-x-2">
                     <label class="relative hidden sm:flex">
                         <input
+                            onkeyup="searchByName()"
+                            id="searchInput"
                             class="form-input peer h-9 w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 text-xs+ placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                            placeholder="Search users..." type="text">
-                    </label>
+                            placeholder="Search UID..." type="text">
+                        </label>
                     
                     <div class="flex">
                         <select wire:model="statusFilter" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -96,16 +98,16 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody >
                 @foreach ($getdataAll as $item)
-                    <tr
+                    <tr class="tabel-produk"
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row"
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $item->id }}
                         </th>
                         @if (auth()->check() && auth()->user()->is_admin)
-                        <td class="px-6 py-4" >
+                        <td class="px-6 py-4 nama" >
                             {{ $item->user_id }}  {{ $item->name }} 
                         </td>
                         @endif
