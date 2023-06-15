@@ -120,6 +120,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index']);
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile_update');
     Route::view('/user-transaction-list', 'dashboard.transaction.user-transaction-list');
+    
 });
 
 
