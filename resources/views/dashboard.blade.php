@@ -42,11 +42,11 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                         </a>
-                        <a href="#"
+                        <a href="{{ url('/chatify') }}"
                             class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
                             type="button" data-drawer-target="drawer-contact" data-drawer-show="drawer-contact"
                             aria-controls="drawer-contact">
-                            Hubungi Kami
+                            Chat
                         </a>
                     </div>
                 </div>
