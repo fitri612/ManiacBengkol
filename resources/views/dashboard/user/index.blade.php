@@ -12,8 +12,10 @@
             <div class="flex items-center space-x-2">
                 <label class="relative hidden sm:flex">
                     <input
+                        onkeyup="searchByName()"
+                        id="searchInput"
                         class="form-input peer h-9 w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 text-xs+ placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                        placeholder="Search users..." type="text" />
+                        placeholder="Search user ..." type="text">
                 </label>
 
                 <div class="flex">
@@ -47,7 +49,7 @@
         </div>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4">
             @foreach ($user as $item)
-                <div class="card">
+                <div class="card artikel">
                     <div class="p-2 text-right">
 
                     </div>
@@ -63,7 +65,7 @@
                                     alt="avatar" />
                             </div>
                         @endif
-                        <h3 class="pt-3 text-lg font-medium text-slate-700 dark:text-navy-100">
+                        <h3 class="title pt-3 text-lg font-medium text-slate-700 dark:text-navy-100">
                             {{ $item->name }}
                         </h3>
                         <p class="text-xs+">{{ $item->email }}</p>
