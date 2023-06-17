@@ -119,9 +119,15 @@ class TransactionList extends Component
 
     public function uploadTransactionNote($transactionNoteId)
     {
+        
         $this->showModalimg = true;
         $this->transactionNoteId = $transactionNoteId;
         $transaction = Transaction::find($this->transactionNoteId);
+        $this->validate([
+            'image' => 'required|image',
+        ], [
+            'image.required' => 'Please choose an image.',
+        ]);
         if ($transaction && $this->image && $this->image->getSize() > 0) {
             $path = $this->image->store('transaction_note', 'public');
             $transaction->transaction_note = $path;
@@ -159,6 +165,8 @@ class TransactionList extends Component
 
 
 
+
+
     public function openModal($transactionId)
     {
         $this->transactionId = $transactionId;
@@ -180,6 +188,7 @@ class TransactionList extends Component
     public function closeModalimg()
     {
         $this->showModalimg = false;
+        $this->image = null;
     }
 
 
