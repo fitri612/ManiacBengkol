@@ -1,28 +1,30 @@
 <?php
 
+use App\Models\Article;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Register;
+
 use App\Http\Livewire\Cart\CartList;
-
-use App\Http\Livewire\Auth\PwdResetConfirm;
-use App\Http\Livewire\Auth\PasswordReset;
-
-
 use Illuminate\Support\Facades\Auth;
+
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-
-
-
 use App\Http\Controllers\LikeController;
+
+
+
+use App\Http\Livewire\Auth\PasswordReset;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Auth\PwdResetConfirm;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BookingAdminController;
-use App\Models\Article;
+
+use App\Http\Controllers\vendor\Chatify\MessagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +38,7 @@ use App\Models\Article;
 */
 
 Route::get('/', function () {
+    
     $userReview = file_get_contents(base_path('resources/json/user_review.json'));
     $articles = Article::with('likes')->take(3)->get();
     return view('dashboard', compact('articles', 'userReview'));
@@ -94,6 +97,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/booking-admin/{id}/edit', [BookingAdminController::class, 'edit']);
     Route::post('/booking-admin/{id}', [BookingAdminController::class, 'update']);
     Route::delete('/booking-admin/{id}', [BookingAdminController::class, 'destroy']);
+    //chat
+    Route::get('/list_chat', [MessagesController::class, 'index_admin']);
     // user all
     Route::get('/user', [ProfileController::class, 'getData'])->name('user.index');
     Route::view('/transaction-list', 'dashboard.transaction.transaction-list');
@@ -120,6 +125,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index']);
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile_update');
     Route::view('/user-transaction-list', 'dashboard.transaction.user-transaction-list');
+    
+    Route::get('/home', [MessagesController::class, 'index'])->name('home');
 });
 
 
@@ -139,8 +146,13 @@ Route::middleware(['auth'])->group(function () {
 
 
 // 'views
-Route::view('/testing', 'layouts.admin');
-Route::view('/testprod', 'test.test');
+// Route::view('/list_chat', 'dashboard.chat.admin');
+// Route::get('/list_chat', [MessagesController::class, 'index_admin']);
+// Route::get('/', [MessagesController::class, 'index']);
+// Route::view('/testprod', 'test.test');
+// Route::get('/testprod', [MessagesController::class, 'index']);
+// Route::get('/testprod/{id}', [MessagesController::class, 'index']);
+
 
 
 // Articles
