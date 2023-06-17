@@ -1,14 +1,6 @@
-@extends('layouts.app')
-
-@section('content')
-
-{{-- @livewire('category.index') --}}
-{{-- @livewire('product.index') --}}
-
-
-@endsection
 
 @include('Chatify::layouts.headLinks')
+
 <div class="messenger">
     {{-- ----------------------Users/Groups lists side---------------------- --}}
     <div class="messenger-listView {{ !!$id ? 'conversation-active' : '' }}">

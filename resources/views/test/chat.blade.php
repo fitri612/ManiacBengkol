@@ -1,7 +1,4 @@
 
-{{-- <meta name="id" content="{{ $id }}"> --}}
-<meta name="csrf-token" content="{{ csrf_token() }}">
-<meta name="url" content="{{ url('').'/'.config('chatify.routes.prefix') }}" data-user="{{ Auth::user()->id }}">
 
 
 
@@ -34,20 +31,7 @@
             <img src="../img/avataritem.png" alt="Avatar" class="w-8 h-8 rounded-full mr-2">
             <h4 class="text-lg font-semibold">Customer Support</h4>
           </div>
-          <div class="overflow-y-auto max-h-52">
-            <div class="flex flex-col space-y-2">
-              <div class="bg-blue-200 rounded-lg py-2 px-4">
-                <p class="text-sm">Hello! </p>
-              </div>
-              <div class="message-card-content">
-                <p class="text-sm">Sure, .</p>
-              </div>
-              {{-- @include('Chatify::layouts.messageCard') --}}
-            </div>
-          </div>
-          <div class="mt-4">
-            @include('Chatify::layouts.sendForm')
-          </div>
+          
         </div>
       </div>
     </div>

@@ -190,18 +190,10 @@
         </div>
 
         <div id="drawer-contact"
-            class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-80 dark:bg-gray-800"
+            class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-1/3 dark:bg-gray-800"
             tabindex="-1" aria-labelledby="drawer-contact-label">
-            <h5 id="drawer-label"
-                class="inline-flex items-center mb-6 text-base font-semibold text-gray-500 uppercase dark:text-gray-400">
-                <svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                        clip-rule="evenodd"></path>
-                </svg>
-            </h5>
-            <button type="button" data-drawer-hide="drawer-contact" aria-controls="drawer-contact"
+            
+            {{-- <button type="button" data-drawer-hide="drawer-contact" aria-controls="drawer-contact"
                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
@@ -210,14 +202,37 @@
                         clip-rule="evenodd"></path>
                 </svg>
                 <span class="sr-only">Close menu</span>
-            </button>
+            </button> --}}
 
-            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+            {{-- <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
                 <a href="#" class="hover:underline">contact@maniacbengkol.com</a>
             </p>
             <p class="text-sm text-gray-500 dark:text-gray-400">
                 <a href="#" class="hover:underline"></a>021-456-7890</a>
-            </p>
+            </p> --}}
+            @if(auth()->check())
+            @include('dashboard.chat.customer')
+        @else
+            {{-- <a href="{{ route('login') }}">Login</a> --}}
+            
+        <div class="w-full p-4 text-center bg-white  sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <h5 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">Customer service</h5>
+            <p class="mb-5 text-base text-gray-500 sm:text-lg dark:text-gray-400">untuk dapat menggunakan layanan customer service kami, kamu harus login terlebih dahulu.</p>
+            <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
+                <a href="{{ route('login') }}" class="w-full sm:w-auto bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
+                    {{-- <svg class="mr-3 w-7 h-7" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="apple" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"></path></svg> --}}
+                    <svg class="mr-3 w-7 h-7" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg>
+                    <div class="text-left">
+                        
+                        <div class=" font-sans text-sm font-semibold">Login sekarang</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        @endif
+        
+            
         </div>
         {{-- ceck --}}
         <section class="py-12">

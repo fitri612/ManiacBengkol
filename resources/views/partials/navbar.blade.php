@@ -12,7 +12,7 @@
 <body>
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="{{ url('/') }}" class="flex items-center">
+            <a href="{{ url('/home') }}" class="flex items-center">
                 <img src="https://gcdnb.pbrd.co/images/4LUQpWQfxfra.png?o=1" width="40px" height="40px" class="mr-3" alt="maniac Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Maniac Bengkol</span>
             </a>
@@ -82,6 +82,7 @@
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                     Riwayat Booking</a>
                             </li>
+                           
                             <li>
                                 <a href="{{ url('/profile') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
@@ -111,7 +112,7 @@
                       
                 <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                 <ul class="navigation flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700 dark:text-white">
-                    <li><a href="{{ url('/') }}" class="nav-item block py-2 pl-3 pr-4 text-gray-900 dark:text-white" data-nav="beranda">Beranda</a></li>
+                    <li><a href="{{ url('/home') }}" class="nav-item block py-2 pl-3 pr-4 text-gray-900 dark:text-white" data-nav="beranda">Beranda</a></li>
                     <li><a href="{{ url('/articles') }}" class="nav-item block py-2 pl-3 pr-4 text-gray-900 dark:text-white" data-nav="artikel">Artikel</a></li>
                     <li><a href="{{ url('/product-list') }}" class="nav-item block py-2 pl-3 pr-4 text-gray-900 dark:text-white" data-nav="daftarproduk">Daftar Produk</a></li>
                     <li><a href="{{ url('/booking') }}" class="nav-item block py-2 pl-3 pr-4 text-gray-900dark:text-white" data-nav="booking">Booking</a></li>

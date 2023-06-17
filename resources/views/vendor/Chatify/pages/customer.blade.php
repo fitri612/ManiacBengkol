@@ -1,43 +1,19 @@
-@extends('layouts.app')
-
-@section('content')
-
-{{-- @livewire('category.index') --}}
-{{-- @livewire('product.index') --}}
-
-
-@endsection
 
 @include('Chatify::layouts.headLinks')
+<div class="container mx-auto px-5 py-4" style=" max-height: 400px; padding: 10px; ">
 <div class="messenger">
     {{-- ----------------------Users/Groups lists side---------------------- --}}
-    <div class="messenger-listView {{ !!$id ? 'conversation-active' : '' }}">
+    {{-- <div class="messenger-listView {{ !!$id ? 'conversation-active' : '' }}"> --}}
         {{-- Header and search bar --}}
-        <div class="m-header">
-            <nav>
-                <a href="#"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">MESSAGES</span> </a>
-                {{-- header buttons --}}
-                <nav class="m-header-right">
-                    <a href="#"><i class="fas fa-cog settings-btn"></i></a>
-                    <a href="#" class="listView-x"><i class="fas fa-times"></i></a>
-                </nav>
-            </nav>
-            {{-- Search input --}}
-            <input type="text" class="messenger-search" placeholder="Search" />
-            {{-- Tabs --}}
-            {{-- <div class="messenger-listView-tabs">
-                <a href="#" class="active-tab" data-view="users">
-                    <span class="far fa-user"></span> Contacts</a>
-            </div> --}}
-        </div>
+        
         {{-- tabs and lists --}}
         <div class="m-body contacts-container">
            {{-- Lists [Users/Group] --}}
            {{-- ---------------- [ User Tab ] ---------------- --}}
            <div class="show messenger-tab users-tab app-scroll" data-view="users">
                {{-- Favorites --}}
-               <div class="favorites-section">
-                <p class="messenger-title"><span>Favoritesss</span></p>
+               <div class="favorites-section hide">
+                {{-- <p class="messenger-title"><span>Favoritesss</span></p> --}}
                 <div class="messenger-favorites app-scroll-hidden"></div>
                </div>
                {{-- Saved Messages --}}
@@ -52,18 +28,12 @@
                 @endif
            </div>
              {{-- ---------------- [ Search Tab ] ---------------- --}}
-           <div class="messenger-tab search-tab app-scroll" data-view="search">
-                {{-- items --}}
-                <p class="messenger-title"><span>Search</span></p>
-                <div class="search-records">
-                    <p class="message-hint center-el"><span>Type to search..</span></p>
-                </div>
-             </div>
+           
         </div>
-    </div>
+    {{-- </div> --}}
 
     {{-- ----------------------Messaging side---------------------- --}}
-    <div class="messenger-messagingView">
+    <div class="messenger-messagingView  " >
         {{-- header title [conversation name] amd buttons --}}
         <div class="m-header m-header-messaging">
             <nav class="chatify-d-flex chatify-justify-content-between chatify-align-items-center">
@@ -77,9 +47,9 @@
                 </div>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
-                    <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a>
-                    <a href="/"><i class="fas fa-home"></i></a>
-                    <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
+                    {{-- <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a> --}}
+                    {{-- <a href="/"><i class="fas fa-home"></i></a> --}}
+                    {{-- <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a> --}}
                 </nav>
             </nav>
             {{-- Internet connection --}}
@@ -93,7 +63,7 @@
         {{-- Messaging area --}}
         <div class="m-body messages-container app-scroll">
             <div class="messages">
-                <p class="message-hint center-el"><span>Please select a chat to start messaging</span></p>
+                <p class="message-hint center-el"><span>Please wait... if conversation screen not show  please <a style="color: blue" href="/home">Reload</a> the page</span></p>
             </div>
 
             {{-- Typing indicator --}}
@@ -114,15 +84,9 @@
         @include('Chatify::layouts.sendForm')
     </div>
     {{-- ---------------------- Info side ---------------------- --}}
-    <div class="messenger-infoView app-scroll">
-        {{-- nav actions --}}
-        <nav>
-            <p>User Details</p>
-            <a href="#"><i class="fas fa-times"></i></a>
-        </nav>
-        {!! view('Chatify::layouts.info')->render() !!}
-    </div>
+    
 </div>
 
 @include('Chatify::layouts.modals')
 @include('Chatify::layouts.footerLinks')
+</div>
