@@ -1,0 +1,1 @@
+@include('vendor.chatify.pages.customer')

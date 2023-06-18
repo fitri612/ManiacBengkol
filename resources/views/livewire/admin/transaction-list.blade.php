@@ -93,7 +93,7 @@
                     <th scope="col" class="px-6 py-3">
                         method payment
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" colspan="2" class="text-center px-6 py-3">
                         Action
                     </th>
                 </tr>
@@ -212,22 +212,7 @@
                         <td class="px-6 py-4">
                             {{-- <span wire:poll.500ms="">{{ $item->transaction_status }}</span> --}}
                             <span class="font-bold">{{ $item->transaction_status }}</span>
-                            @if(auth()->check() && auth()->user()->is_admin)
-                            <p class="text-sm">change status</p>
-                            <select wire:model="selectedStatus.{{ $item->id }}"  class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected disabled >
-                                    Change Status
-                                    </option>
-                                @foreach ($status as $stat)
-                                    <option value="{{ $stat }}">{{ $stat }}</option>
-                                @endforeach
-                            </select>
                             
-                            <button wire:click="updateStatus({{ $item->id }})" type="button" class="mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">save <i class="fa-solid fa-floppy-disk"></i></button>
-                            
-                            @else
-                            {{-- <span>{{ $item->transaction_status }}</span> --}}
-                            @endif
                         </td>
                         <td class="px-6 py-4">
                             {{ $item->method_payment }}
@@ -240,7 +225,8 @@
                         </button> --}}
                         <button wire:click="openModal({{ $item->id }})" wire:loading.attr="disabled" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                             Show Detail
-                        </button>                 
+                        </button>
+                                         
                         <!--  modal show details -->
                         {{-- <div id="defaultModal" wire:key="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 {{ $showModal ? '' : 'hidden' }} flex items-center justify-center w-full h-full overflow-y-auto"> --}}
                         <div id="defaultModal" wire:key="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 {{ $showModal ? '' : 'hidden' }} flex items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -261,7 +247,6 @@
                                     </div>
                                     <!-- Modal body -->
                                     <div class="p-6 space-y-2">
-                                        
                                         @foreach ($transactionDetail as $detail)
                                         <div  class=" mt-3 max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:text-white">
                                             <div class="grid grid-cols-2 gap-2">
@@ -290,6 +275,24 @@
                         </div>
   
                             
+                        </td>
+                        <td>
+                            @if(auth()->check() && auth()->user()->is_admin)
+                            <p class="text-sm">change status</p>
+                            <select wire:model="selectedStatus.{{ $item->id }}"  class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected disabled >
+                                    Change Status
+                                    </option>
+                                @foreach ($status as $stat)
+                                    <option value="{{ $stat }}">{{ $stat }}</option>
+                                @endforeach
+                            </select>
+                            
+                            <button wire:click="updateStatus({{ $item->id }})" type="button" class="mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">save <i class="fa-solid fa-floppy-disk"></i></button>
+                            
+                            @else
+                            {{-- <span>{{ $item->transaction_status }}</span> --}}
+                            @endif
                         </td>
                     </tr>
                 @endforeach
