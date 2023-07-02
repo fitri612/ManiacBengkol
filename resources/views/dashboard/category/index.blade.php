@@ -138,7 +138,8 @@
                                                 @csrf
                                                 <button
                                                     class=" btn border border-error font-medium text-error hover:bg-error hover:text-white focus:bg-error focus:text-white active:bg-error/90"
-                                                    type="submit">
+                                                    type="submit"
+                                                    onclick="confirm('delete category')">
                                                     Delete
                                                 </button>
                                             </form>

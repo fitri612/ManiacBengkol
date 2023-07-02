@@ -122,9 +122,7 @@
                         <div class="px-4 py-6">
                             <h4 style="text-align: center; font-size: 30px;" class="font-bold mb-2 dark:text-white">Aman
                             </h4>
-                            <p style="text-align: center; font-size: 20px;" class="mb-2 dark:text-white">Semua mitra yang
-                                terdaftar sudah
-                                dilakukan pengecekan kualitas.</p>
+                            <p style="text-align: center; font-size: 20px;" class="mb-2 dark:text-white">Telah dipercaya memperbaiki kendaraan lebih dari 100 customer</p>
                         </div>
                     </div>
 
